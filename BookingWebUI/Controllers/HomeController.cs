@@ -8,5 +8,9 @@ namespace Ploeh.Samples.Booking.WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        public ViewResult Index()
+        {
+            return this.View();
+        }
     }
 }
