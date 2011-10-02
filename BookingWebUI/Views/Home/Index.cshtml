@@ -1,5 +1,44 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Select a date";
 }
+<script type="text/javascript" src="../../Scripts/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="../../Scripts/jquery-ui-1.8.16.min.js" />
+<script type="text/javascript" src="../../Scripts/jquery.ui.core.min.js"></script>
+<script type="text/javascript">
+        $(function () {
 
-<h2>Index</h2>
+            var disabledDays =[@foreach (var date in this.Model) { <text>"@(date)",</text> }];
+
+            $("#datepicker").datepicker({
+                beforeShowDay: getStatusForDate,
+                dateFormat: 'yy.mm.dd',
+                onChangeMonthYear: changeMonthYear,
+                onSelect: selectDate
+            });
+
+            function changeMonthYear(year, month, inst) {
+                $.getJSON("@(this.Url.Action("DisabledDays"))>", { year: year, month: month }, disableDates);
+            }
+
+            function selectDate(dateText, inst) {
+                window.location.href = "@(this.Url.Action("NewBooking"))/" + dateText;
+            }
+
+            function disableDates(dates) {
+                disabledDays = dates;
+                $("#datepicker").datepicker("refresh");
+            }
+
+            function getStatusForDate(date) {
+                var dateFormat = $("#datepicker").datepicker("option", "dateFormat");
+                var formattedDate = $.datepicker.formatDate(dateFormat, date);
+                if ($.inArray(formattedDate, disabledDays) != -1) {
+                    return [false];
+                }
+                return [true];
+            }
+        });
+</script>
+<h2>
+    Please select a date</h2>
+<div id="datepicker" />
