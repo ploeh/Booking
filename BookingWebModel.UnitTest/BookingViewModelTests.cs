@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Xunit;
 using Ploeh.Samples.Booking.WebUI.Models;
+using Ploeh.AutoFixture.Idioms;
+using Xunit.Extensions;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {
@@ -14,6 +16,12 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             Assert.DoesNotThrow(() => 
                 new BookingViewModel());
+        }
+
+        [Theory, AutoWebData]
+        public void DateIsWritable(WritablePropertyAssertion assertion)
+        {
+            assertion.Verify(Reflect<BookingViewModel>.GetProperty<DateTime>(sut => sut.Date));
         }
     }
 }

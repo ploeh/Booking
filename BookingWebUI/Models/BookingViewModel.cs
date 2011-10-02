@@ -7,5 +7,6 @@ namespace Ploeh.Samples.Booking.WebUI.Models
 {
     public class BookingViewModel
     {
+        public DateTime Date { get; set; }
     }
 }
