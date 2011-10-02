@@ -22,6 +22,10 @@ namespace Ploeh.Samples.Booking.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Booking",
+                url: "{controller}/{year}.{month}.{day}",
+                defaults: new { controller = "Booking", action = "Make" });
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
