@@ -10,7 +10,7 @@ namespace Ploeh.Samples.Booking.WebUI.Controllers
     {
         public ViewResult Index()
         {
-            return this.View();
+            return this.View(Enumerable.Empty<string>());
         }
     }
 }
