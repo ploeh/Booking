@@ -23,7 +23,7 @@ namespace Ploeh.Samples.Booking.WebUI
 
             routes.MapRoute(
                 name: "Booking",
-                url: "{controller}/{year}.{month}.{day}",
+                url: "Booking/{year}.{month}.{day}",
                 defaults: new { controller = "Booking", action = "Make" });
             routes.MapRoute(
                 name: "Default",
