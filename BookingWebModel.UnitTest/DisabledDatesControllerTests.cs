@@ -16,5 +16,14 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             Assert.IsAssignableFrom<IController>(sut);
         }
+
+        [Theory, AutoWebData]
+        public void GetReturnsCorrectDataType(DisabledDatesController sut,
+            int year,
+            int month)
+        {
+            JsonResult actual = sut.Get(year, month);
+            Assert.IsAssignableFrom<string[]>(actual.Data);
+        }
     }
 }
