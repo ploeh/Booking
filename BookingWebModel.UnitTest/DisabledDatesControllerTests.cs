@@ -25,5 +25,14 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             JsonResult actual = sut.Get(year, month);
             Assert.IsAssignableFrom<string[]>(actual.Data);
         }
+
+        [Theory, AutoWebData]
+        public void GetReturnsCorrectJsonBehavior(DisabledDatesController sut,
+            int year,
+            int month)
+        {
+            var actual = sut.Get(year, month);
+            Assert.Equal(JsonRequestBehavior.AllowGet, actual.JsonRequestBehavior);
+        }
     }
 }

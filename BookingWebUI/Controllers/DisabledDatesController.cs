@@ -11,7 +11,7 @@ namespace Ploeh.Samples.Booking.WebUI.Controllers
         [OutputCache(Duration = 0, VaryByParam = "none")]
         public JsonResult Get(int year, int month)
         {
-            return this.Json(new string[0]);
+            return this.Json(new string[0], JsonRequestBehavior.AllowGet);
         }
     }
 }
