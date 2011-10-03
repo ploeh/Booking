@@ -43,6 +43,8 @@ namespace Ploeh.Samples.Booking.WebUI
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            ControllerBuilder.Current.SetControllerFactory(new PoorMansCompositionRoot());
         }
     }
 }
