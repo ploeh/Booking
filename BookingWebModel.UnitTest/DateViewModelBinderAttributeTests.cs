@@ -16,5 +16,12 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             Assert.IsAssignableFrom<CustomModelBinderAttribute>(sut);
         }
+
+        [Theory, AutoWebData]
+        public void GetBinderReturnsCorrectResult(DateViewModelBinderAttribute sut)
+        {
+            var actual = sut.GetBinder();
+            Assert.IsAssignableFrom<DateViewModelBinder>(actual);
+        }
     }
 }

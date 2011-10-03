@@ -10,7 +10,7 @@ namespace Ploeh.Samples.Booking.WebModel
     {
         public override IModelBinder GetBinder()
         {
-            throw new NotImplementedException();
+            return new DateViewModelBinder();
         }
     }
 }
