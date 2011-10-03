@@ -47,6 +47,7 @@
     <Compile Include="BookingController.cs" />
     <Compile Include="BookingViewModel.cs" />
     <Compile Include="DateViewModel.cs" />
+    <Compile Include="DateViewModelBinder.cs" />
     <Compile Include="DisabledDatesController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

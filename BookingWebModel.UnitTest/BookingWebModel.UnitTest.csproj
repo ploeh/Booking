@@ -77,6 +77,7 @@
     <Compile Include="AutoWebDataAttribute.cs" />
     <Compile Include="BookingControllerTest.cs" />
     <Compile Include="BookingViewModelTests.cs" />
+    <Compile Include="DateViewModelBinderTests.cs" />
     <Compile Include="DateViewModelTests.cs" />
     <Compile Include="DisabledDatesControllerTests.cs" />
     <Compile Include="HomeControllerTests.cs" />
