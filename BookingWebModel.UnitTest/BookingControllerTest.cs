@@ -48,5 +48,13 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             ViewResult actual = sut.Make(model);
             Assert.Equal("Receipt", actual.ViewName);
         }
+
+        [Theory, AutoWebData]
+        public void PostMakeReturnsCorrectModel(BookingController sut,
+            BookingViewModel expected)
+        {
+            var actual = sut.Make(expected);
+            Assert.Equal(expected, actual.Model);
+        }
     }
 }

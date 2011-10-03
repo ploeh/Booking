@@ -17,7 +17,7 @@ namespace Ploeh.Samples.Booking.WebUI.Controllers
         [HttpPost]
         public ViewResult Make(BookingViewModel model)
         {
-            return this.View("Receipt");
+            return this.View("Receipt", model);
         }
     }
 }
