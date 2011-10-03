@@ -27,7 +27,7 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             DateTime dateTime,
             CultureInfo culture)
         {
-            var rawValue = dateTime.ToString("yyyy.MM.dd");
+            var rawValue = dateTime.ToString(DateViewModelBinder.DateFormat);
             Mock.Get(bindingContext.ValueProvider)
                 .Setup(vp => vp.GetValue("id"))
                 .Returns(new ValueProviderResult(rawValue, rawValue, culture));
