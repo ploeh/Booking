@@ -36,7 +36,7 @@ namespace Ploeh.Samples.Booking.WebUI
                 namespaces: namespaces);
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{controller}/{id}",
                 defaults: new { controller = "Home", action = "Get", id = UrlParameter.Optional },
                 namespaces: namespaces);
 
