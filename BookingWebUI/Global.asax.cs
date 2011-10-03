@@ -22,21 +22,23 @@ namespace Ploeh.Samples.Booking.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            var namespaces = new[] { typeof(HomeController).Namespace };
+
             routes.MapRoute(
                 name: "Booking",
                 url: "Booking/{year}.{month}.{day}",
                 defaults: new { controller = "Booking", action = "Make" },
-                namespaces: new[] { typeof(BookingController).Namespace });
+                namespaces: namespaces);
             routes.MapRoute(
                 name: "DisabledDates",
                 url: "DisabledDates",
                 defaults: new { controller = "DisabledDates", action = "Get" },
-                namespaces: new[] { typeof(DisabledDatesController).Namespace });
+                namespaces: namespaces);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { typeof(HomeController).Namespace });
+                namespaces: namespaces);
 
         }
 
