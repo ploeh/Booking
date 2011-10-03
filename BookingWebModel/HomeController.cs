@@ -8,7 +8,7 @@ namespace Ploeh.Samples.Booking.WebModel
 {
     public class HomeController : Controller
     {
-        public ViewResult Index()
+        public ViewResult Get()
         {
             return this.View(Enumerable.Empty<string>());
         }

@@ -18,16 +18,16 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         }
 
         [Theory, AutoWebData]
-        public void IndexReturnsInstance(HomeController sut)
+        public void GetReturnsInstance(HomeController sut)
         {
-            ViewResult actual = sut.Index();
+            ViewResult actual = sut.Get();
             Assert.NotNull(actual);
         }
 
         [Theory, AutoWebData]
-        public void IndexReturnsCorrectModelType(HomeController sut)
+        public void GetReturnsCorrectModelType(HomeController sut)
         {
-            var actual = sut.Index();
+            var actual = sut.Get();
             Assert.IsAssignableFrom<IEnumerable<string>>(actual.Model);
         }
     }

@@ -167,7 +167,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
