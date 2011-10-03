@@ -7,5 +7,6 @@ namespace Ploeh.Samples.Booking.WebModel
 {
     public class DateViewModel
     {
+        public int Year { get; set; }
     }
 }
