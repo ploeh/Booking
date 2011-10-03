@@ -14,7 +14,7 @@ namespace Ploeh.Samples.Booking.WebModel
         }
 
         [HttpPost]
-        public ViewResult Make(BookingViewModel model)
+        public ViewResult Post(BookingViewModel model)
         {
             return this.View("Receipt", model);
         }
