@@ -173,7 +173,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Booking\Make.cshtml" />
+    <Content Include="Views\Booking\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Booking\Receipt.cshtml" />

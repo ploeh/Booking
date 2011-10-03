@@ -8,7 +8,7 @@ namespace Ploeh.Samples.Booking.WebModel
 {
     public class BookingController : Controller
     {
-        public ViewResult Make(int year, int month, int day)
+        public ViewResult Get(int year, int month, int day)
         {
             return this.View(new BookingViewModel { Date = new DateTime(year, month, day) });
         }

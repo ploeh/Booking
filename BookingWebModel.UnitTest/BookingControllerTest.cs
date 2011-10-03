@@ -17,22 +17,22 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         }
 
         [Theory, AutoWebData]
-        public void MakeReturnsCorrectModelType(BookingController sut,
+        public void GetReturnsCorrectModelType(BookingController sut,
             int year,
             int month,
             int day)
         {
-            ViewResult actual = sut.Make(year, month, day);
+            ViewResult actual = sut.Get(year, month, day);
             Assert.IsAssignableFrom<BookingViewModel>(actual.Model);
         }
 
         [Theory, AutoWebData]
-        public void MakeReturnModelWithCorrectDate(BookingController sut,
+        public void GetReturnModelWithCorrectDate(BookingController sut,
             int year,
             int month,
             int day)
         {
-            var actual = sut.Make(year, month, day);
+            var actual = sut.Get(year, month, day);
 
             var expected = new DateTime(year, month, day);
             var model = Assert.IsAssignableFrom<BookingViewModel>(actual.Model);
