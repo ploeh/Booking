@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.WebModel
 {
+    [DateViewModelBinder]
     public class DateViewModel
     {
         public int Year { get; set; }
