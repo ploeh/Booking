@@ -29,5 +29,11 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             assertion.Verify(Reflect<BookingViewModel>.GetProperty<string>(sut => sut.Email));
         }
+
+        [Theory, AutoWebData]
+        public void NameIsWritable(WritablePropertyAssertion assertion)
+        {
+            assertion.Verify(Reflect<BookingViewModel>.GetProperty<string>(sut => sut.Name));
+        }
     }
 }
