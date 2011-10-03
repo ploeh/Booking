@@ -35,7 +35,7 @@
             @this.Html.LabelFor(model => model.Quantity)
         </div>
         <div class="editor-field">
-            @this.Html.DropDownListFor(model => model.Quantity, Enumerable.Range(1, this.Model.Remaining).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }))
+            @this.Html.DropDownListFor(model => model.Quantity, Enumerable.Range(1, this.Model.RemainingCapacity).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }))
             @this.Html.ValidationMessageFor(model => model.Quantity)
         </div>
         <p>

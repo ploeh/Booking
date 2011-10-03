@@ -23,7 +23,7 @@ namespace Ploeh.Samples.Booking.WebModel
                 new BookingViewModel
                 {
                     Date = id.ToDateTime(),
-                    Remaining = remainingCapacity
+                    RemainingCapacity = remainingCapacity
                 });
         }
 

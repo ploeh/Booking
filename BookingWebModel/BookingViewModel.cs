@@ -15,6 +15,6 @@ namespace Ploeh.Samples.Booking.WebModel
 
         public int Quantity { get; set; }
 
-        public int Remaining { get; set; }
+        public int RemainingCapacity { get; set; }
     }
 }

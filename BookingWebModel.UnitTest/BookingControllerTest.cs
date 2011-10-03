@@ -52,7 +52,7 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             var actual = sut.Get(id);
 
             var model = Assert.IsAssignableFrom<BookingViewModel>(actual.Model);
-            Assert.Equal(expected, model.Remaining);
+            Assert.Equal(expected, model.RemainingCapacity);
         }
 
         [Theory, AutoWebData]
