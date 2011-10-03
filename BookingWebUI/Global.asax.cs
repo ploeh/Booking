@@ -25,21 +25,16 @@ namespace Ploeh.Samples.Booking.WebUI
             var namespaces = new[] { typeof(HomeController).Namespace };
 
             routes.MapRoute(
-                name: "Booking",
-                url: "Booking/{year}.{month}.{day}",
-                defaults: new { controller = "Booking", action = "Get" },
-                namespaces: namespaces);
-            routes.MapRoute(
-                name: "DisabledDates",
-                url: "DisabledDates",
-                defaults: new { controller = "DisabledDates", action = "Get" },
+                name: "Post",
+                url: "{Controller}/{id}",
+                defaults: new { controller = "Home", action = "Post" },
+                constraints: new { httpMethod = new HttpMethodConstraint("POST") },
                 namespaces: namespaces);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{id}",
                 defaults: new { controller = "Home", action = "Get", id = UrlParameter.Optional },
                 namespaces: namespaces);
-
         }
 
         protected void Application_Start()
