@@ -41,5 +41,11 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             assertion.Verify(Reflect<BookingViewModel>.GetProperty<int>(sut => sut.Quantity));
         }
+
+        [Theory, AutoWebData]
+        public void RemainingIsWritable(WritablePropertyAssertion assertion)
+        {
+            assertion.Verify(Reflect<BookingViewModel>.GetProperty<int>(sut => sut.Remaining));
+        }
     }
 }
