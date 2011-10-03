@@ -40,5 +40,13 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             var model = Assert.IsAssignableFrom<BookingViewModel>(actual.Model);
             Assert.Equal(expected, model.Date);
         }
+
+        [Theory, AutoWebData]
+        public void PostMakeReturnsCorrectViewName(BookingController sut,
+            BookingViewModel model)
+        {
+            ViewResult actual = sut.Make(model);
+            Assert.Equal("Receipt", actual.ViewName);
+        }
     }
 }

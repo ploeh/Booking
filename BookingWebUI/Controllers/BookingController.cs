@@ -13,5 +13,10 @@ namespace Ploeh.Samples.Booking.WebUI.Controllers
         {
             return this.View(new BookingViewModel { Date = new DateTime(year, month, day) });
         }
+
+        public ViewResult Make(BookingViewModel model)
+        {
+            return this.View("Receipt");
+        }
     }
 }
