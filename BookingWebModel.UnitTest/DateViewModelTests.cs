@@ -6,6 +6,7 @@ using Xunit;
 using Ploeh.Samples.Booking.WebModel;
 using Xunit.Extensions;
 using Ploeh.AutoFixture.Idioms;
+using Ploeh.SemanticComparison.Fluent;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {
@@ -42,6 +43,14 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             DateTime actual = sut.ToDateTime();
             var expected = new DateTime(sut.Year, sut.Month, sut.Day);
             Assert.Equal(expected, actual);
+        }
+
+        [Theory, AutoWebData]
+        public void ConstructFromDateTimeReturnsCorrectSut(DateTime dateTime)
+        {
+            var actual = new DateViewModel(dateTime);
+
+            dateTime.AsSource().OfLikeness<DateViewModel>().ShouldEqual(actual);
         }
     }
 }

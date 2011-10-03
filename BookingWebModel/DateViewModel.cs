@@ -8,6 +8,17 @@ namespace Ploeh.Samples.Booking.WebModel
     [DateViewModelBinder]
     public class DateViewModel
     {
+        public DateViewModel()
+        {
+        }
+
+        public DateViewModel(DateTime dateTime)
+        {
+            this.Year = dateTime.Year;
+            this.Month = dateTime.Month;
+            this.Day = dateTime.Day;
+        }
+
         public int Year { get; set; }
 
         public int Month { get; set; }
