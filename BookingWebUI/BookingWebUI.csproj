@@ -178,6 +178,12 @@
   <ItemGroup>
     <Content Include="Views\Booking\Receipt.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookingWebModel\BookingWebModel.csproj">
+      <Project>{0477B1CF-B675-4303-9C9B-509D81C2D3B9}</Project>
+      <Name>BookingWebModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Ploeh.Samples.Booking.WebModel;
 
 namespace Ploeh.Samples.Booking.WebUI
 {
@@ -24,16 +25,18 @@ namespace Ploeh.Samples.Booking.WebUI
             routes.MapRoute(
                 name: "Booking",
                 url: "Booking/{year}.{month}.{day}",
-                defaults: new { controller = "Booking", action = "Make" });
+                defaults: new { controller = "Booking", action = "Make" },
+                namespaces: new[] { typeof(BookingController).Namespace });
             routes.MapRoute(
                 name: "DisabledDates",
                 url: "DisabledDates",
-                defaults: new { controller = "DisabledDates", action = "Get" });
+                defaults: new { controller = "DisabledDates", action = "Get" },
+                namespaces: new[] { typeof(DisabledDatesController).Namespace });
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { typeof(HomeController).Namespace });
 
         }
 
