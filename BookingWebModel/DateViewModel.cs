@@ -12,5 +12,10 @@ namespace Ploeh.Samples.Booking.WebModel
         public int Month { get; set; }
 
         public int Day { get; set; }
+
+        public DateTime ToDateTime()
+        {
+            return new DateTime(this.Year, this.Month, this.Day);
+        }
     }
 }

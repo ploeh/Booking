@@ -35,5 +35,13 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             assertion.Verify(Reflect<DateViewModel>.GetProperty<int>(sut => sut.Day));
         }
+
+        [Theory, AutoWebData]
+        public void ToDateTimeReturnsCorrectResult(DateViewModel sut)
+        {
+            DateTime actual = sut.ToDateTime();
+            var expected = new DateTime(sut.Year, sut.Month, sut.Day);
+            Assert.Equal(expected, actual);
+        }
     }
 }
