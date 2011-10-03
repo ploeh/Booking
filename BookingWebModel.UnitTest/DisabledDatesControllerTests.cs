@@ -5,7 +5,6 @@ using System.Text;
 using Xunit.Extensions;
 using Xunit;
 using System.Web.Mvc;
-using Ploeh.Samples.Booking.WebUI.Controllers;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {

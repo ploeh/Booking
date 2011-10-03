@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Ploeh.Samples.Booking.WebUI.Models
+namespace Ploeh.Samples.Booking.WebModel
 {
     public class BookingViewModel
     {

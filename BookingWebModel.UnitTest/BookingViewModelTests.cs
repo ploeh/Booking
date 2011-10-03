@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using Ploeh.Samples.Booking.WebUI.Models;
 using Ploeh.AutoFixture.Idioms;
 using Xunit.Extensions;
 

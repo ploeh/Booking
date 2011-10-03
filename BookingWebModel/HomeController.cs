@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Ploeh.Samples.Booking.WebUI.Controllers
+namespace Ploeh.Samples.Booking.WebModel
 {
     public class HomeController : Controller
     {

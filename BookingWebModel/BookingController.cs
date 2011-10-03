@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Ploeh.Samples.Booking.WebUI.Models;
 
-namespace Ploeh.Samples.Booking.WebUI.Controllers
+namespace Ploeh.Samples.Booking.WebModel
 {
     public class BookingController : Controller
     {

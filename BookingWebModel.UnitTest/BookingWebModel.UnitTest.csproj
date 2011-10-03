@@ -99,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookingWebModel\BookingWebModel.csproj">
+      <Project>{0477B1CF-B675-4303-9C9B-509D81C2D3B9}</Project>
+      <Name>BookingWebModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BookingWebUI\BookingWebUI.csproj">
       <Project>{B83C3621-ED80-4DA6-A9D4-DACD23D701E2}</Project>
       <Name>BookingWebUI</Name>
