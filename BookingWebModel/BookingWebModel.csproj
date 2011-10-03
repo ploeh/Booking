@@ -51,6 +51,7 @@
     <Compile Include="DateViewModelBinderAttribute.cs" />
     <Compile Include="DisabledDatesController.cs" />
     <Compile Include="HomeController.cs" />
+    <Compile Include="IReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

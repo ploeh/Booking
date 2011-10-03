@@ -5,6 +5,9 @@ using System.Text;
 using Xunit.Extensions;
 using Xunit;
 using System.Web.Mvc;
+using Ploeh.AutoFixture.Xunit;
+using Moq;
+using Ploeh.Samples.Booking.WebModel;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {
@@ -33,6 +36,23 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             var expected = id.ToDateTime();
             var model = Assert.IsAssignableFrom<BookingViewModel>(actual.Model);
             Assert.Equal(expected, model.Date);
+        }
+
+        [Theory, AutoWebData]
+        public void GetReturnsModelWithCorrectRemainingCapacity(
+            [Frozen]Mock<IReader<DateTime, int>> readerStub,
+            BookingController sut,
+            DateViewModel id,
+            int expected)
+        {
+            readerStub
+                .Setup(r => r.Query(id.ToDateTime()))
+                .Returns(expected);
+
+            var actual = sut.Get(id);
+
+            var model = Assert.IsAssignableFrom<BookingViewModel>(actual.Model);
+            Assert.Equal(expected, model.Remaining);
         }
 
         [Theory, AutoWebData]

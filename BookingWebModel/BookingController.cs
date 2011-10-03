@@ -8,9 +8,23 @@ namespace Ploeh.Samples.Booking.WebModel
 {
     public class BookingController : Controller
     {
+        private readonly IReader<DateTime, int> remainingCapacityReader;
+
+        public BookingController(IReader<DateTime, int> remainingCapacityReader)
+        {
+            this.remainingCapacityReader = remainingCapacityReader;
+        }
+
         public ViewResult Get(DateViewModel id)
         {
-            return this.View(new BookingViewModel { Date = id.ToDateTime() });
+            var date = id.ToDateTime();
+            var remainingCapacity = this.remainingCapacityReader.Query(date);
+            return this.View(
+                new BookingViewModel
+                {
+                    Date = id.ToDateTime(),
+                    Remaining = remainingCapacity
+                });
         }
 
         [HttpPost]
