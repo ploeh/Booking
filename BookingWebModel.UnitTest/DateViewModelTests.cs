@@ -23,5 +23,11 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             assertion.Verify(Reflect<DateViewModel>.GetProperty<int>(sut => sut.Year));
         }
+
+        [Theory, AutoWebData]
+        public void MonthIsWritable(WritablePropertyAssertion assertion)
+        {
+            assertion.Verify(Reflect<DateViewModel>.GetProperty<int>(sut => sut.Month));
+        }
     }
 }
