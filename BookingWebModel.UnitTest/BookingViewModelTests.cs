@@ -5,6 +5,8 @@ using System.Text;
 using Xunit;
 using Ploeh.AutoFixture.Idioms;
 using Xunit.Extensions;
+using Ploeh.Samples.Booking.DomainModel;
+using Ploeh.SemanticComparison.Fluent;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {
@@ -45,6 +47,14 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         public void RemainingCapacityIsWritable(WritablePropertyAssertion assertion)
         {
             assertion.Verify(Reflect<BookingViewModel>.GetProperty<int>(sut => sut.RemainingCapacity));
+        }
+
+        [Theory, AutoWebData]
+        public void MakeReservationReturnsCorrectResult(BookingViewModel sut)
+        {
+            MakeReservationCommand actual = sut.MakeReservation();
+            var expected = sut.AsSource().OfLikeness<MakeReservationCommand>().Without(d => d.Id);
+            expected.ShouldEqual(actual);
         }
     }
 }

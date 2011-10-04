@@ -54,6 +54,12 @@
     <Compile Include="IReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookingDomainModel\BookingDomainModel.csproj">
+      <Project>{FDD7CD42-386F-49F2-908A-B09156B3B9F8}</Project>
+      <Name>BookingDomainModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

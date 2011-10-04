@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.WebModel
 {
@@ -16,5 +17,10 @@ namespace Ploeh.Samples.Booking.WebModel
         public int Quantity { get; set; }
 
         public int RemainingCapacity { get; set; }
+
+        public MakeReservationCommand MakeReservation()
+        {
+            return new MakeReservationCommand(this.Date, this.Email, this.Name, this.Quantity);
+        }
     }
 }
