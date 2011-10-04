@@ -31,8 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.2.4.1\lib\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture.AutoMoq">
+      <HintPath>..\packages\AutoFixture.AutoMoq.2.4.1\lib\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture.Xunit">
       <HintPath>..\packages\AutoFixture.Xunit.2.4.1\lib\Ploeh.AutoFixture.Xunit.dll</HintPath>

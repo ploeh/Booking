@@ -6,6 +6,7 @@ using Xunit.Extensions;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Ploeh.Samples.Booking.DomainModel;
+using Moq;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
@@ -58,6 +59,21 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             object anonymousObject)
         {
             Assert.False(sut.Equals(anonymousObject));            
+        }
+
+        [Theory, AutoDomainData]
+        public void EqualsWhenIdEquals(MakeReservationCommand sut,
+            Mock<IMessage> messageStub)
+        {
+            messageStub.SetupGet(m => m.Id).Returns(sut.Id);
+            var actual = BothEquals(sut, messageStub.Object);
+            Assert.True(actual.All(b => b));
+        }
+
+        private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
+        {
+            yield return sut.Equals((object)other);
+            yield return sut.Equals(other);
         }
     }
 }

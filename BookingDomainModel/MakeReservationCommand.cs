@@ -49,7 +49,17 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool Equals(IMessage other)
         {
-            throw new NotImplementedException();
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as IMessage;
+            if (other != null)
+            {
+                return true;
+            }
+            return base.Equals(obj);
         }
     }
 }
