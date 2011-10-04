@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ploeh.Samples.Booking.WebModel;
+using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.WebUI
 {
@@ -15,7 +16,8 @@ namespace Ploeh.Samples.Booking.WebUI
             if (controllerType == typeof(BookingController))
             {
                 return new BookingController(
-                    new FixedRemainingCapacityReader());
+                    new FixedRemainingCapacityReader(),
+                    new NullChannel<MakeReservationCommand>());
             }
 
             return base.GetControllerInstance(requestContext, controllerType);
@@ -26,6 +28,13 @@ namespace Ploeh.Samples.Booking.WebUI
             public int Query(DateTime arg)
             {
                 return 10;
+            }
+        }
+
+        private class NullChannel<T> : IChannel<T> where T : IMessage
+        {
+            public void Send(T message)
+            {
             }
         }
     }

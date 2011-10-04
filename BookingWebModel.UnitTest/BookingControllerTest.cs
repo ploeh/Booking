@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using Ploeh.AutoFixture.Xunit;
 using Moq;
 using Ploeh.Samples.Booking.WebModel;
+using Ploeh.Samples.Booking.DomainModel;
+using Ploeh.SemanticComparison.Fluent;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {
@@ -69,6 +71,17 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         {
             var actual = sut.Post(expected);
             Assert.Equal(expected, actual.Model);
+        }
+
+        [Theory, AutoWebData]
+        public void PostSendsOnChannel(
+            [Frozen]Mock<IChannel<MakeReservationCommand>> channelMock,
+            BookingController sut,
+            BookingViewModel model)
+        {
+            sut.Post(model);
+            var expected = model.MakeReservation().AsSource().OfLikeness<MakeReservationCommand>().Without(d => d.Id);
+            channelMock.Verify(c => c.Send(It.Is<MakeReservationCommand>(x => expected.Equals(x))));
         }
     }
 }

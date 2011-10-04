@@ -180,6 +180,10 @@
     <Content Include="Views\Booking\Receipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookingDomainModel\BookingDomainModel.csproj">
+      <Project>{FDD7CD42-386F-49F2-908A-B09156B3B9F8}</Project>
+      <Name>BookingDomainModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BookingWebModel\BookingWebModel.csproj">
       <Project>{0477B1CF-B675-4303-9C9B-509D81C2D3B9}</Project>
       <Name>BookingWebModel</Name>

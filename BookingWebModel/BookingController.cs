@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.WebModel
 {
     public class BookingController : Controller
     {
         private readonly IReader<DateTime, int> remainingCapacityReader;
+        private readonly IChannel<MakeReservationCommand> channel;
 
-        public BookingController(IReader<DateTime, int> remainingCapacityReader)
+        public BookingController(IReader<DateTime, int> remainingCapacityReader, IChannel<MakeReservationCommand> channel)
         {
             this.remainingCapacityReader = remainingCapacityReader;
+            this.channel = channel;
         }
 
         public ViewResult Get(DateViewModel id)
@@ -30,6 +33,7 @@ namespace Ploeh.Samples.Booking.WebModel
         [HttpPost]
         public ViewResult Post(BookingViewModel model)
         {
+            this.channel.Send(model.MakeReservation());
             return this.View("Receipt", model);
         }
     }
