@@ -76,7 +76,14 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             messageStub.SetupGet(m => m.Id).Returns(Guid.NewGuid());
             var actual = BothEquals(sut, messageStub.Object);
-            Assert.True(actual.All(b => !b));
+            Assert.False(actual.Any(b => b));
+        }
+
+        [Theory, AutoDomainData]
+        public void DoesNotEqualNull(MakeReservationCommand sut)
+        {
+            var actual = BothEquals<IMessage>(sut, null);
+            Assert.False(actual.Any(b => b));
         }
 
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>

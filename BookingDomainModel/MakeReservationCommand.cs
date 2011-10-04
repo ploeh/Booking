@@ -49,6 +49,9 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool Equals(IMessage other)
         {
+            if (other == null)
+                return false;
+
             return this.Id == other.Id;
         }
 
