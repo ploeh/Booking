@@ -5,11 +5,18 @@ using System.Text;
 using Xunit.Extensions;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
+using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
     public class MakeReservationCommandTests
     {
+        [Theory, AutoDomainData]
+        public void SutIsMessage(MakeReservationCommand sut)
+        {
+            Assert.IsAssignableFrom<IMessage>(sut);
+        }
+
         [Theory, AutoDomainData]
         public void DateIsCorrect([Frozen]DateTime expected, MakeReservationCommand sut)
         {

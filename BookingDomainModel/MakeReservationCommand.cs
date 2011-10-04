@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public class MakeReservationCommand
+    public class MakeReservationCommand : IMessage
     {
         private readonly DateTime date;
         private readonly string email;
