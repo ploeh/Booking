@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ploeh.Samples.Booking.DomainModel.UnitTest
+namespace Ploeh.Samples.Booking.DomainModel
 {
     public class MakeReservationCommand
     {
