@@ -11,6 +11,7 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly string email;
         private readonly string name;
         private readonly int quantity;
+        private readonly Guid id;
 
         public MakeReservationCommand(DateTime date, string email, string name, int quantity)
         {
@@ -18,6 +19,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.email = email;
             this.name = name;
             this.quantity = quantity;
+            this.id = Guid.NewGuid();
         }
 
         public DateTime Date
@@ -42,7 +44,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public Guid Id
         {
-            get { return Guid.NewGuid(); }
+            get { return this.id; }
         }
     }
 }
