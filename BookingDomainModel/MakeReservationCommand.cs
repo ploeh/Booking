@@ -46,5 +46,10 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             get { return this.id; }
         }
+
+        public bool Equals(IMessage other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

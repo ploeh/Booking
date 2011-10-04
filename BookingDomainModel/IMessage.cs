@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public interface IMessage
+    public interface IMessage : IEquatable<IMessage>
     {
         Guid Id { get; }
     }
