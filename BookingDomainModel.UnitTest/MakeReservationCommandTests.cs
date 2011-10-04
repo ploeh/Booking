@@ -15,5 +15,11 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal<DateTime>(expected, sut.Date);
         }
+
+        [Theory, AutoDomainData]
+        public void EmailIsCorrect([Frozen]string expected, MakeReservationCommand sut)
+        {
+            Assert.Equal<string>(expected, sut.Email);
+        }
     }
 }
