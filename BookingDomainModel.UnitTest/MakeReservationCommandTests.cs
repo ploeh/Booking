@@ -70,6 +70,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.True(actual.All(b => b));
         }
 
+        [Theory, AutoDomainData]
+        public void DoesNotEqualWhenIdsDiffer(MakeReservationCommand sut,
+            Mock<IMessage> messageStub)
+        {
+            messageStub.SetupGet(m => m.Id).Returns(Guid.NewGuid());
+            var actual = BothEquals(sut, messageStub.Object);
+            Assert.True(actual.All(b => !b));
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);

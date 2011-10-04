@@ -49,7 +49,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool Equals(IMessage other)
         {
-            return true;
+            return this.Id == other.Id;
         }
 
         public override bool Equals(object obj)
@@ -57,7 +57,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             var other = obj as IMessage;
             if (other != null)
             {
-                return true;
+                return this.Equals(other);
             }
             return base.Equals(obj);
         }
