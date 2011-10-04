@@ -39,5 +39,10 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             get { return this.quantity; }
         }
+
+        public Guid Id
+        {
+            get { return Guid.NewGuid(); }
+        }
     }
 }

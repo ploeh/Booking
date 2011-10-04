@@ -40,5 +40,11 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal<int>(expected, sut.Quantity);
         }
+
+        [Theory, AutoDomainData]
+        public void IdIsUnique(MakeReservationCommand sut, MakeReservationCommand other)
+        {
+            Assert.NotEqual(sut.Id, other.Id);
+        }
     }
 }

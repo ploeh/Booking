@@ -7,5 +7,6 @@ namespace Ploeh.Samples.Booking.DomainModel
 {
     public interface IMessage
     {
+        Guid Id { get; }
     }
 }
