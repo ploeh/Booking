@@ -52,5 +52,12 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal(sut.Id, sut.Id);
         }
+
+        [Theory, AutoDomainData]
+        public void DoesNotEqualAnonymousObject(MakeReservationCommand sut,
+            object anonymousObject)
+        {
+            Assert.False(sut.Equals(anonymousObject));            
+        }
     }
 }
