@@ -10,12 +10,14 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly DateTime date;
         private readonly string email;
         private readonly string name;
+        private readonly int quantity;
 
-        public MakeReservationCommand(DateTime date, string email, string name)
+        public MakeReservationCommand(DateTime date, string email, string name, int quantity)
         {
             this.date = date;
             this.email = email;
             this.name = name;
+            this.quantity = quantity;
         }
 
         public DateTime Date
@@ -31,6 +33,11 @@ namespace Ploeh.Samples.Booking.DomainModel
         public string Name
         {
             get { return this.name; }
+        }
+
+        public int Quantity
+        {
+            get { return this.quantity; }
         }
     }
 }
