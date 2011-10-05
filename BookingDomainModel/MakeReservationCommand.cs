@@ -64,5 +64,15 @@ namespace Ploeh.Samples.Booking.DomainModel
             }
             return base.Equals(obj);
         }
+
+        public override int GetHashCode()
+        {
+            return this.date.GetHashCode() ^
+                this.email.GetHashCode() ^
+                this.id.GetHashCode() ^ 
+                this.name.GetHashCode() ^ 
+                this.quantity.GetHashCode();
+
+        }
     }
 }

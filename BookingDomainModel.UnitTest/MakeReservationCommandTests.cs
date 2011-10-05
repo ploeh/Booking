@@ -86,6 +86,19 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.False(actual.Any(b => b));
         }
 
+        [Theory, AutoDomainData]
+        public void GetHashCodeReturnsCorrectResult(MakeReservationCommand sut)
+        {
+            var actual = sut.GetHashCode();
+
+            var expected = sut.Date.GetHashCode() ^
+                sut.Email.GetHashCode() ^
+                sut.Id.GetHashCode() ^
+                sut.Name.GetHashCode() ^
+                sut.Quantity.GetHashCode();
+            Assert.Equal(expected, actual);
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);
