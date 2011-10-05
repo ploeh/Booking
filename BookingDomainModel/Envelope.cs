@@ -18,5 +18,10 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             get { return this.body; }
         }
+
+        public string MessageType
+        {
+            get { return this.body.GetType().Name.ToLowerInvariant(); }
+        }
     }
 }

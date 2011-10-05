@@ -18,6 +18,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             T actual = sut.Body;
             Assert.Equal(expected, actual);
         }
+
+        [Theory, AutoDomainData]
+        public void MessageTypeIsCorrectWhenConstructedModestly(
+            [Modest]Envelope<T> sut)
+        {
+            string actual = sut.MessageType;
+            var expected = sut.Body.GetType().Name.ToLowerInvariant();
+            Assert.Equal(expected, actual);
+        }
     }
 
     public class EnvelopeTestsOfObject : EnvelopeTests<object> { }
