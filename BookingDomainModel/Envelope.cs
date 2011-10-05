@@ -20,6 +20,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public Envelope(T body, string version, string bodyType)
         {
+            this.body = body;
             this.bodyType = bodyType;
         }
 
