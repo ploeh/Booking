@@ -89,7 +89,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         }
 
-        public class Quickening
+        public class Quickening : IQuickening
         {
             public IEnumerable<IMessage> Quicken(dynamic envelope)
             {

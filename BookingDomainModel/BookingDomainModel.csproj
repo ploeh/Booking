@@ -43,6 +43,7 @@
     <Compile Include="Envelope.cs" />
     <Compile Include="IChannel.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IQuickening.cs" />
     <Compile Include="MakeReservationCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

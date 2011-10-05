@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using Xunit.Extensions;
 using Xunit;
+using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
     public class MakeReservationCommandQuickeningTests
     {
+        [Theory, AutoDomainData]
+        public void SutIsQuickening(MakeReservationCommand.Quickening sut)
+        {
+            Assert.IsAssignableFrom<IQuickening>(sut);
+        }
+
         [Theory, AutoDomainData]
         public void QuickenReturnsCorrectResultWhenBodyTypeMatches(
             MakeReservationCommand.Quickening sut,
