@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.IO;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Ploeh.Samples.Booking.WebModel;
 using Ploeh.Samples.Booking.DomainModel;
 using Ploeh.Samples.Booking.JsonAntiCorruption;
 using Ploeh.Samples.Booking.Persistence.FileSystem;
-using System.IO;
-using System.Web.Hosting;
+using Ploeh.Samples.Booking.WebModel;
 
 namespace Ploeh.Samples.Booking.WebUI
 {
@@ -44,13 +41,6 @@ namespace Ploeh.Samples.Booking.WebUI
             public int Query(DateTime arg)
             {
                 return 10;
-            }
-        }
-
-        private class NullChannel<T> : IChannel<T> where T : IMessage
-        {
-            public void Send(T message)
-            {
             }
         }
     }
