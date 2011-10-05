@@ -11,10 +11,12 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
     public class FileQueueWriter<T> : IStoreWriter<T> where T : IMessage
     {
         private readonly DirectoryInfo directory;
+        private readonly string extension;
 
-        public FileQueueWriter(DirectoryInfo directory)
+        public FileQueueWriter(DirectoryInfo directory, string extension)
         {
             this.directory = directory;
+            this.extension = extension;
         }
 
         public Stream GetStreamFor(T item)
@@ -23,7 +25,7 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
                 Path.Combine(
                     this.directory.FullName,
                     item.Id.ToString()),
-                "txt");
+                extension);
             return File.Open(path, FileMode.Create);
         }
     }

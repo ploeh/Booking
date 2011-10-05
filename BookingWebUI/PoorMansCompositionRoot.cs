@@ -30,7 +30,8 @@ namespace Ploeh.Samples.Booking.WebUI
                     new FixedRemainingCapacityReader(),
                     new JsonChannel<MakeReservationCommand>(
                         new FileQueueWriter<MakeReservationCommand>(
-                            this.queueDirectory)));
+                            this.queueDirectory,
+                            "txt")));
             }
 
             return base.GetControllerInstance(requestContext, controllerType);
