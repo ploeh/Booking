@@ -24,7 +24,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
         {
             using (var stream = this.store.GetStreamFor(message))
             using (var writer = new StreamWriter(stream))
-                this.serializer.Serialize(writer, message);
+                this.serializer.Serialize(writer, message.Envelop());
         }
     }
 }
