@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public interface IMessage : IEquatable<IMessage>
+    public interface IMessage
     {
         Envelope Envelop();
 

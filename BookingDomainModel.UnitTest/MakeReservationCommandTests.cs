@@ -55,51 +55,6 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         }
 
         [Theory, AutoDomainData]
-        public void DoesNotEqualAnonymousObject(MakeReservationCommand sut,
-            object anonymousObject)
-        {
-            Assert.False(sut.Equals(anonymousObject));            
-        }
-
-        [Theory, AutoDomainData]
-        public void EqualsWhenIdEquals(MakeReservationCommand sut,
-            Mock<IMessage> messageStub)
-        {
-            messageStub.SetupGet(m => m.Id).Returns(sut.Id);
-            var actual = BothEquals(sut, messageStub.Object);
-            Assert.True(actual.All(b => b));
-        }
-
-        [Theory, AutoDomainData]
-        public void DoesNotEqualWhenIdsDiffer(MakeReservationCommand sut,
-            Mock<IMessage> messageStub)
-        {
-            messageStub.SetupGet(m => m.Id).Returns(Guid.NewGuid());
-            var actual = BothEquals(sut, messageStub.Object);
-            Assert.False(actual.Any(b => b));
-        }
-
-        [Theory, AutoDomainData]
-        public void DoesNotEqualNull(MakeReservationCommand sut)
-        {
-            var actual = BothEquals<IMessage>(sut, null);
-            Assert.False(actual.Any(b => b));
-        }
-
-        [Theory, AutoDomainData]
-        public void GetHashCodeReturnsCorrectResult(MakeReservationCommand sut)
-        {
-            var actual = sut.GetHashCode();
-
-            var expected = sut.Date.GetHashCode() ^
-                sut.Email.GetHashCode() ^
-                sut.Id.GetHashCode() ^
-                sut.Name.GetHashCode() ^
-                sut.Quantity.GetHashCode();
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory, AutoDomainData]
         public void EnvelopReturnsCorrectBody(MakeReservationCommand sut)
         {
             var actual = sut.Envelop();
@@ -111,12 +66,6 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             var actual = sut.Envelop();
             Assert.Equal("1", actual.Version);
-        }
-
-        private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
-        {
-            yield return sut.Equals((object)other);
-            yield return sut.Equals(other);
         }
     }
 }

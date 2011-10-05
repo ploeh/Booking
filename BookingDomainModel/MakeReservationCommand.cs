@@ -61,34 +61,6 @@ namespace Ploeh.Samples.Booking.DomainModel
             get { return this.id; }
         }
 
-        public bool Equals(IMessage other)
-        {
-            if (other == null)
-                return false;
-
-            return this.Id == other.Id;
-        }
-
-        public override bool Equals(object obj)
-        {
-            var other = obj as IMessage;
-            if (other != null)
-            {
-                return this.Equals(other);
-            }
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.date.GetHashCode() ^
-                this.email.GetHashCode() ^
-                this.id.GetHashCode() ^ 
-                this.name.GetHashCode() ^ 
-                this.quantity.GetHashCode();
-
-        }
-
         public class Quickening : IQuickening
         {
             public IEnumerable<IMessage> Quicken(dynamic envelope)
