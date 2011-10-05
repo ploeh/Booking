@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileQueueWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookingDomainModel\BookingDomainModel.csproj">
+      <Project>{FDD7CD42-386F-49F2-908A-B09156B3B9F8}</Project>
+      <Name>BookingDomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookingPersistenceModel\BookingPersistenceModel.csproj">
+      <Project>{526A8D17-6BDA-4E91-A074-AC73CA87D07E}</Project>
+      <Name>BookingPersistenceModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
