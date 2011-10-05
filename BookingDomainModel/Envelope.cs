@@ -12,10 +12,8 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly string version;
 
         public Envelope(T body, string version)
+            : this(body, version, body.GetType().Name.ToLowerInvariant())
         {
-            this.body = body;
-            this.version = version;
-            this.bodyType = this.body.GetType().Name.ToLowerInvariant();
         }
 
         public Envelope(T body, string version, string bodyType)
