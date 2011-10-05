@@ -9,19 +9,20 @@ using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
-    public abstract class EnvelopeTests<T>
+    public class EnvelopeTests
     {
         [Theory, AutoDomainData]
-        public void BodyIsCorrectWhenConstructedModestly([Frozen]T expected,
-            [Modest]Envelope<T> sut)
+        public void BodyIsCorrectWhenConstructedModestly(
+            [Frozen]object expected,
+            [Modest]Envelope sut)
         {
-            T actual = sut.Body;
+            var actual = sut.Body;
             Assert.Equal(expected, actual);
         }
 
         [Theory, AutoDomainData]
         public void BodyTypeIsCorrectWhenConstructedModestly(
-            [Modest]Envelope<T> sut)
+            [Modest]Envelope sut)
         {
             string actual = sut.BodyType;
             var expected = sut.Body.GetType().Name.ToLowerInvariant();
@@ -31,7 +32,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         [Theory, AutoDomainData]
         public void VersionIsCorrectWhenConstructedModestly(
             [Frozen]string expected,
-            [Modest]Envelope<T> sut)
+            [Modest]Envelope sut)
         {
             string actual = sut.Version;
             Assert.Equal(expected, actual);
@@ -40,7 +41,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         [Theory, AutoDomainData]
         public void BodyTypeIsCorrectWhenConstructedGreedily(
             [Frozen]string expected,
-            [Greedy]Envelope<T> sut)
+            [Greedy]Envelope sut)
         {
             var actual = sut.BodyType;
             Assert.Equal(expected, actual);
@@ -48,8 +49,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
         [Theory, AutoDomainData]
         public void BodyIsCorrectWhenConstructedGreedily(
-            [Frozen]T expected,
-            [Greedy]Envelope<T> sut)
+            [Frozen]object expected,
+            [Greedy]Envelope sut)
         {
             var actual = sut.Body;
             Assert.Equal(expected, actual);
@@ -58,17 +59,10 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         [Theory, AutoDomainData]
         public void VersionIsCorrectWhenConstructedGreedily(
             [Frozen]string expected,
-            [Greedy]Envelope<T> sut)
+            [Greedy]Envelope sut)
         {
             var actual = sut.Version;
             Assert.Equal(expected, actual);
         }
     }
-
-    public class EnvelopeTestsOfObject : EnvelopeTests<object> { }
-    public class EnvelopeTestsOfString : EnvelopeTests<string> { }
-    public class EnvelopeTestsOfInt32 : EnvelopeTests<int> { }
-    public class EnvelopeTestsOfGuid : EnvelopeTests<Guid> { }
-    public class EnvelopeTestsOfDateTime : EnvelopeTests<DateTime> { }
-    public class EnvelopeTestsOfVersion : EnvelopeTests<Version> { }
 }

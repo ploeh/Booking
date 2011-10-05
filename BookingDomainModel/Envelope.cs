@@ -5,25 +5,25 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public class Envelope<T>
+    public class Envelope
     {
-        private readonly T body;
+        private readonly object body;
         private readonly string bodyType;
         private readonly string version;
 
-        public Envelope(T body, string version)
+        public Envelope(object body, string version)
             : this(body, version, body.GetType().Name.ToLowerInvariant())
         {
         }
 
-        public Envelope(T body, string version, string bodyType)
+        public Envelope(object body, string version, string bodyType)
         {
             this.body = body;
             this.version = version;
             this.bodyType = bodyType;
         }
 
-        public T Body
+        public object Body
         {
             get { return this.body; }
         }
