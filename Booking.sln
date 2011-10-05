@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingJson", "BookingJson\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingPersistenceModel", "BookingPersistenceModel\BookingPersistenceModel.csproj", "{526A8D17-6BDA-4E91-A074-AC73CA87D07E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingFilePersistence", "BookingFilePersistence\BookingFilePersistence.csproj", "{F59E8A4D-095B-40AB-9573-6EAC4B05092C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{526A8D17-6BDA-4E91-A074-AC73CA87D07E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526A8D17-6BDA-4E91-A074-AC73CA87D07E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526A8D17-6BDA-4E91-A074-AC73CA87D07E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59E8A4D-095B-40AB-9573-6EAC4B05092C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59E8A4D-095B-40AB-9573-6EAC4B05092C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59E8A4D-095B-40AB-9573-6EAC4B05092C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59E8A4D-095B-40AB-9573-6EAC4B05092C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
