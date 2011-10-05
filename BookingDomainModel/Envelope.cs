@@ -21,7 +21,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             get { return this.body; }
         }
 
-        public string MessageType
+        public string BodyType
         {
             get { return this.body.GetType().Name.ToLowerInvariant(); }
         }

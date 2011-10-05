@@ -20,10 +20,10 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         }
 
         [Theory, AutoDomainData]
-        public void MessageTypeIsCorrectWhenConstructedModestly(
+        public void BodyTypeIsCorrectWhenConstructedModestly(
             [Modest]Envelope<T> sut)
         {
-            string actual = sut.MessageType;
+            string actual = sut.BodyType;
             var expected = sut.Body.GetType().Name.ToLowerInvariant();
             Assert.Equal(expected, actual);
         }
