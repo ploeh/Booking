@@ -16,7 +16,7 @@ namespace Ploeh.Samples.Booking.WebUI
 
         public PoorMansCompositionRoot()
         {
-            var queuePath = HostingEnvironment.MapPath("~/queue");
+            var queuePath = HostingEnvironment.MapPath("~/Queue");
             if (!Directory.Exists(queuePath))
                 Directory.CreateDirectory(queuePath);
             this.queueDirectory = new DirectoryInfo(queuePath);
