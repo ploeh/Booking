@@ -22,6 +22,11 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.id = Guid.NewGuid();
         }
 
+        public Envelope Envelop()
+        {
+            return null;
+        }
+
         public DateTime Date
         {
             get { return this.date; }

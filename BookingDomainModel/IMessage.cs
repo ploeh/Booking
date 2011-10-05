@@ -7,6 +7,8 @@ namespace Ploeh.Samples.Booking.DomainModel
 {
     public interface IMessage : IEquatable<IMessage>
     {
+        Envelope Envelop();
+
         Guid Id { get; }
     }
 }
