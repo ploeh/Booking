@@ -106,6 +106,13 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.Equal(sut, actual.Body);
         }
 
+        [Theory, AutoDomainData]
+        public void EnvelopReturnsCorrectVersion(MakeReservationCommand sut)
+        {
+            var actual = sut.Envelop();
+            Assert.Equal("1", actual.Version);
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);

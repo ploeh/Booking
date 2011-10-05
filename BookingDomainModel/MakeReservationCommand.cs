@@ -24,7 +24,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public Envelope Envelop()
         {
-            return new Envelope(this, "foo");
+            return new Envelope(this, "1");
         }
 
         public DateTime Date
