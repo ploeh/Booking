@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoDomainDataAttribute.cs" />
+    <Compile Include="EnvelopeTests.cs" />
     <Compile Include="MakeReservationCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

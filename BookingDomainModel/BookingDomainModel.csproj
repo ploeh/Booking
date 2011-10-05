@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Envelope.cs" />
     <Compile Include="IChannel.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="MakeReservationCommand.cs" />
