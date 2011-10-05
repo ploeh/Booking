@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Ploeh.Samples.Booking.JsonAntiCorruption
 {
-    public interface IStore<T>
+    public interface IStoreWriter<T>
     {
         Stream GetStreamFor(T item);
     }

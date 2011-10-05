@@ -10,10 +10,10 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
 {
     public class JsonChannel<T> : IChannel<T> where T : IMessage
     {
-        private readonly IStore<T> store;
+        private readonly IStoreWriter<T> store;
         private readonly JsonSerializer serializer;
 
-        public JsonChannel(IStore<T> store)
+        public JsonChannel(IStoreWriter<T> store)
         {
             this.store = store;
             this.serializer = new JsonSerializer();
