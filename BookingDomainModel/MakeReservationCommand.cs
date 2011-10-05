@@ -22,6 +22,15 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.id = Guid.NewGuid();
         }
 
+        protected MakeReservationCommand(dynamic source)
+        {
+            this.date = source.Date;
+            this.email = source.Email;
+            this.name = source.Name;
+            this.quantity = source.Quantity;
+            this.id = source.Id;
+        }
+
         public Envelope Envelop()
         {
             return new Envelope(this, "1");
@@ -78,6 +87,14 @@ namespace Ploeh.Samples.Booking.DomainModel
                 this.name.GetHashCode() ^ 
                 this.quantity.GetHashCode();
 
+        }
+
+        public class Quickening
+        {
+            public IEnumerable<IMessage> Quicken(dynamic envelope)
+            {
+                yield return new MakeReservationCommand(envelope.Body);
+            }
         }
     }
 }
