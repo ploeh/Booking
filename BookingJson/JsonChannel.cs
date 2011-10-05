@@ -5,6 +5,7 @@ using System.Text;
 using Ploeh.Samples.Booking.DomainModel;
 using System.IO;
 using Newtonsoft.Json;
+using Ploeh.Samples.Booking.PersistenceModel;
 
 namespace Ploeh.Samples.Booking.JsonAntiCorruption
 {
