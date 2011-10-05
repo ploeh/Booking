@@ -27,6 +27,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var expected = sut.Body.GetType().Name.ToLowerInvariant();
             Assert.Equal(expected, actual);
         }
+
+        [Theory, AutoDomainData]
+        public void VersionIsCorrectWhenConstructedModestly(
+            [Frozen]string expected,
+            [Modest]Envelope<T> sut)
+        {
+            string actual = sut.Version;
+            Assert.Equal(expected, actual);
+        }
     }
 
     public class EnvelopeTestsOfObject : EnvelopeTests<object> { }

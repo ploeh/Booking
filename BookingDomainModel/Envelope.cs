@@ -8,10 +8,12 @@ namespace Ploeh.Samples.Booking.DomainModel
     public class Envelope<T>
     {
         private readonly T body;
+        private readonly string version;
 
-        public Envelope(T body)
+        public Envelope(T body, string version)
         {
             this.body = body;
+            this.version = version;
         }
 
         public T Body
@@ -22,6 +24,11 @@ namespace Ploeh.Samples.Booking.DomainModel
         public string MessageType
         {
             get { return this.body.GetType().Name.ToLowerInvariant(); }
+        }
+
+        public string Version
+        {
+            get { return this.version; }
         }
     }
 }
