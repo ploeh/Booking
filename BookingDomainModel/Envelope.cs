@@ -8,12 +8,19 @@ namespace Ploeh.Samples.Booking.DomainModel
     public class Envelope<T>
     {
         private readonly T body;
+        private readonly string bodyType;
         private readonly string version;
 
         public Envelope(T body, string version)
         {
             this.body = body;
             this.version = version;
+            this.bodyType = this.body.GetType().Name.ToLowerInvariant();
+        }
+
+        public Envelope(T body, string version, string bodyType)
+        {
+            this.bodyType = bodyType;
         }
 
         public T Body
@@ -23,7 +30,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public string BodyType
         {
-            get { return this.body.GetType().Name.ToLowerInvariant(); }
+            get { return this.bodyType; }
         }
 
         public string Version

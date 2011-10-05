@@ -36,6 +36,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             string actual = sut.Version;
             Assert.Equal(expected, actual);
         }
+
+        [Theory, AutoDomainData]
+        public void BodyTypeIsCorrectWhenConstructedGreedily(
+            [Frozen]string expected,
+            [Greedy]Envelope<T> sut)
+        {
+            var actual = sut.BodyType;
+            Assert.Equal(expected, actual);
+        }
     }
 
     public class EnvelopeTestsOfObject : EnvelopeTests<object> { }
