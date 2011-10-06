@@ -84,5 +84,19 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.DoesNotThrow(() =>
                 sut.Reserve(request));
         }
+
+        [Theory, AutoDomainData]
+        public void ReserveReturnsInstanceWithCorrectlyDecrementedRemaining(
+            int quantity,
+            Capacity sut,
+            RequestReservationCommand command)
+        {
+            var expected = sut.Remaining - quantity;
+            var request = command.WithQuantity(quantity);
+
+            Capacity actual = sut.Reserve(request);
+
+            Assert.Equal(expected, actual.Remaining);
+        }
     }
 }
