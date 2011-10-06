@@ -8,10 +8,12 @@ namespace Ploeh.Samples.Booking.DomainModel
     public class ReservationAcceptedEvent : IMessage
     {
         private readonly Guid id;
+        private readonly DateTime date;
 
-        public ReservationAcceptedEvent(Guid id)
+        public ReservationAcceptedEvent(Guid id, DateTime date)
         {
             this.id = id;
+            this.date = date;
         }
 
         public Envelope Envelop()
@@ -22,6 +24,11 @@ namespace Ploeh.Samples.Booking.DomainModel
         public Guid Id
         {
             get { return this.id; }
+        }
+
+        public DateTime Date
+        {
+            get { return this.date; }
         }
     }
 }
