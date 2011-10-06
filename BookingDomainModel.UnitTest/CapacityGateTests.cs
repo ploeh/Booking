@@ -108,7 +108,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         [Theory, AutoDomainData]
         public void ConsumeDoesNotForwardReplayedEvent(
             [Frozen]Mock<ICapacityRepository> repositoryMock,
-            [Frozen]Mock<IChannel<CapacityReservedEvent>> channelMock,
+            [Frozen]Mock<IChannel<CapacityReservedEvent>> capacityChannelMock,
+            [Frozen]Mock<IChannel<SoldOutEvent>> soldOutChannelMock,
             CapacityGate sut,
             RequestReservationCommand command,
             Capacity originalCapacity)
@@ -123,7 +124,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             sut.Consume(requestWithinCapacity);
 
             repositoryMock.Verify(r => r.Write(It.IsAny<CapacityReservedEvent>()), Times.Never());
-            channelMock.Verify(r => r.Send(It.IsAny<CapacityReservedEvent>()), Times.Never());
+            capacityChannelMock.Verify(r => r.Send(It.IsAny<CapacityReservedEvent>()), Times.Never());
+            soldOutChannelMock.Verify(r => r.Send(It.IsAny<SoldOutEvent>()), Times.Never());
         }
     }
 }

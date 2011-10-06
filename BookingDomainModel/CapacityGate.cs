@@ -31,10 +31,9 @@ namespace Ploeh.Samples.Booking.DomainModel
                 {
                     this.repository.Write(reservedCapacity);
                     this.capacityChannel.Send(reservedCapacity);
+                    this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
                 }
             }
-
-            this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
         }
     }
 }
