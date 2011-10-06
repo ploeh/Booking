@@ -52,5 +52,23 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             channelMock.Verify(c => c.Send(It.IsAny<CapacityReservedEvent>()), Times.Never());
         }
+
+        [Theory, AutoDomainData]
+        public void ConsumeWritesEventToRepositoryWhenCapacityIsAvailable(
+            [Frozen]Mock<ICapacityRepository> repositoryMock,
+            CapacityGate sut,
+            RequestReservationCommand command,
+            Capacity capacity)
+        {
+            repositoryMock
+                .Setup(r => r.Read(command.Date.Date))
+                .Returns(capacity);
+
+            var requestWithinCapacity = command.WithQuantity(capacity.Remaining - 1);
+            sut.Consume(requestWithinCapacity);
+
+            var expected = requestWithinCapacity.ReserveCapacity().Id;
+            repositoryMock.Verify(r => r.Write(It.Is<CapacityReservedEvent>(e => e.Id == expected)));
+        }
     }
 }

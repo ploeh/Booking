@@ -19,9 +19,11 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public void Consume(RequestReservationCommand item)
         {
-            var originalCapacity = repository.Read(item.Date.Date);
+            var originalCapacity = this.repository.Read(item.Date.Date);
             if (originalCapacity.CanReserve(item))
                 this.capacityChannel.Send(item.ReserveCapacity());
+
+            this.repository.Write(item.ReserveCapacity());
         }
     }
 }

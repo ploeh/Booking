@@ -8,5 +8,7 @@ namespace Ploeh.Samples.Booking.DomainModel
     public interface ICapacityRepository
     {
         Capacity Read(DateTime date);
+
+        void Write(CapacityReservedEvent capacityReserved);
     }
 }
