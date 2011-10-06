@@ -28,5 +28,12 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal<DateTime>(date, sut.Date);
         }
+
+        [Theory, AutoDomainData]
+        public void EnvelopReturnsCorrectBody(SoldOutEvent sut)
+        {
+            var actual = sut.Envelop();
+            Assert.Equal(sut, actual.Body);
+        }
     }
 }
