@@ -44,6 +44,7 @@
     <Compile Include="CapacityGate.cs" />
     <Compile Include="CapacityReservedEvent.cs" />
     <Compile Include="Envelope.cs" />
+    <Compile Include="ICapacityRepository.cs" />
     <Compile Include="IChannel.cs" />
     <Compile Include="IConsumer.cs" />
     <Compile Include="IMessage.cs" />
