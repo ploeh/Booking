@@ -185,6 +185,20 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.Equal(expected, actual);
         }
 
+        [Theory, AutoDomainData]
+        public void CanReserveIsConsistentAccrossReplays(
+            Capacity initial, 
+            RequestReservationCommand command)
+        {
+            var remaining = initial.Remaining;
+            var request = command.WithQuantity(remaining);
+            var sut = initial.Reserve(request);
+
+            var result = sut.CanReserve(request);
+
+            Assert.True(result);
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);

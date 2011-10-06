@@ -23,6 +23,9 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool CanReserve(RequestReservationCommand request)
         {
+            if (this.acceptedReservations.Contains(request.Id))
+                return true;
+
             return this.remaining >= request.Quantity;
         }
 
