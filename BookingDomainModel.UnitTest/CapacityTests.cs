@@ -162,8 +162,17 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Capacity sut)
         {
             var expected = sut.Reserve(request);
-            var result = sut.Reserve(request);
-            Assert.Equal(expected, result);
+            var actual = sut.Reserve(request);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory, AutoDomainData]
+        public void ReserveDoesNotHaveSideEffects(
+            RequestReservationCommand request,
+            Capacity sut)
+        {
+            var actual = sut.Reserve(request);
+            Assert.NotEqual(actual, sut);
         }
 
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
