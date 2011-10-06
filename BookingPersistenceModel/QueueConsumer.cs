@@ -6,13 +6,13 @@ using System.IO;
 
 namespace Ploeh.Samples.Booking.PersistenceModel
 {
-    public class PollingConsumer
+    public class QueueConsumer
     {
         private readonly IQueue queue;
         private readonly IObserver<Stream> observer;
         private readonly IEnumerable<Stream> streams;
 
-        public PollingConsumer(IQueue queue, IObserver<Stream> observer)
+        public QueueConsumer(IQueue queue, IObserver<Stream> observer)
         {
             this.queue = queue;
             this.observer = observer;

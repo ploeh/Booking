@@ -11,13 +11,13 @@ using Moq;
 
 namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
 {
-    public class PollingConsumerTests
+    public class QueueConsumerTests
     {
         [Theory, AutoPersistenceData]
         public void ConsumeAllDispatchesAllStreams(
             [Frozen]Mock<IQueue> queueStub,
             [Frozen]Mock<IObserver<Stream>> consumerMock,
-            PollingConsumer sut,
+            QueueConsumer sut,
             IEnumerable<Stream> streams)
         {
             queueStub
@@ -34,7 +34,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         [Theory, AutoPersistenceData]
         public void ConsumeAllDeletesStreams(
             [Frozen]Mock<IQueue> queueMock,
-            PollingConsumer sut,
+            QueueConsumer sut,
             IEnumerable<Stream> streams)
         {
             queueMock

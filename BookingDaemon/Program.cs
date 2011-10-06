@@ -15,7 +15,7 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         static void Main(string[] args)
         {
-            var q = new PollingConsumer(
+            var q = new QueueConsumer(
                 new FileQueue(
                     new DirectoryInfo(@"C:\Users\mark\Documents\Presentations\Conventions\Booking\BookingWebUI\Queue"),
                     "txt"),
