@@ -23,22 +23,19 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool CanReserve(RequestReservationCommand request)
         {
-            if (this.IsReplayOf(request))
-                return true;
-
-            return this.remaining >= request.Quantity;
+            return this.CanReserve(request, request.Quantity);
         }
 
-        public Capacity Reserve(RequestReservationCommand request)
+        public Capacity Reserve(CapacityReservedEvent @event)
         {
-            if (!this.CanReserve(request))
+            if (!this.CanReserve(@event, @event.Quantity))
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
 
-            if (this.IsReplayOf(request))
+            if (this.IsReplayOf(@event))
                 return this;
 
-            return new Capacity(this.remaining - request.Quantity,
-                this.acceptedReservations.Concat(new[] { request.Id }).ToArray());
+            return new Capacity(this.remaining - @event.Quantity,
+                this.acceptedReservations.Concat(new[] { @event.Id }).ToArray());
         }
 
         public bool Equals(Capacity other)
@@ -68,9 +65,17 @@ namespace Ploeh.Samples.Booking.DomainModel
                     .Aggregate((x, y) => x ^ y);
         }
 
-        private bool IsReplayOf(RequestReservationCommand request)
+        private bool IsReplayOf(IMessage message)
         {
-            return this.acceptedReservations.Contains(request.Id);
+            return this.acceptedReservations.Contains(message.Id);
+        }
+
+        private bool CanReserve(IMessage message, int quantity)
+        {
+            if (this.IsReplayOf(message))
+                return true;
+
+            return this.remaining >= quantity;
         }
     }
 }
