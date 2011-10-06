@@ -10,9 +10,9 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly Guid id;
         private readonly DateTime date;
 
-        public SoldOutEvent(Guid id, DateTime date)
+        public SoldOutEvent(DateTime date)
         {
-            this.id = id;
+            this.id = Guid.NewGuid();
             this.date = date;
         }
 

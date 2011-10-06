@@ -18,9 +18,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         }
 
         [Theory, AutoDomainData]
-        public void IdIsCorrect([Frozen]Guid expected, SoldOutEvent sut)
+        public void IdIsUnique(SoldOutEvent sut, SoldOutEvent other)
         {
-            Assert.Equal(expected, sut.Id);
+            Assert.NotEqual(sut.Id, other.Id);
+        }
+
+        [Theory, AutoDomainData]
+        public void IdIsStable(SoldOutEvent sut)
+        {
+            Assert.Equal(sut.Id, sut.Id);
         }
 
         [Theory, AutoDomainData]

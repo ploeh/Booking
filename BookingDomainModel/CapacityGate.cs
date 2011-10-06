@@ -34,7 +34,7 @@ namespace Ploeh.Samples.Booking.DomainModel
                 }
             }
 
-            this.soldOutChannel.Send(new SoldOutEvent(Guid.NewGuid(), item.Date.Date));
+            this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
         }
     }
 }
