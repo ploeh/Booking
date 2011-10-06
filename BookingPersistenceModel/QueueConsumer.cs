@@ -26,7 +26,11 @@ namespace Ploeh.Samples.Booking.PersistenceModel
                     this.observer.OnNext(s);
                     this.queue.Delete(s);
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    if (e.IsUnsafeToSuppress())
+                        throw;
+                }
             }
         }
     }
