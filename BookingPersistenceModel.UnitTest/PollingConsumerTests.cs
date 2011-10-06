@@ -14,15 +14,6 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
     public class PollingConsumerTests
     {
         [Theory, AutoPersistenceData]
-        public void ConsumerIsCorrect(
-            [Frozen]IStreamConsumer expected,
-            PollingConsumer sut)
-        {
-            IStreamConsumer actual = sut.Consumer;
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory, AutoPersistenceData]
         public void EmptyQueueDispatchesAllStreams(
             [Frozen]IEnumerable<Stream> streams,
             [Frozen]Mock<IStreamConsumer> consumerMock,

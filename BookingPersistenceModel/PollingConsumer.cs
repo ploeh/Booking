@@ -17,11 +17,6 @@ namespace Ploeh.Samples.Booking.PersistenceModel
             this.streams = streams;
         }
 
-        public IStreamConsumer Consumer
-        {
-            get { return this.consumer; }
-        }
-
         public void EmptyQueue()
         {
             foreach (var s in this.streams)
