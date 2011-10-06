@@ -32,7 +32,9 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
         {
             while(true)
             {
-                var file = this.directory.EnumerateFiles("*." + this.extension).FirstOrDefault();
+                var file = this.directory.EnumerateFiles("*." + this.extension)
+                    .OrderBy(f => f.CreationTime)
+                    .FirstOrDefault();
                 if (file == null)
                     yield break;
 
