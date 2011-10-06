@@ -8,18 +8,19 @@ namespace Ploeh.Samples.Booking.PersistenceModel
 {
     public class PollingConsumer
     {
+        private readonly IQueue queue;
         private readonly IObserver<Stream> observer;
         private readonly IEnumerable<Stream> streams;
 
-        public PollingConsumer(IEnumerable<Stream> streams, IObserver<Stream> observer)
+        public PollingConsumer(IQueue queue, IObserver<Stream> observer)
         {
+            this.queue = queue;
             this.observer = observer;
-            this.streams = streams;
         }
 
         public void ConsumeSequence()
         {
-            foreach (var s in this.streams)
+            foreach (var s in this.queue)
                 this.observer.OnNext(s);
         }
     }

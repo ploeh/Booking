@@ -15,10 +15,15 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
     {
         [Theory, AutoPersistenceData]
         public void ConsumeSequenceDispatchesAllStreams(
-            [Frozen]IEnumerable<Stream> streams,
+            [Frozen]Mock<IQueue> queueStub,
             [Frozen]Mock<IObserver<Stream>> consumerMock,
-            PollingConsumer sut)
+            PollingConsumer sut,
+            IEnumerable<Stream> streams)
         {
+            queueStub
+                .Setup(q => q.GetEnumerator())
+                .Returns(streams.GetEnumerator());
+
             sut.ConsumeSequence();
 
             streams.ToList().ForEach(s =>

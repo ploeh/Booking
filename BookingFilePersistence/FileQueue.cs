@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Collections;
+using Ploeh.Samples.Booking.PersistenceModel;
 
 namespace Ploeh.Samples.Booking.Persistence.FileSystem
 {
-    public class FileStreams : IEnumerable<Stream>
+    public class FileQueue : IQueue
     {
         private readonly DirectoryInfo directory;
         private readonly string extension;
 
-        public FileStreams(DirectoryInfo directory, string extension)
+        public FileQueue(DirectoryInfo directory, string extension)
         {
             this.directory = directory;
             this.extension = extension;
