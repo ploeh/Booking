@@ -37,5 +37,10 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             get { return this.version; }
         }
+
+        public static string CreateDefaultBodyTypeFor(Type type)
+        {
+            return type.Name.ToLowerInvariant();
+        }
     }
 }

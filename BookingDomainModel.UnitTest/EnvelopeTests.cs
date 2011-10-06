@@ -64,5 +64,20 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var actual = sut.Version;
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData(typeof(object))]
+        [InlineData(typeof(string))]
+        [InlineData(typeof(int))]
+        [InlineData(typeof(Guid))]
+        [InlineData(typeof(DateTime))]
+        [InlineData(typeof(Version))]
+        public void CreateDefaultBodyTypeReturnsCorrectResult(Type type)
+        {
+            string actual = Envelope.CreateDefaultBodyTypeFor(type);
+            
+            var expected = type.Name.ToLowerInvariant();
+            Assert.Equal(expected, actual);
+        }
     }
 }
