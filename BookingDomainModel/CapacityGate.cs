@@ -22,11 +22,12 @@ namespace Ploeh.Samples.Booking.DomainModel
             var originalCapacity = this.repository.Read(item.Date.Date);
             if (originalCapacity.CanReserve(item))
             {
-                var newCapacity = originalCapacity.Reserve(item.ReserveCapacity());
+                var reservedCapacity = item.ReserveCapacity();
+                var newCapacity = originalCapacity.Reserve(reservedCapacity);
                 if (!newCapacity.Equals(originalCapacity))
                 {
-                    this.repository.Write(item.ReserveCapacity());
-                    this.capacityChannel.Send(item.ReserveCapacity());
+                    this.repository.Write(reservedCapacity);
+                    this.capacityChannel.Send(reservedCapacity);
                 }
             }
         }
