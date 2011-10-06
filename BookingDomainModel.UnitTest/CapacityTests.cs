@@ -146,6 +146,16 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.True(actual.All(b => b));
         }
 
+        [Theory, AutoDomainData]
+        public void GetHashCodeReturnsCorrectResult([Frozen]Guid[] ids, Capacity sut)
+        {
+            var expectedHashCode = ids
+                .Select(g => g.GetHashCode())
+                .Aggregate((x, y) => x ^ y)
+                ^ sut.Remaining.GetHashCode();
+            Assert.Equal(expectedHashCode, sut.GetHashCode());
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);
