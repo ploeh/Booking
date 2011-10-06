@@ -112,6 +112,12 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.True(actual.All(b => !b));
         }
 
+        [Theory, AutoDomainData]
+        public void SutDoesNotEqualAnonymousOther(Capacity sut, object other)
+        {
+            Assert.False(sut.Equals(other));
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);
