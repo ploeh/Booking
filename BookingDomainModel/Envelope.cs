@@ -12,7 +12,7 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly string version;
 
         public Envelope(object body, string version)
-            : this(body, version, body.GetType().Name.ToLowerInvariant())
+            : this(body, version, Envelope.CreateDefaultBodyTypeFor(body.GetType()))
         {
         }
 
