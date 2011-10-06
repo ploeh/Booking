@@ -14,7 +14,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
     public class PollingConsumerTests
     {
         [Theory, AutoPersistenceData]
-        public void ConsumeSequenceDispatchesAllStreams(
+        public void ConsumeAllDispatchesAllStreams(
             [Frozen]Mock<IQueue> queueStub,
             [Frozen]Mock<IObserver<Stream>> consumerMock,
             PollingConsumer sut,
@@ -24,7 +24,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
                 .Setup(q => q.GetEnumerator())
                 .Returns(streams.GetEnumerator());
 
-            sut.ConsumeSequence();
+            sut.ConsumeAll();
 
             streams.ToList().ForEach(s =>
                 consumerMock.Verify(c =>
@@ -41,7 +41,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
                 .Setup(q => q.GetEnumerator())
                 .Returns(streams.GetEnumerator());
 
-            sut.ConsumeSequence();
+            sut.ConsumeAll();
 
             streams.ToList().ForEach(s =>
                 queueMock.Verify(q =>

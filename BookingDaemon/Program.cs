@@ -26,7 +26,7 @@ namespace Ploeh.Samples.Booking.Daemon
                     }));
             while (true)
             {
-                q.ConsumeSequence();
+                q.ConsumeAll();
                 Thread.Sleep(500);
             }
         }

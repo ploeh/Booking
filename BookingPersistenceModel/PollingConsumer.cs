@@ -18,7 +18,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel
             this.observer = observer;
         }
 
-        public void ConsumeSequence()
+        public void ConsumeAll()
         {
             foreach (var s in this.queue)
             {
