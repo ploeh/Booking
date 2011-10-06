@@ -104,5 +104,18 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.IsAssignableFrom<IEquatable<Capacity>>(sut);
         }
+
+        [Theory, AutoDomainData]
+        public void SutDoesNotEqualNull(Capacity sut)
+        {
+            var actual = BothEquals(sut, null);
+            Assert.True(actual.All(b => !b));
+        }
+
+        private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
+        {
+            yield return sut.Equals((object)other);
+            yield return sut.Equals(other);
+        }
     }
 }

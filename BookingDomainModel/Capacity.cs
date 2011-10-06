@@ -34,7 +34,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool Equals(Capacity other)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
