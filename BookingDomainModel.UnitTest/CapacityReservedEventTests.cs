@@ -29,5 +29,12 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             int actual = sut.Quantity;
             Assert.Equal(expected, actual);
         }
+
+        [Theory, AutoDomainData]
+        public void EnvelopReturnsResultWithCorrectBody(CapacityReservedEvent sut)
+        {
+            var actual = sut.Envelop();
+            Assert.Equal(sut, actual.Body);
+        }
     }
 }
