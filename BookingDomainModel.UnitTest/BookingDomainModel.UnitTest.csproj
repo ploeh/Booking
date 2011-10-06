@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoDomainDataAttribute.cs" />
+    <Compile Include="CapacityGateTests.cs" />
     <Compile Include="CapacityReservedEventTests.cs" />
     <Compile Include="CapacityTests.cs" />
     <Compile Include="EnvelopeTests.cs" />
