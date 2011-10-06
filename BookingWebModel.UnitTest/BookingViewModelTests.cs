@@ -52,8 +52,8 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         [Theory, AutoWebData]
         public void MakeReservationReturnsCorrectResult(BookingViewModel sut)
         {
-            MakeReservationCommand actual = sut.MakeReservation();
-            var expected = sut.AsSource().OfLikeness<MakeReservationCommand>().Without(d => d.Id);
+            RequestReservationCommand actual = sut.MakeReservation();
+            var expected = sut.AsSource().OfLikeness<RequestReservationCommand>().Without(d => d.Id);
             expected.ShouldEqual(actual);
         }
     }

@@ -75,13 +75,13 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
 
         [Theory, AutoWebData]
         public void PostSendsOnChannel(
-            [Frozen]Mock<IChannel<MakeReservationCommand>> channelMock,
+            [Frozen]Mock<IChannel<RequestReservationCommand>> channelMock,
             BookingController sut,
             BookingViewModel model)
         {
             sut.Post(model);
-            var expected = model.MakeReservation().AsSource().OfLikeness<MakeReservationCommand>().Without(d => d.Id);
-            channelMock.Verify(c => c.Send(It.Is<MakeReservationCommand>(x => expected.Equals(x))));
+            var expected = model.MakeReservation().AsSource().OfLikeness<RequestReservationCommand>().Without(d => d.Id);
+            channelMock.Verify(c => c.Send(It.Is<RequestReservationCommand>(x => expected.Equals(x))));
         }
     }
 }

@@ -28,8 +28,8 @@ namespace Ploeh.Samples.Booking.WebUI
             {
                 return new BookingController(
                     new FixedRemainingCapacityReader(),
-                    new JsonChannel<MakeReservationCommand>(
-                        new FileQueueWriter<MakeReservationCommand>(
+                    new JsonChannel<RequestReservationCommand>(
+                        new FileQueueWriter<RequestReservationCommand>(
                             this.queueDirectory,
                             "txt")));
             }

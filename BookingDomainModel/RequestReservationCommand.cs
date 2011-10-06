@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public class MakeReservationCommand : IMessage
+    public class RequestReservationCommand : IMessage
     {
         private readonly DateTime date;
         private readonly string email;
@@ -13,7 +13,7 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly int quantity;
         private readonly Guid id;
 
-        public MakeReservationCommand(DateTime date, string email, string name, int quantity)
+        public RequestReservationCommand(DateTime date, string email, string name, int quantity)
         {
             this.date = date;
             this.email = email;
@@ -22,7 +22,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.id = Guid.NewGuid();
         }
 
-        protected MakeReservationCommand(dynamic source)
+        protected RequestReservationCommand(dynamic source)
         {
             this.date = source.Date;
             this.email = source.Email;
@@ -65,7 +65,7 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             public IEnumerable<IMessage> Quicken(dynamic envelope)
             {
-                yield return new MakeReservationCommand(envelope.Body);
+                yield return new RequestReservationCommand(envelope.Body);
             }
         }
     }

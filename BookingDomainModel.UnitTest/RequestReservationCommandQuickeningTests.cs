@@ -8,24 +8,24 @@ using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
-    public class MakeReservationCommandQuickeningTests
+    public class RequestReservationCommandQuickeningTests
     {
         [Theory, AutoDomainData]
-        public void SutIsQuickening(MakeReservationCommand.Quickening sut)
+        public void SutIsQuickening(RequestReservationCommand.Quickening sut)
         {
             Assert.IsAssignableFrom<IQuickening>(sut);
         }
 
         [Theory, AutoDomainData]
         public void QuickenReturnsCorrectResultWhenBodyTypeMatches(
-            MakeReservationCommand.Quickening sut,
-            MakeReservationCommand command)
+            RequestReservationCommand.Quickening sut,
+            RequestReservationCommand command)
         {
             dynamic envelope = command.Envelop();
 
             IEnumerable<IMessage> actual = sut.Quicken(envelope);
 
-            var single = Assert.IsAssignableFrom<MakeReservationCommand>(actual.Single());
+            var single = Assert.IsAssignableFrom<RequestReservationCommand>(actual.Single());
             Assert.Equal(command.Email, single.Email);
             Assert.Equal(command.Id, single.Id);
             Assert.Equal(command.Name, single.Name);

@@ -10,59 +10,59 @@ using Moq;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
-    public class MakeReservationCommandTests
+    public class RequestReservationCommandTests
     {
         [Theory, AutoDomainData]
-        public void SutIsMessage(MakeReservationCommand sut)
+        public void SutIsMessage(RequestReservationCommand sut)
         {
             Assert.IsAssignableFrom<IMessage>(sut);
         }
 
         [Theory, AutoDomainData]
-        public void DateIsCorrect([Frozen]DateTime expected, MakeReservationCommand sut)
+        public void DateIsCorrect([Frozen]DateTime expected, RequestReservationCommand sut)
         {
             Assert.Equal<DateTime>(expected, sut.Date);
         }
 
         [Theory, AutoDomainData]
-        public void EmailIsCorrect([Frozen]string expected, MakeReservationCommand sut)
+        public void EmailIsCorrect([Frozen]string expected, RequestReservationCommand sut)
         {
             Assert.Equal<string>(expected, sut.Email);
         }
 
         [Theory, AutoDomainData]
-        public void NameIsCorrect([Frozen]string expected, MakeReservationCommand sut)
+        public void NameIsCorrect([Frozen]string expected, RequestReservationCommand sut)
         {
             Assert.Equal<string>(expected, sut.Name);
         }
 
         [Theory, AutoDomainData]
-        public void QuantityIsCorrect([Frozen]int expected, MakeReservationCommand sut)
+        public void QuantityIsCorrect([Frozen]int expected, RequestReservationCommand sut)
         {
             Assert.Equal<int>(expected, sut.Quantity);
         }
 
         [Theory, AutoDomainData]
-        public void IdIsUnique(MakeReservationCommand sut, MakeReservationCommand other)
+        public void IdIsUnique(RequestReservationCommand sut, RequestReservationCommand other)
         {
             Assert.NotEqual(sut.Id, other.Id);
         }
 
         [Theory, AutoDomainData]
-        public void IdIsStable(MakeReservationCommand sut)
+        public void IdIsStable(RequestReservationCommand sut)
         {
             Assert.Equal(sut.Id, sut.Id);
         }
 
         [Theory, AutoDomainData]
-        public void EnvelopReturnsCorrectBody(MakeReservationCommand sut)
+        public void EnvelopReturnsCorrectBody(RequestReservationCommand sut)
         {
             var actual = sut.Envelop();
             Assert.Equal(sut, actual.Body);
         }
 
         [Theory, AutoDomainData]
-        public void EnvelopReturnsCorrectVersion(MakeReservationCommand sut)
+        public void EnvelopReturnsCorrectVersion(RequestReservationCommand sut)
         {
             var actual = sut.Envelop();
             Assert.Equal("1", actual.Version);

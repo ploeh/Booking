@@ -64,8 +64,8 @@
     <Compile Include="AutoDomainDataAttribute.cs" />
     <Compile Include="CapacityTests.cs" />
     <Compile Include="EnvelopeTests.cs" />
-    <Compile Include="MakeReservationCommandQuickeningTests.cs" />
-    <Compile Include="MakeReservationCommandTests.cs" />
+    <Compile Include="RequestReservationCommandQuickeningTests.cs" />
+    <Compile Include="RequestReservationCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

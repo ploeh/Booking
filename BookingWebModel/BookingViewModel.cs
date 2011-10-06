@@ -18,9 +18,9 @@ namespace Ploeh.Samples.Booking.WebModel
 
         public int RemainingCapacity { get; set; }
 
-        public MakeReservationCommand MakeReservation()
+        public RequestReservationCommand MakeReservation()
         {
-            return new MakeReservationCommand(this.Date, this.Email, this.Name, this.Quantity);
+            return new RequestReservationCommand(this.Date, this.Email, this.Name, this.Quantity);
         }
     }
 }

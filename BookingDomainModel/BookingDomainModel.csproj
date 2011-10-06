@@ -45,7 +45,7 @@
     <Compile Include="IChannel.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IQuickening.cs" />
-    <Compile Include="MakeReservationCommand.cs" />
+    <Compile Include="RequestReservationCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

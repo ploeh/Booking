@@ -10,9 +10,9 @@ namespace Ploeh.Samples.Booking.WebModel
     public class BookingController : Controller
     {
         private readonly IReader<DateTime, int> remainingCapacityReader;
-        private readonly IChannel<MakeReservationCommand> channel;
+        private readonly IChannel<RequestReservationCommand> channel;
 
-        public BookingController(IReader<DateTime, int> remainingCapacityReader, IChannel<MakeReservationCommand> channel)
+        public BookingController(IReader<DateTime, int> remainingCapacityReader, IChannel<RequestReservationCommand> channel)
         {
             this.remainingCapacityReader = remainingCapacityReader;
             this.channel = channel;
