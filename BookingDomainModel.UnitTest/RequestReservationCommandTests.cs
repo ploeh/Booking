@@ -89,5 +89,13 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             sut.AsSource().OfLikeness<CapacityReservedEvent>()
                 .ShouldEqual(actual);
         }
+
+        [Theory, AutoDomainData]
+        public void AcceptReturnsCorrectResult(RequestReservationCommand sut)
+        {
+            ReservationAcceptedEvent actual = sut.Accept();
+
+            sut.AsSource().OfLikeness<ReservationAcceptedEvent>().ShouldEqual(actual);
+        }
     }
 }
