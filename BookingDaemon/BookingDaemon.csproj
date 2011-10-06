@@ -50,6 +50,16 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookingFilePersistence\BookingFilePersistence.csproj">
+      <Project>{F59E8A4D-095B-40AB-9573-6EAC4B05092C}</Project>
+      <Name>BookingFilePersistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookingPersistenceModel\BookingPersistenceModel.csproj">
+      <Project>{526A8D17-6BDA-4E91-A074-AC73CA87D07E}</Project>
+      <Name>BookingPersistenceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
