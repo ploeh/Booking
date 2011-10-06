@@ -135,6 +135,17 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.False(actual.Any(b => b));
         }
 
+        [Theory, AutoDomainData]
+        public void SutEqualsOtherWhenBothReservationsAndRemainingAreEqual(
+            [Frozen]int remaining,
+            [Frozen]Guid[] ids,
+            Capacity sut, 
+            Capacity other)
+        {
+            var actual = BothEquals(sut, other);
+            Assert.True(actual.All(b => b));
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);

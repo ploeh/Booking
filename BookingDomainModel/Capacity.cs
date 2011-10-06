@@ -8,10 +8,12 @@ namespace Ploeh.Samples.Booking.DomainModel
     public class Capacity : IEquatable<Capacity>
     {
         private readonly int remaining;
+        private readonly HashSet<Guid> acceptedReservations;
 
-        public Capacity(int remaining)
+        public Capacity(int remaining, params Guid[] acceptedReservations)
         {
             this.remaining = remaining;
+            this.acceptedReservations = new HashSet<Guid>(acceptedReservations);
         }
 
         public int Remaining
@@ -34,7 +36,21 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool Equals(Capacity other)
         {
-            return false;
+            if (other == null)
+                return false;
+
+            return this.remaining == other.remaining
+                && this.acceptedReservations.SetEquals(other.acceptedReservations);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Capacity;
+            if (other != null)
+            {
+                return this.Equals(other);
+            }
+            return base.Equals(obj);
         }
     }
 }
