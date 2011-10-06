@@ -10,12 +10,14 @@ namespace Ploeh.Samples.Booking.DomainModel
         private readonly Guid id;
         private readonly DateTime date;
         private readonly string name;
+        private readonly string email;
 
-        public ReservationRejectedEvent(Guid id, DateTime date, string name)
+        public ReservationRejectedEvent(Guid id, DateTime date, string name, string email)
         {
             this.id = id;
             this.date = date;
             this.name = name;
+            this.email = email;
         }
 
         public Envelope Envelop()
@@ -36,6 +38,11 @@ namespace Ploeh.Samples.Booking.DomainModel
         public string Name
         {
             get { return this.name; }
+        }
+
+        public string Email
+        {
+            get { return this.email; }
         }
     }
 }
