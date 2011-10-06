@@ -7,5 +7,6 @@ namespace Ploeh.Samples.Booking.DomainModel
 {
     public interface IConsumer<T>
     {
+        void Consume(T item);
     }
 }

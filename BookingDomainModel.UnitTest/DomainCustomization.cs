@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ploeh.AutoFixture.Xunit;
 using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.AutoMoq;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
-    public class AutoDomainDataAttribute : AutoDataAttribute
+    public class DomainCustomization : CompositeCustomization
     {
-        public AutoDomainDataAttribute()
-            : base(new Fixture().Customize(new DomainCustomization()))
+        public DomainCustomization()
+            : base(
+                new AutoMoqCustomization())
         {
         }
     }
