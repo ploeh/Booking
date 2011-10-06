@@ -31,7 +31,11 @@ namespace Ploeh.Samples.Booking.DomainModel
             if (!this.CanReserve(request))
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
 
-            return new Capacity(this.remaining - request.Quantity);
+            if (this.acceptedReservations.Contains(request.Id))
+                return this;
+
+            return new Capacity(this.remaining - request.Quantity,
+                this.acceptedReservations.Concat(new[] { request.Id }).ToArray());
         }
 
         public bool Equals(Capacity other)

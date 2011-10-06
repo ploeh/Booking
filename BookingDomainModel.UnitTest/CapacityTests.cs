@@ -175,6 +175,16 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.NotEqual(actual, sut);
         }
 
+        [Theory, AutoDomainData]
+        public void ReserveReturnsInstanceWithWithoutDecrementingRemainingWhenRequestWasAlreadyAccepted(
+            RequestReservationCommand request,
+            Capacity sut)
+        {
+            var expected = sut.Reserve(request);
+            var actual = expected.Reserve(request);
+            Assert.Equal(expected, actual);
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);
