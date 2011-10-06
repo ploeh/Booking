@@ -86,5 +86,24 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             repositoryMock.Verify(r => r.Write(It.IsAny<CapacityReservedEvent>()), Times.Never());
         }
+
+        [Theory, AutoDomainData]
+        public void ConsumeDoesNotWriteReplayedEventToRepository(
+            [Frozen]Mock<ICapacityRepository> repositoryMock,
+            CapacityGate sut,
+            RequestReservationCommand command,
+            Capacity originalCapacity)
+        {
+            var requestWithinCapacity = command.WithQuantity(originalCapacity.Remaining - 1);
+            var newCapacity = originalCapacity.Reserve(requestWithinCapacity.ReserveCapacity());
+
+            repositoryMock
+                .Setup(r => r.Read(command.Date.Date))
+                .Returns(newCapacity);
+
+            sut.Consume(requestWithinCapacity);
+
+            repositoryMock.Verify(r => r.Write(It.IsAny<CapacityReservedEvent>()), Times.Never());
+        }
     }
 }
