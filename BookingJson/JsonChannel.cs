@@ -22,7 +22,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
 
         public void Send(T message)
         {
-            using (var stream = this.store.GetStreamFor(message))
+            using (var stream = this.store.OpenStreamFor(message))
             using (var writer = new StreamWriter(stream))
                 this.serializer.Serialize(writer, message.Envelop());
         }

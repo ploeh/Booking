@@ -8,6 +8,6 @@ namespace Ploeh.Samples.Booking.PersistenceModel
 {
     public interface IStoreWriter<T>
     {
-        Stream GetStreamFor(T item);
+        Stream OpenStreamFor(T item);
     }
 }

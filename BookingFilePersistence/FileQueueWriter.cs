@@ -19,7 +19,7 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
             this.extension = extension;
         }
 
-        public Stream GetStreamFor(T item)
+        public Stream OpenStreamFor(T item)
         {
             var path = Path.ChangeExtension(
                 Path.Combine(
