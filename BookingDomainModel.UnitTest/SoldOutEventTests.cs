@@ -5,6 +5,7 @@ using System.Text;
 using Xunit.Extensions;
 using Ploeh.Samples.Booking.DomainModel;
 using Xunit;
+using Ploeh.AutoFixture.Xunit;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
@@ -14,6 +15,12 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         public void SutIsMessage(SoldOutEvent sut)
         {
             Assert.IsAssignableFrom<IMessage>(sut);
+        }
+
+        [Theory, AutoDomainData]
+        public void IdIsCorrect([Frozen]Guid expected, SoldOutEvent sut)
+        {
+            Assert.Equal(expected, sut.Id);
         }
     }
 }
