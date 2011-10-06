@@ -14,12 +14,12 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
     public class PollingConsumerTests
     {
         [Theory, AutoPersistenceData]
-        public void EmptyQueueDispatchesAllStreams(
+        public void ConsumeSequenceDispatchesAllStreams(
             [Frozen]IEnumerable<Stream> streams,
             [Frozen]Mock<IStreamConsumer> consumerMock,
             PollingConsumer sut)
         {
-            sut.EmptyQueue();
+            sut.ConsumeSequence();
 
             streams.ToList().ForEach(s =>
                 consumerMock.Verify(c =>
