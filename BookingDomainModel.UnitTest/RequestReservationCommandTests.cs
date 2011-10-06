@@ -80,5 +80,14 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
                 .Without(d => d.Id)
                 .ShouldEqual(actual);
         }
+
+        [Theory, AutoDomainData]
+        public void ReserveCapacityReturnsCorrectResult(RequestReservationCommand sut)
+        {
+            CapacityReservedEvent actual = sut.ReserveCapacity();
+
+            sut.AsSource().OfLikeness<CapacityReservedEvent>()
+                .ShouldEqual(actual);
+        }
     }
 }

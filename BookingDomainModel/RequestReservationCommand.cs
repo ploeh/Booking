@@ -31,6 +31,11 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.id = source.Id;
         }
 
+        public CapacityReservedEvent ReserveCapacity()
+        {
+            return new CapacityReservedEvent(this.id, this.quantity);
+        }
+
         public RequestReservationCommand WithQuantity(int newQuantity)
         {
             return new RequestReservationCommand(this.date, this.email, this.name, newQuantity);
