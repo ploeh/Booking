@@ -7,6 +7,7 @@ using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Ploeh.Samples.Booking.DomainModel;
 using Moq;
+using Ploeh.SemanticComparison.Fluent;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
@@ -66,6 +67,18 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             var actual = sut.Envelop();
             Assert.Equal("1", actual.Version);
+        }
+
+        [Theory, AutoDomainData]
+        public void WithQuantityReturnsCorrectResult(RequestReservationCommand sut,
+            int newQuantity)
+        {
+            RequestReservationCommand actual = sut.WithQuantity(newQuantity);
+
+            sut.AsSource().OfLikeness<RequestReservationCommand>()
+                .With(d => d.Quantity).EqualsWhen((s, d) => d.Quantity == newQuantity)
+                .Without(d => d.Id)
+                .ShouldEqual(actual);
         }
     }
 }

@@ -31,6 +31,11 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.id = source.Id;
         }
 
+        public RequestReservationCommand WithQuantity(int newQuantity)
+        {
+            return new RequestReservationCommand(this.date, this.email, this.name, newQuantity);
+        }
+
         public Envelope Envelop()
         {
             return new Envelope(this, "1");
