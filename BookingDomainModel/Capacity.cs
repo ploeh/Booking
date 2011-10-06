@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public class Capacity
+    public class Capacity : IEquatable<Capacity>
     {
         private readonly int remaining;
 
@@ -30,6 +30,11 @@ namespace Ploeh.Samples.Booking.DomainModel
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
 
             return new Capacity(this.remaining - request.Quantity);
+        }
+
+        public bool Equals(Capacity other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

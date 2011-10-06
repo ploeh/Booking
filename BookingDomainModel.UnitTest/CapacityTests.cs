@@ -98,5 +98,11 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             Assert.Equal(expected, actual.Remaining);
         }
+
+        [Theory, AutoDomainData]
+        public void SutIsEquatable(Capacity sut)
+        {
+            Assert.IsAssignableFrom<IEquatable<Capacity>>(sut);
+        }
     }
 }
