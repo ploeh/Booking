@@ -9,12 +9,15 @@ namespace Ploeh.Samples.Booking.DomainModel
     {
         private readonly ICapacityRepository repository;
         private readonly IChannel<CapacityReservedEvent> capacityChannel;
+        private readonly IChannel<SoldOutEvent> soldOutChannel;
 
         public CapacityGate(ICapacityRepository repository,
-            IChannel<CapacityReservedEvent> capacityChannel)
+            IChannel<CapacityReservedEvent> capacityChannel,
+            IChannel<SoldOutEvent> soldOutChannel)
         {
             this.repository = repository;
             this.capacityChannel = capacityChannel;
+            this.soldOutChannel = soldOutChannel;
         }
 
         public void Consume(RequestReservationCommand item)
@@ -30,6 +33,8 @@ namespace Ploeh.Samples.Booking.DomainModel
                     this.capacityChannel.Send(reservedCapacity);
                 }
             }
+
+            this.soldOutChannel.Send(new SoldOutEvent(Guid.NewGuid(), item.Date.Date));
         }
     }
 }
