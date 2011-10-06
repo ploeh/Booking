@@ -23,7 +23,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool CanReserve(RequestReservationCommand request)
         {
-            if (this.acceptedReservations.Contains(request.Id))
+            if (this.IsReplayOf(request))
                 return true;
 
             return this.remaining >= request.Quantity;
@@ -34,7 +34,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             if (!this.CanReserve(request))
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
 
-            if (this.acceptedReservations.Contains(request.Id))
+            if (this.IsReplayOf(request))
                 return this;
 
             return new Capacity(this.remaining - request.Quantity,
@@ -66,6 +66,11 @@ namespace Ploeh.Samples.Booking.DomainModel
                 ^ this.acceptedReservations
                     .Select(g => g.GetHashCode())
                     .Aggregate((x, y) => x ^ y);
+        }
+
+        private bool IsReplayOf(RequestReservationCommand request)
+        {
+            return this.acceptedReservations.Contains(request.Id);
         }
     }
 }
