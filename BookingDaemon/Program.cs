@@ -6,6 +6,8 @@ using Ploeh.Samples.Booking.Persistence.FileSystem;
 using System.IO;
 using Ploeh.Samples.Booking.PersistenceModel;
 using System.Threading;
+using Ploeh.Samples.Booking.JsonAntiCorruption;
+using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.Daemon
 {
@@ -17,26 +19,15 @@ namespace Ploeh.Samples.Booking.Daemon
                 new FileStreams(
                     new DirectoryInfo(@"C:\Users\mark\Documents\Presentations\Conventions\Booking\BookingWebUI\Queue"),
                     "txt"),
-                new NullObserver<Stream>());
+                new JsonStreamObserver(
+                    new[]
+                    {
+                        new RequestReservationCommand.Quickening()
+                    }));
             while (true)
             {
                 q.ConsumeSequence();
                 Thread.Sleep(500);
-            }
-        }
-
-        private class NullObserver<T> : IObserver<T>
-        {
-            public void OnCompleted()
-            {
-            }
-
-            public void OnError(Exception error)
-            {
-            }
-
-            public void OnNext(T value)
-            {
             }
         }
     }
