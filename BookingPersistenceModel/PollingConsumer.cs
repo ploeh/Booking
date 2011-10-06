@@ -21,7 +21,10 @@ namespace Ploeh.Samples.Booking.PersistenceModel
         public void ConsumeSequence()
         {
             foreach (var s in this.queue)
+            {
                 this.observer.OnNext(s);
+                this.queue.Delete(s);
+            }
         }
     }
 }

@@ -30,5 +30,22 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
                 consumerMock.Verify(c =>
                     c.OnNext(s)));
         }
+
+        [Theory, AutoPersistenceData]
+        public void ConsumeAllDeletesStreams(
+            [Frozen]Mock<IQueue> queueMock,
+            PollingConsumer sut,
+            IEnumerable<Stream> streams)
+        {
+            queueMock
+                .Setup(q => q.GetEnumerator())
+                .Returns(streams.GetEnumerator());
+
+            sut.ConsumeSequence();
+
+            streams.ToList().ForEach(s =>
+                queueMock.Verify(q =>
+                    q.Delete(s)));
+        }
     }
 }

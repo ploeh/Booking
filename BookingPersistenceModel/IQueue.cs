@@ -8,5 +8,6 @@ namespace Ploeh.Samples.Booking.PersistenceModel
 {
     public interface IQueue : IEnumerable<Stream>
     {
+        void Delete(Stream stream);
     }
 }

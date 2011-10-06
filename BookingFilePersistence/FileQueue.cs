@@ -19,6 +19,10 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
             this.extension = extension;
         }
 
+        public void Delete(Stream stream)
+        {
+        }
+
         public IEnumerator<Stream> GetEnumerator()
         {
             while(true)
