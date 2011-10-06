@@ -22,5 +22,12 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal(expected, sut.Id);
         }
+
+        [Theory, AutoDomainData]
+        public void QuantityIsCorrect([Frozen]int expected, CapacityReservedEvent sut)
+        {
+            int actual = sut.Quantity;
+            Assert.Equal(expected, actual);
+        }
     }
 }
