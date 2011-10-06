@@ -5,6 +5,7 @@ using System.Text;
 using Xunit.Extensions;
 using Xunit;
 using Ploeh.Samples.Booking.DomainModel;
+using System.Dynamic;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
@@ -30,6 +31,19 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.Equal(command.Id, single.Id);
             Assert.Equal(command.Name, single.Name);
             Assert.Equal(command.Quantity, single.Quantity);
+        }
+
+        [Theory, AutoDomainData]
+        public void QuickenReturnsNothingWhenBodyTypeDoesNotMatch(
+            RequestReservationCommand.Quickening sut,
+            string bodyType)
+        {
+            dynamic envelope = new ExpandoObject();
+            envelope.BodyType = bodyType;
+
+            var actual = sut.Quicken(envelope);
+
+            Assert.Empty(actual);
         }
     }
 }
