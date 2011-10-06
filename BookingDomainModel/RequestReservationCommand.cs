@@ -36,6 +36,11 @@ namespace Ploeh.Samples.Booking.DomainModel
             return new ReservationAcceptedEvent(this.id, this.date, this.name, this.email, this.quantity);
         }
 
+        public ReservationRejectedEvent Reject()
+        {
+            return new ReservationRejectedEvent(this.id, this.date, this.name, this.email, this.quantity);
+        }
+
         public CapacityReservedEvent ReserveCapacity()
         {
             return new CapacityReservedEvent(this.id, this.quantity);
