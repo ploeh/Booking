@@ -10,7 +10,6 @@ namespace Ploeh.Samples.Booking.PersistenceModel
     {
         private readonly IQueue queue;
         private readonly IObserver<Stream> observer;
-        private readonly IEnumerable<Stream> streams;
 
         public QueueConsumer(IQueue queue, IObserver<Stream> observer)
         {
