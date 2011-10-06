@@ -28,5 +28,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             Assert.False(result);
         }
+
+        [Theory, AutoDomainData]
+        public void CanReserveReturnsTrueWhenQuantityIsEqualToRemaining(
+            Capacity sut, 
+            RequestReservationCommand command)
+        {
+            var request = command.WithQuantity(sut.Remaining);
+            var result = sut.CanReserve(request);
+            Assert.True(result);
+        }
     }
 }

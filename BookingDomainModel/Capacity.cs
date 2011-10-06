@@ -21,7 +21,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public bool CanReserve(RequestReservationCommand request)
         {
-            return false;
+            return this.remaining == request.Quantity;
         }
     }
 }
