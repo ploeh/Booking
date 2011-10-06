@@ -21,6 +21,11 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
 
         public void Delete(Stream stream)
         {
+            var fileStream = stream as FileStream;
+            if (fileStream != null)
+            {
+                File.Delete(fileStream.Name);
+            }
         }
 
         public IEnumerator<Stream> GetEnumerator()
