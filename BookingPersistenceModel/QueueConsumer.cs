@@ -21,8 +21,12 @@ namespace Ploeh.Samples.Booking.PersistenceModel
         {
             foreach (var s in this.queue)
             {
-                this.observer.OnNext(s);
-                this.queue.Delete(s);
+                try
+                {
+                    this.observer.OnNext(s);
+                    this.queue.Delete(s);
+                }
+                catch { }
             }
         }
     }

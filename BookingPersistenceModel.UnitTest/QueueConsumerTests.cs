@@ -47,5 +47,24 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
                 queueMock.Verify(q =>
                     q.Delete(s)));
         }
+
+        [Theory, AutoPersistenceData]
+        public void ConsumeAllDoesNotDeleteWhenObserverThrows(
+            [Frozen]Mock<IQueue> queueMock,
+            [Frozen]Mock<IObserver<Stream>> observerStub,
+            QueueConsumer sut,
+            IEnumerable<Stream> streams)
+        {
+            queueMock
+                .Setup(q => q.GetEnumerator())
+                .Returns(streams.GetEnumerator());
+            observerStub
+                .Setup(o => o.OnNext(It.IsAny<Stream>()))
+                .Throws<InvalidOperationException>();
+
+            sut.ConsumeAll();
+
+            queueMock.Verify(q => q.Delete(It.IsAny<Stream>()), Times.Never());
+        }
     }
 }
