@@ -24,7 +24,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public Envelope Envelop()
         {
-            throw new NotImplementedException();
+            return new Envelope(this, "1");
         }
 
         public Guid Id
