@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IStreamConsumer.cs" />
     <Compile Include="PollingConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IStoreWriter.cs" />

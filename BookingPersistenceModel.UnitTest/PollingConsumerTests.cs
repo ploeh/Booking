@@ -16,14 +16,14 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         [Theory, AutoPersistenceData]
         public void ConsumeSequenceDispatchesAllStreams(
             [Frozen]IEnumerable<Stream> streams,
-            [Frozen]Mock<IStreamConsumer> consumerMock,
+            [Frozen]Mock<IObserver<Stream>> consumerMock,
             PollingConsumer sut)
         {
             sut.ConsumeSequence();
 
             streams.ToList().ForEach(s =>
                 consumerMock.Verify(c =>
-                    c.Consume(s)));
+                    c.OnNext(s)));
         }
     }
 }
