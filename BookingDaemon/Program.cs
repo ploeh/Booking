@@ -17,7 +17,7 @@ namespace Ploeh.Samples.Booking.Daemon
         {
             var q = new QueueConsumer(
                 new FileQueue(
-                    new DirectoryInfo(@"C:\Users\mark\Documents\Presentations\Conventions\Booking\BookingWebUI\Queue"),
+                    new DirectoryInfo(@"..\..\..\BookingWebUI\Queue"),
                     "txt"),
                 new JsonStreamObserver(
                     new[]
