@@ -156,6 +156,16 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Assert.Equal(expectedHashCode, sut.GetHashCode());
         }
 
+        [Theory, AutoDomainData]
+        public void ReserveReturnsEquivalentInstanceWhenReplayed(
+            RequestReservationCommand request,
+            Capacity sut)
+        {
+            var expected = sut.Reserve(request);
+            var result = sut.Reserve(request);
+            Assert.Equal(expected, result);
+        }
+
         private static IEnumerable<bool> BothEquals<T>(T sut, T other) where T : IEquatable<T>
         {
             yield return sut.Equals((object)other);
