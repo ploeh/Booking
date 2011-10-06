@@ -28,5 +28,11 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal<DateTime>(date, sut.Date);
         }
+
+        [Theory, AutoDomainData]
+        public void NameIsCorrect([Frozen]string name, ReservationRejectedEvent sut)
+        {
+            Assert.Equal<string>(name, sut.Name);
+        }
     }
 }
