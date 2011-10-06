@@ -88,7 +88,25 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         }
 
         [Theory, AutoDomainData]
-        public void ConsumeDoesNotWriteReplayedEventToRepository(
+        public void ConsumeSendsSoldOutEventWhenSoldOut(
+            [Frozen]Mock<ICapacityRepository> repositoryStub,
+            [Frozen]Mock<IChannel<SoldOutEvent>> channelMock,
+            CapacityGate sut,
+            RequestReservationCommand command,
+            Capacity capacity)
+        {
+            repositoryStub
+                .Setup(r => r.Read(command.Date.Date))
+                .Returns(capacity);
+
+            sut.Consume(command.WithQuantity(capacity.Remaining));
+
+            var expected = command.Date.Date;
+            channelMock.Verify(c => c.Send(It.Is<SoldOutEvent>(e => e.Date == expected)));
+        }
+
+        [Theory, AutoDomainData]
+        public void ConsumeDoesNotForwardReplayedEvent(
             [Frozen]Mock<ICapacityRepository> repositoryMock,
             [Frozen]Mock<IChannel<CapacityReservedEvent>> channelMock,
             CapacityGate sut,
@@ -106,24 +124,6 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             repositoryMock.Verify(r => r.Write(It.IsAny<CapacityReservedEvent>()), Times.Never());
             channelMock.Verify(r => r.Send(It.IsAny<CapacityReservedEvent>()), Times.Never());
-        }
-
-        [Theory, AutoDomainData]
-        public void ConsumeSendsSoldOutEventWhenSoldOut(
-            [Frozen]Mock<ICapacityRepository> repositoryStub,
-            [Frozen]Mock<IChannel<SoldOutEvent>> channelMock,
-            CapacityGate sut,
-            RequestReservationCommand command,
-            Capacity capacity)
-        {
-            repositoryStub
-                .Setup(r => r.Read(command.Date.Date))
-                .Returns(capacity);
-
-            sut.Consume(command.WithQuantity(capacity.Remaining));
-
-            var expected = command.Date.Date;
-            channelMock.Verify(c => c.Send(It.Is<SoldOutEvent>(e => e.Date == expected)));
         }
     }
 }
