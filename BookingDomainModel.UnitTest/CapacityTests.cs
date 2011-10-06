@@ -51,5 +51,17 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             Assert.True(result);
         }
+
+        [Theory, AutoDomainData]
+        public void ReserveThrowsWhenQuantityIsGreaterThanRemaining(
+            Capacity sut, 
+            RequestReservationCommand command)
+        {
+            var greaterQuantity = sut.Remaining + 1;
+            var request = command.WithQuantity(greaterQuantity);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                sut.Reserve(request));
+        }
     }
 }

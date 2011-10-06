@@ -23,5 +23,10 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             return this.remaining >= request.Quantity;
         }
+
+        public void Reserve(RequestReservationCommand request)
+        {
+            throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
+        }
     }
 }
