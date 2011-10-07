@@ -26,6 +26,11 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .BasedOn<IController>()
                 .LifestylePerWebRequest());
 
+            container.Register(Classes
+                .FromAssemblyInDirectory(new AssemblyFilter("bin").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
+                .BasedOn<IQuickening>()
+                .WithService.FromInterface());
+
             #region Manual configuration that requires maintenance
             container.Register(Component
                 .For<DirectoryInfo>()
@@ -65,22 +70,6 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .DependsOn(
                     Dependency.OnComponent("directory", "queueDirectory"),
                     Dependency.OnValue("extension", "txt")));
-
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<RequestReservationCommand.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<ReservationAcceptedEvent.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<ReservationRejectedEvent.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<CapacityReservedEvent.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<SoldOutEvent.Quickening>());
 
             container.Register(Component
                 .For<IChannel<RequestReservationCommand>>()

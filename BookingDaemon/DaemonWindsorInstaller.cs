@@ -20,6 +20,11 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Register(Classes
+                .FromAssemblyInDirectory(new AssemblyFilter(".").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
+                .BasedOn<IQuickening>()
+                .WithService.FromInterface());
+
             #region Manual configuration that requires maintenance
             container.Register(Component
                 .For<DirectoryInfo>()
@@ -113,22 +118,6 @@ namespace Ploeh.Samples.Booking.Daemon
                     messageDispatcher.Subscribe(k.Resolve<Dispatcher<SoldOutEvent>>());
                     return messageDispatcher;
                 }));
-
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<RequestReservationCommand.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<ReservationAcceptedEvent.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<ReservationRejectedEvent.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<CapacityReservedEvent.Quickening>());
-            container.Register(Component
-                .For<IQuickening>()
-                .ImplementedBy<SoldOutEvent.Quickening>());
 
             container.Register(Component
                 .For<QueueConsumer>());
