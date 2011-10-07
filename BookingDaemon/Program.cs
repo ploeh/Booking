@@ -19,7 +19,14 @@ namespace Ploeh.Samples.Booking.Daemon
         static void Main(string[] args)
         {
             var queueDirectory = new DirectoryInfo(@"..\..\..\BookingWebUI\Queue");
-            var queueMessageExtension = "txt";
+            if (!queueDirectory.Exists)
+                queueDirectory.Create();
+
+            var singleSourceOfTruthDirectory = new DirectoryInfo(@"..\..\..\BookingWebUI\SSoT");
+            if (!singleSourceOfTruthDirectory.Exists)
+                singleSourceOfTruthDirectory.Create();
+
+            var extension = "txt";
 
             var disposable = new CompositeDisposable();
             var messageDispatcher = new Subject<object>();
@@ -27,24 +34,27 @@ namespace Ploeh.Samples.Booking.Daemon
                 messageDispatcher.Subscribe(
                     new Dispatcher<RequestReservationCommand>(
                         new CapacityGate(
-                            new NullCapacityRepository(),
+                            new JsonCapacityRepository(
+                                new FileDateWriter(
+                                    singleSourceOfTruthDirectory,
+                                    extension)),
                             new JsonChannel<ReservationAcceptedEvent>(
                                 new FileQueueWriter<ReservationAcceptedEvent>(
                                     queueDirectory,
-                                    queueMessageExtension)),
+                                    extension)),
                             new JsonChannel<ReservationRejectedEvent>(
                                 new FileQueueWriter<ReservationRejectedEvent>(
                                     queueDirectory,
-                                    queueMessageExtension)),
+                                    extension)),
                             new JsonChannel<SoldOutEvent>(
                                 new FileQueueWriter<SoldOutEvent>(
                                     queueDirectory,
-                                    queueMessageExtension))))));
+                                    extension))))));
 
             var q = new QueueConsumer(
                 new FileQueue(
                     queueDirectory,
-                    queueMessageExtension),
+                    extension),
                 new JsonStreamObserver(
                     new IQuickening[]
                     {
@@ -75,18 +85,6 @@ namespace Ploeh.Samples.Booking.Daemon
             } while (Console.ReadLine().ToUpperInvariant() != "QUIT");
 
             tokenSource.Cancel();
-        }
-
-        private class NullCapacityRepository : ICapacityRepository
-        {
-            public IEnumerable<Capacity> Read(DateTime date)
-            {
-                return Enumerable.Empty<Capacity>();
-            }
-
-            public void Write(DateTime date, CapacityReservedEvent capacityReserved)
-            {
-            }
         }
     }
 }

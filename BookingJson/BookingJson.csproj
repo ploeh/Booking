@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonCapacityRepository.cs" />
     <Compile Include="JsonChannel.cs" />
     <Compile Include="JsonStreamObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
