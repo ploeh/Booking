@@ -96,13 +96,20 @@ namespace Ploeh.Samples.Booking.Daemon
                 }
             }, tokenSource.Token);
 
-            Console.WriteLine("Type \"quit\" to exit.");
+            Console.WriteLine("Type \"quit\" or \"exit\" to exit.");
             do
             {
                 Console.Write("> ");
-            } while (Console.ReadLine().ToUpperInvariant() != "QUIT");
+            } while (DoNotExit());
 
             tokenSource.Cancel();
+        }
+
+        private static bool DoNotExit()
+        {
+            var line = Console.ReadLine().ToUpperInvariant();
+            return line != "QUIT"
+                && line != "EXIT";
         }
     }
 }
