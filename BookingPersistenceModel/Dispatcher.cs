@@ -6,11 +6,11 @@ using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.PersistenceModel
 {
-    public class TypeMatchingConsumer<T> : IObserver<object>
+    public class Dispatcher<T> : IObserver<object>
     {
         private readonly IConsumer<T> consumer;
 
-        public TypeMatchingConsumer(IConsumer<T> consumer)
+        public Dispatcher(IConsumer<T> consumer)
         {
             this.consumer = consumer;
         }

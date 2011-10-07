@@ -11,10 +11,10 @@ using Moq;
 
 namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
 {
-    public abstract class TypeMatchingConsumerTests<T>
+    public abstract class DispatcherTests<T>
     {
         [Theory, AutoPersistenceData]
-        public void SutIsObserverOfObject(TypeMatchingConsumer<T> sut)
+        public void SutIsObserverOfObject(Dispatcher<T> sut)
         {
             Assert.IsAssignableFrom<IObserver<object>>(sut);
         }
@@ -22,7 +22,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         [Theory, AutoPersistenceData]
         public void OnNextMathingValueConsumesConsumer(
             [Frozen]Mock<IConsumer<T>> consumerMock,
-            TypeMatchingConsumer<T> sut,
+            Dispatcher<T> sut,
             T value)
         {
             sut.OnNext(value);
@@ -30,8 +30,8 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         }
     }
 
-    public class TypeMatchingConsumerTestsOfString : TypeMatchingConsumerTests<string> { }
-    public class TypeMatchingConsumerTestsOfInt : TypeMatchingConsumerTests<int> { }
-    public class TypeMatchingConsumerTestsOfGuid : TypeMatchingConsumerTests<Guid> { }
-    public class TypeMatchingConsumerTestsOfVersion : TypeMatchingConsumerTests<Version> { }
+    public class TypeMatchingConsumerTestsOfString : DispatcherTests<string> { }
+    public class TypeMatchingConsumerTestsOfInt : DispatcherTests<int> { }
+    public class TypeMatchingConsumerTestsOfGuid : DispatcherTests<Guid> { }
+    public class TypeMatchingConsumerTestsOfVersion : DispatcherTests<Version> { }
 }
