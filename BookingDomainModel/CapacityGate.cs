@@ -37,7 +37,8 @@ namespace Ploeh.Samples.Booking.DomainModel
                 var newCapacity = originalCapacity.Reserve(reservedCapacity);
                 if (!newCapacity.Equals(originalCapacity))
                 {
-                    this.repository.Write(reservedCapacity);
+                    this.repository.Write(item.Date.Date, reservedCapacity);
+
                     this.acceptChannel.Send(item.Accept());
                     if (newCapacity.Remaining <= 0)
                         this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
