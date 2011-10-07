@@ -42,14 +42,10 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
 
         private DirectoryInfo GetDirectory(DateTime item)
         {
-            var dateDirectory = new DirectoryInfo(
+            return new DirectoryInfo(
                 Path.Combine(
                     this.directory.FullName,
-                    item.ToString("yyyyMMdd")));
-
-            if (!dateDirectory.Exists)
-                dateDirectory.Create();
-            return dateDirectory;
+                    item.ToString("yyyyMMdd"))).CreateIfAbsent();
         }
     }
 }

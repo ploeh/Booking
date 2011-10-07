@@ -14,26 +14,38 @@ namespace Ploeh.Samples.Booking.WebUI
     {
         private readonly DirectoryInfo queueDirectory;
         private readonly DirectoryInfo singleSourceOfTruthDirectory;
+        private readonly DirectoryInfo viewStoreDirectory;
 
         public PoorMansCompositionRoot()
         {
-            var queuePath = HostingEnvironment.MapPath("~/Queue");
-            this.queueDirectory = new DirectoryInfo(queuePath);
-            if (!this.queueDirectory.Exists)
-                this.queueDirectory.Create();
-
-            var ssotPath = HostingEnvironment.MapPath("~/SSoT");
-            this.singleSourceOfTruthDirectory = new DirectoryInfo(ssotPath);
-            if (!this.singleSourceOfTruthDirectory.Exists)
-                this.singleSourceOfTruthDirectory.Create();
+            this.queueDirectory = 
+                new DirectoryInfo(HostingEnvironment.MapPath("~/Queue")).CreateIfAbsent();
+            this.singleSourceOfTruthDirectory = 
+                new DirectoryInfo(HostingEnvironment.MapPath("~/SSoT")).CreateIfAbsent();
+            this.viewStoreDirectory = 
+                new DirectoryInfo(HostingEnvironment.MapPath("~/ViewStore")).CreateIfAbsent();
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
+            var extension = "txt";
+
+            if (controllerType == typeof(HomeController))
+            {
+                return new HomeController(
+                    new FileMonthViewStore(
+                        this.viewStoreDirectory,
+                        extension));
+            }
+            if (controllerType == typeof(DisabledDatesController))
+            {
+                return new DisabledDatesController(
+                    new FileMonthViewStore(
+                        this.viewStoreDirectory,
+                        extension));
+            }
             if (controllerType == typeof(BookingController))
             {
-                var extension = "txt";
-
                 var fileDateStore = new FileDateStore(
                     singleSourceOfTruthDirectory,
                     extension);

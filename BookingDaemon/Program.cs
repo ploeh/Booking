@@ -11,6 +11,7 @@ using Ploeh.Samples.Booking.DomainModel;
 using System.Reactive.Subjects;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
+using Ploeh.Samples.Booking.WebModel;
 
 namespace Ploeh.Samples.Booking.Daemon
 {
@@ -18,13 +19,12 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         static void Main(string[] args)
         {
-            var queueDirectory = new DirectoryInfo(@"..\..\..\BookingWebUI\Queue");
-            if (!queueDirectory.Exists)
-                queueDirectory.Create();
-
-            var singleSourceOfTruthDirectory = new DirectoryInfo(@"..\..\..\BookingWebUI\SSoT");
-            if (!singleSourceOfTruthDirectory.Exists)
-                singleSourceOfTruthDirectory.Create();
+            var queueDirectory = 
+                new DirectoryInfo(@"..\..\..\BookingWebUI\Queue").CreateIfAbsent();
+            var singleSourceOfTruthDirectory = 
+                new DirectoryInfo(@"..\..\..\BookingWebUI\SSoT").CreateIfAbsent();
+            var viewStoreDirectory = 
+                new DirectoryInfo(@"..\..\..\BookingWebUI\ViewStore").CreateIfAbsent();
 
             var extension = "txt";
 
@@ -63,6 +63,13 @@ namespace Ploeh.Samples.Booking.Daemon
                                 new FileQueueWriter<SoldOutEvent>(
                                     queueDirectory,
                                     extension))))));
+            disposable.Add(
+                messageDispatcher.Subscribe(
+                    new Dispatcher<SoldOutEvent>(
+                        new MonthViewUpdater(
+                            new FileMonthViewStore(
+                                viewStoreDirectory,
+                                extension)))));
 
             var q = new QueueConsumer(
                 new FileQueue(
