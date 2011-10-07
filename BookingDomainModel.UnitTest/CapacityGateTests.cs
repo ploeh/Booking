@@ -21,7 +21,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         [Theory, AutoDomainData]
         public void ConsumeRequestWithEnoughCapacitySendsCorrectEvent(
             [Frozen]Mock<ICapacityRepository> repositoryStub,
-            [Frozen]Mock<IChannel<CapacityReservedEvent>> channelMock,
+            [Frozen]Mock<IChannel<ReservationAcceptedEvent>> channelMock,
             CapacityGate sut,
             RequestReservationCommand command,
             Capacity capacity)
@@ -32,8 +32,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             sut.Consume(command);
 
-            var expected = command.ReserveCapacity().Id;
-            channelMock.Verify(c => c.Send(It.Is<CapacityReservedEvent>(e => e.Id == expected)));
+            var expected = command.Accept().Id;
+            channelMock.Verify(c => c.Send(It.Is<ReservationAcceptedEvent>(e => e.Id == expected)));
         }
 
         [Theory, AutoDomainData]

@@ -8,15 +8,15 @@ namespace Ploeh.Samples.Booking.DomainModel
     public class CapacityGate : IConsumer<RequestReservationCommand>
     {
         private readonly ICapacityRepository repository;
-        private readonly IChannel<CapacityReservedEvent> capacityChannel;
+        private readonly IChannel<ReservationAcceptedEvent> acceptChannel;
         private readonly IChannel<SoldOutEvent> soldOutChannel;
 
         public CapacityGate(ICapacityRepository repository,
-            IChannel<CapacityReservedEvent> capacityChannel,
+            IChannel<ReservationAcceptedEvent> capacityChannel,
             IChannel<SoldOutEvent> soldOutChannel)
         {
             this.repository = repository;
-            this.capacityChannel = capacityChannel;
+            this.acceptChannel = capacityChannel;
             this.soldOutChannel = soldOutChannel;
         }
 
@@ -30,7 +30,7 @@ namespace Ploeh.Samples.Booking.DomainModel
                 if (!newCapacity.Equals(originalCapacity))
                 {
                     this.repository.Write(reservedCapacity);
-                    this.capacityChannel.Send(reservedCapacity);
+                    this.acceptChannel.Send(item.Accept());
                     if (newCapacity.Remaining <= 0)
                         this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
                 }
