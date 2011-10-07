@@ -163,5 +163,22 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var expected = requestExceedingCapacity.Reject().Id;
             channelMock.Verify(c => c.Send(It.Is<ReservationRejectedEvent>(e => e.Id == expected)));
         }
+
+        [Theory, AutoDomainData]
+        public void ConsumeDoesNotSendRejectEventWhenRequestIsWithinCapacity(
+            [Frozen]Mock<ICapacityRepository> repositoryStub,
+            [Frozen]Mock<IChannel<ReservationRejectedEvent>> channelMock,
+            CapacityGate sut,
+            RequestReservationCommand command,
+            Capacity capacity)
+        {
+            repositoryStub
+                .Setup(r => r.Read(command.Date.Date))
+                .Returns(capacity);
+
+            sut.Consume(command.WithQuantity(capacity.Remaining));
+
+            channelMock.Verify(c => c.Send(It.IsAny<ReservationRejectedEvent>()), Times.Never());
+        }
     }
 }

@@ -38,8 +38,8 @@ namespace Ploeh.Samples.Booking.DomainModel
                         this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
                 }
             }
-
-            rejectChannel.Send(item.Reject());
+            else
+                rejectChannel.Send(item.Reject());
         }
     }
 }
