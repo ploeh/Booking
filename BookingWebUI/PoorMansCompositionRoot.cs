@@ -13,36 +13,52 @@ namespace Ploeh.Samples.Booking.WebUI
     public class PoorMansCompositionRoot : DefaultControllerFactory
     {
         private readonly DirectoryInfo queueDirectory;
+        private readonly DirectoryInfo singleSourceOfTruthDirectory;
 
         public PoorMansCompositionRoot()
         {
             var queuePath = HostingEnvironment.MapPath("~/Queue");
-            if (!Directory.Exists(queuePath))
-                Directory.CreateDirectory(queuePath);
             this.queueDirectory = new DirectoryInfo(queuePath);
+            if (!this.queueDirectory.Exists)
+                this.queueDirectory.Create();
+
+            var ssotPath = HostingEnvironment.MapPath("~/SSoT");
+            this.singleSourceOfTruthDirectory = new DirectoryInfo(ssotPath);
+            if (!this.singleSourceOfTruthDirectory.Exists)
+                this.singleSourceOfTruthDirectory.Create();
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
             if (controllerType == typeof(BookingController))
             {
+                var extension = "txt";
+
+                var fileDateStore = new FileDateStore(
+                    singleSourceOfTruthDirectory,
+                    extension);
+
+                var quickenings = new IQuickening[]
+                {
+                    new RequestReservationCommand.Quickening(),
+                    new ReservationAcceptedEvent.Quickening(),
+                    new ReservationRejectedEvent.Quickening(),
+                    new CapacityReservedEvent.Quickening(),
+                    new SoldOutEvent.Quickening()
+                };
+
                 return new BookingController(
-                    new FixedRemainingCapacityReader(),
+                    new JsonCapacityRepository(
+                        fileDateStore,
+                        fileDateStore,
+                        quickenings),
                     new JsonChannel<RequestReservationCommand>(
                         new FileQueueWriter<RequestReservationCommand>(
                             this.queueDirectory,
-                            "txt")));
+                            extension)));
             }
 
             return base.GetControllerInstance(requestContext, controllerType);
-        }
-
-        private class FixedRemainingCapacityReader : IReader<DateTime, int>
-        {
-            public int Query(DateTime arg)
-            {
-                return 10;
-            }
         }
     }
 }

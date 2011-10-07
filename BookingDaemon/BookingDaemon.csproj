@@ -71,6 +71,10 @@
       <Project>{526A8D17-6BDA-4E91-A074-AC73CA87D07E}</Project>
       <Name>BookingPersistenceModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BookingWebModel\BookingWebModel.csproj">
+      <Project>{0477B1CF-B675-4303-9C9B-509D81C2D3B9}</Project>
+      <Name>BookingWebModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

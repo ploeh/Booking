@@ -6,10 +6,11 @@ using Ploeh.Samples.Booking.DomainModel;
 using Ploeh.Samples.Booking.PersistenceModel;
 using Newtonsoft.Json;
 using System.IO;
+using Ploeh.Samples.Booking.WebModel;
 
 namespace Ploeh.Samples.Booking.JsonAntiCorruption
 {
-    public class JsonCapacityRepository : ICapacityRepository
+    public class JsonCapacityRepository : ICapacityRepository, IReader<DateTime, int>
     {
         private readonly IStoreWriter<DateTime> writer;
         private readonly IStoreReader<DateTime> reader;
@@ -64,6 +65,11 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
                     stream.Dispose();
                 }
             }
+        }
+
+        public int Query(DateTime arg)
+        {
+            return this.Read(arg).Single().Remaining;
         }
     }
 }
