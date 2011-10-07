@@ -22,6 +22,15 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.quantity = quantity;
         }
 
+        protected ReservationRejectedEvent(dynamic source)
+        {
+            this.id = source.Id;
+            this.date = source.Date;
+            this.name = source.Name;
+            this.email = source.Email;
+            this.quantity = source.Quantity;
+        }
+
         public Envelope Envelop()
         {
             return new Envelope(this, "1");
@@ -56,7 +65,7 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             public IEnumerable<IMessage> Quicken(dynamic envelope)
             {
-                yield break;
+                yield return new ReservationRejectedEvent(envelope.Body);
             }
         }
     }
