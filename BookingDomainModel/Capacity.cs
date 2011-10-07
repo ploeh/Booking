@@ -70,7 +70,7 @@ namespace Ploeh.Samples.Booking.DomainModel
                     .Aggregate((x, y) => x ^ y);
         }
 
-        public static Capacity DefaultCapacity
+        public static Capacity Default
         {
             get { return Capacity.defaultCapacity; }
         }

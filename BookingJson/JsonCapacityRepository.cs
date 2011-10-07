@@ -27,7 +27,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
         public IEnumerable<Capacity> Read(DateTime date)
         {
             var capacity = this.GetEventsFor(date)
-                .Aggregate(Capacity.DefaultCapacity, (c, e) => c.Reserve(e));
+                .Aggregate(Capacity.Default, (c, e) => c.Reserve(e));
 
             return new[] { capacity };
         }

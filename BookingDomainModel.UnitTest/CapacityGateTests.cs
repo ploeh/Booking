@@ -192,7 +192,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
                 .Setup(r => r.Read(command.Date.Date))
                 .Returns(Enumerable.Empty<Capacity>());
 
-            sut.Consume(command.WithQuantity(Capacity.DefaultCapacity.Remaining + 1));
+            sut.Consume(command.WithQuantity(Capacity.Default.Remaining + 1));
 
             channelMock.Verify(c => c.Send(It.IsAny<ReservationRejectedEvent>()));
         }
@@ -208,7 +208,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
                 .Setup(r => r.Read(command.Date.Date))
                 .Returns(Enumerable.Empty<Capacity>());
 
-            sut.Consume(command.WithQuantity(Capacity.DefaultCapacity.Remaining));
+            sut.Consume(command.WithQuantity(Capacity.Default.Remaining));
 
             channelMock.Verify(c => c.Send(It.IsAny<ReservationAcceptedEvent>()));
         }
