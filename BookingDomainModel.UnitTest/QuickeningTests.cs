@@ -5,6 +5,7 @@ using System.Text;
 using Xunit.Extensions;
 using Xunit;
 using Ploeh.SemanticComparison.Fluent;
+using System.Dynamic;
 
 namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 {
@@ -23,6 +24,19 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             var single = Assert.IsAssignableFrom<TMessage>(actual.Single());
             message.AsSource().OfLikeness<TMessage>().ShouldEqual(single);
+        }
+
+        [Theory, AutoDomainData]
+        public void QuickenReturnsNothingWhenBodyTypeDoesNotMatch(
+            TQuickening sut,
+            string bodyType)
+        {
+            dynamic envelope = new ExpandoObject();
+            envelope.BodyType = bodyType;
+
+            var actual = sut.Quicken(envelope);
+
+            Assert.Empty(actual);
         }
     }
 
