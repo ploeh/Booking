@@ -79,6 +79,11 @@ namespace Ploeh.Samples.Booking.Daemon
                     quickenings,
                     messageDispatcher));
 
+            RunUntilStopped(q);
+        }
+
+        private static void RunUntilStopped(QueueConsumer q)
+        {
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
 
