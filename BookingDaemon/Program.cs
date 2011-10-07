@@ -10,6 +10,7 @@ using Ploeh.Samples.Booking.JsonAntiCorruption;
 using Ploeh.Samples.Booking.DomainModel;
 using System.Reactive.Subjects;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
 
 namespace Ploeh.Samples.Booking.Daemon
 {
@@ -55,11 +56,25 @@ namespace Ploeh.Samples.Booking.Daemon
                     },
                     messageDispatcher));
 
-            while (true)
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+
+            var task = Task.Factory.StartNew(() =>
             {
-                q.ConsumeAll();
-                Thread.Sleep(500);
-            }
+                while (!token.IsCancellationRequested)
+                {
+                    q.ConsumeAll();
+                    Thread.Sleep(500);
+                }
+            }, tokenSource.Token);
+
+            Console.WriteLine("Type \"quit\" to exit.");
+            do
+            {
+                Console.Write("> ");
+            } while (Console.ReadLine().ToUpperInvariant() != "QUIT");
+
+            tokenSource.Cancel();
         }
 
         private class NullCapacityRepository : ICapacityRepository
