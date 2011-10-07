@@ -16,6 +16,12 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.quantity = quantity;
         }
 
+        protected CapacityReservedEvent(dynamic source)
+        {
+            this.id = source.Id;
+            this.quantity = source.Quantity;
+        }
+
         public Envelope Envelop()
         {
             return new Envelope(this, "1");
@@ -29,6 +35,17 @@ namespace Ploeh.Samples.Booking.DomainModel
         public int Quantity
         {
             get { return this.quantity; }
+        }
+
+        public class Quickening : IQuickening
+        {
+            public IEnumerable<IMessage> Quicken(dynamic envelope)
+            {
+                if (envelope.BodyType != Envelope.CreateDefaultBodyTypeFor(typeof(CapacityReservedEvent)))
+                    yield break;
+
+                yield return new CapacityReservedEvent(envelope.Body);
+            }
         }
     }
 }
