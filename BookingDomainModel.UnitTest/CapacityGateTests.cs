@@ -180,5 +180,37 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             channelMock.Verify(c => c.Send(It.IsAny<ReservationRejectedEvent>()), Times.Never());
         }
+
+        [Theory, AutoDomainData]
+        public void ConsumeRejectsRequestOverDefaultCapacityWhenRepositoryReturnsNoCapacity(
+            [Frozen]Mock<ICapacityRepository> repositoryStub,
+            [Frozen]Mock<IChannel<ReservationRejectedEvent>> channelMock,
+            CapacityGate sut,
+            RequestReservationCommand command)
+        {
+            repositoryStub
+                .Setup(r => r.Read(command.Date.Date))
+                .Returns(Enumerable.Empty<Capacity>());
+
+            sut.Consume(command.WithQuantity(CapacityGate.DefaultCapacity.Remaining + 1));
+
+            channelMock.Verify(c => c.Send(It.IsAny<ReservationRejectedEvent>()));
+        }
+
+        [Theory, AutoDomainData]
+        public void ConsumeAcceptsRequestWithinDefaultCapacityWhenRepositoryReturnsNoCapacity(
+            [Frozen]Mock<ICapacityRepository> repositoryStub,
+            [Frozen]Mock<IChannel<ReservationAcceptedEvent>> channelMock,
+            CapacityGate sut,
+            RequestReservationCommand command)
+        {
+            repositoryStub
+                .Setup(r => r.Read(command.Date.Date))
+                .Returns(Enumerable.Empty<Capacity>());
+
+            sut.Consume(command.WithQuantity(CapacityGate.DefaultCapacity.Remaining));
+
+            channelMock.Verify(c => c.Send(It.IsAny<ReservationAcceptedEvent>()));
+        }
     }
 }

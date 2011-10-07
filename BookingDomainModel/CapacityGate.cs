@@ -7,6 +7,8 @@ namespace Ploeh.Samples.Booking.DomainModel
 {
     public class CapacityGate : IConsumer<RequestReservationCommand>
     {
+        private static readonly Capacity defaultCapacity = new Capacity(10);
+
         private readonly ICapacityRepository repository;
         private readonly IChannel<ReservationAcceptedEvent> acceptChannel;
         private readonly IChannel<ReservationRejectedEvent> rejectChannel;
@@ -25,7 +27,10 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public void Consume(RequestReservationCommand item)
         {
-            var originalCapacity = this.repository.Read(item.Date.Date).Single();
+            var originalCapacity = this.repository.Read(item.Date.Date)
+                .DefaultIfEmpty(CapacityGate.defaultCapacity)
+                .Single();
+
             if (originalCapacity.CanReserve(item))
             {
                 var reservedCapacity = item.ReserveCapacity();
@@ -40,6 +45,11 @@ namespace Ploeh.Samples.Booking.DomainModel
             }
             else
                 rejectChannel.Send(item.Reject());
+        }
+
+        public static Capacity DefaultCapacity
+        {
+            get { return CapacityGate.defaultCapacity; }
         }
     }
 }
