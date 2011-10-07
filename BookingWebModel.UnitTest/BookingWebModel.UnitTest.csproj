@@ -82,6 +82,7 @@
     <Compile Include="DateViewModelTests.cs" />
     <Compile Include="DisabledDatesControllerTests.cs" />
     <Compile Include="HomeControllerTests.cs" />
+    <Compile Include="MonthViewUpdaterTests.cs" />
     <Compile Include="netfx\System\Guard.cs" />
     <Compile Include="netfx\System\Reflection\Reflect.cs" />
     <Compile Include="netfx\System\Reflection\Reflect.Overloads.cs">

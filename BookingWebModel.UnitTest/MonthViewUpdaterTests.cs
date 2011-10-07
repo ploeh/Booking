@@ -6,11 +6,11 @@ using Xunit.Extensions;
 using Xunit;
 using Ploeh.Samples.Booking.DomainModel;
 
-namespace Ploeh.Samples.Booking.DomainModel.UnitTest
+namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {
     public class MonthViewUpdaterTests
     {
-        [Theory, AutoDomainData]
+        [Theory, AutoWebData]
         public void SutIsConsumer(MonthViewUpdater sut)
         {
             Assert.IsAssignableFrom<IConsumer<SoldOutEvent>>(sut);

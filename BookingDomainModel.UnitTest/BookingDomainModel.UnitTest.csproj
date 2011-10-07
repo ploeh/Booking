@@ -68,7 +68,6 @@
     <Compile Include="DomainCustomization.cs" />
     <Compile Include="EnvelopeTests.cs" />
     <Compile Include="MonthTests.cs" />
-    <Compile Include="MonthViewUpdaterTests.cs" />
     <Compile Include="QuickeningTests.cs" />
     <Compile Include="RequestReservationCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

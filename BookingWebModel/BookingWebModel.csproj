@@ -52,6 +52,7 @@
     <Compile Include="DisabledDatesController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="IReader.cs" />
+    <Compile Include="MonthViewUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
