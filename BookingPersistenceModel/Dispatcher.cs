@@ -25,7 +25,8 @@ namespace Ploeh.Samples.Booking.PersistenceModel
 
         public void OnNext(object value)
         {
-            this.consumer.Consume((T)value);
+            if (value is T)
+                this.consumer.Consume((T)value);
         }
     }
 }

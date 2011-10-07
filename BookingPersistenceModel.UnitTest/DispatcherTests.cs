@@ -28,6 +28,16 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
             sut.OnNext(value);
             consumerMock.Verify(c => c.Consume(value));
         }
+
+        [Theory, AutoPersistenceData]
+        public void OnNextObjectDoesNotConsumeConsumer(
+            [Frozen]Mock<IConsumer<T>> consumerMock,
+            Dispatcher<T> sut,
+            object value)
+        {
+            sut.OnNext(value);
+            consumerMock.Verify(c => c.Consume(It.IsAny<T>()), Times.Never());
+        }
     }
 
     public class TypeMatchingConsumerTestsOfString : DispatcherTests<string> { }
