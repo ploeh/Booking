@@ -31,9 +31,9 @@ namespace Ploeh.Samples.Booking.DomainModel
                 .DefaultIfEmpty(CapacityGate.defaultCapacity)
                 .Single();
 
-            if (originalCapacity.CanReserve(item))
-            {
-                var reservedCapacity = item.ReserveCapacity();
+            var reservedCapacity = item.ReserveCapacity();
+            if (originalCapacity.CanReserve(reservedCapacity))
+            {                
                 var newCapacity = originalCapacity.Reserve(reservedCapacity);
                 if (!newCapacity.Equals(originalCapacity))
                 {

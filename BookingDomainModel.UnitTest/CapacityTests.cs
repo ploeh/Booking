@@ -23,8 +23,9 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             var greaterQuantity = sut.Remaining + 1;
             var request = command.WithQuantity(greaterQuantity);
+            var @event = request.ReserveCapacity();
 
-            bool actual = sut.CanReserve(request);
+            bool actual = sut.CanReserve(@event);
 
             Assert.False(actual);
         }
@@ -35,7 +36,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             RequestReservationCommand command)
         {
             var request = command.WithQuantity(sut.Remaining);
-            var actual = sut.CanReserve(request);
+            var @event = request.ReserveCapacity();
+            var actual = sut.CanReserve(@event);
             Assert.True(actual);
         }
 
@@ -46,8 +48,9 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             var lesserQuantity = sut.Remaining - 1;
             var request = command.WithQuantity(lesserQuantity);
+            var @event = request.ReserveCapacity();
 
-            var actual = sut.CanReserve(request);
+            var actual = sut.CanReserve(@event);
 
             Assert.True(actual);
         }
@@ -200,7 +203,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var @event = request.ReserveCapacity();
             var sut = initial.Reserve(@event);
 
-            var result = sut.CanReserve(request);
+            var result = sut.CanReserve(@event);
 
             Assert.True(result);
         }

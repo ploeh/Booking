@@ -21,14 +21,17 @@ namespace Ploeh.Samples.Booking.DomainModel
             get { return this.remaining; }
         }
 
-        public bool CanReserve(RequestReservationCommand request)
+        public bool CanReserve(CapacityReservedEvent @event)
         {
-            return this.CanReserve(request, request.Quantity);
+            if (this.IsReplayOf(@event))
+                return true;
+
+            return this.remaining >= @event.Quantity;
         }
 
         public Capacity Reserve(CapacityReservedEvent @event)
         {
-            if (!this.CanReserve(@event, @event.Quantity))
+            if (!this.CanReserve(@event))
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
 
             if (this.IsReplayOf(@event))
@@ -68,14 +71,6 @@ namespace Ploeh.Samples.Booking.DomainModel
         private bool IsReplayOf(IMessage message)
         {
             return this.acceptedReservations.Contains(message.Id);
-        }
-
-        private bool CanReserve(IMessage message, int quantity)
-        {
-            if (this.IsReplayOf(message))
-                return true;
-
-            return this.remaining >= quantity;
         }
     }
 }
