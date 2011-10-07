@@ -40,5 +40,6 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         }
     }
 
+    public class QuickeningTestsOfReservationAcceptedEvent : QuickeningTests<ReservationAcceptedEvent.Quickening, ReservationAcceptedEvent> { }
     public class QuickeningTestsOfReservationRejectedEvent : QuickeningTests<ReservationRejectedEvent.Quickening, ReservationRejectedEvent> { }
 }
