@@ -7,6 +7,8 @@ namespace Ploeh.Samples.Booking.DomainModel
 {
     public class Capacity : IEquatable<Capacity>
     {
+        private static readonly Capacity defaultCapacity = new Capacity(10);
+
         private readonly int remaining;
         private readonly HashSet<Guid> acceptedReservations;
 
@@ -66,6 +68,11 @@ namespace Ploeh.Samples.Booking.DomainModel
                 ^ this.acceptedReservations
                     .Select(g => g.GetHashCode())
                     .Aggregate((x, y) => x ^ y);
+        }
+
+        public static Capacity DefaultCapacity
+        {
+            get { return Capacity.defaultCapacity; }
         }
 
         private bool IsReplayOf(IMessage message)
