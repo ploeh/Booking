@@ -45,9 +45,13 @@ namespace Ploeh.Samples.Booking.Daemon
                     queueDirectory,
                     queueMessageExtension),
                 new JsonStreamObserver(
-                    new[]
+                    new IQuickening[]
                     {
-                        new RequestReservationCommand.Quickening()
+                        new RequestReservationCommand.Quickening(),
+                        new ReservationAcceptedEvent.Quickening(),
+                        new ReservationRejectedEvent.Quickening(),
+                        new CapacityReservedEvent.Quickening(),
+                        new SoldOutEvent.Quickening()
                     },
                     messageDispatcher));
 
