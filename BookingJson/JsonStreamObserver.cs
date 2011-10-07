@@ -11,11 +11,13 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
     public class JsonStreamObserver : IObserver<Stream>
     {
         private readonly IEnumerable<IQuickening> quickenings;
+        private readonly IObserver<object> observer;
         private readonly JsonSerializer serializer;
 
-        public JsonStreamObserver(IEnumerable<IQuickening> quickenings)
+        public JsonStreamObserver(IEnumerable<IQuickening> quickenings, IObserver<object> observer)
         {
             this.quickenings = quickenings;
+            this.observer = observer;
             this.serializer = new JsonSerializer();
         }
 
@@ -39,7 +41,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
                                    select m;
                     foreach (var m in messages)
                     {
-                        Console.WriteLine(m.Id);
+                        this.observer.OnNext(m);
                     }
                 }
             }
