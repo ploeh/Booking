@@ -6,6 +6,8 @@ using Xunit.Extensions;
 using Xunit;
 using Ploeh.Samples.Booking.WebModel;
 using System.Web.Mvc;
+using Ploeh.AutoFixture.Xunit;
+using Moq;
 
 namespace Ploeh.Samples.Booking.WebModel.UnitTest
 {

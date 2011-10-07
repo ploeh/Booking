@@ -49,6 +49,7 @@
     <Compile Include="IConsumer.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IQuickening.cs" />
+    <Compile Include="Month.cs" />
     <Compile Include="RequestReservationCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservationAcceptedEvent.cs" />
