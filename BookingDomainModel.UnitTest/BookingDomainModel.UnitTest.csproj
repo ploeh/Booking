@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservationAcceptedEventQuickeningTests.cs" />
     <Compile Include="ReservationAcceptedEventTests.cs" />
+    <Compile Include="ReservationRejectedEventQuickeningTests.cs" />
     <Compile Include="ReservertionRejectedEventTests.cs" />
     <Compile Include="SoldOutEventTests.cs" />
   </ItemGroup>
