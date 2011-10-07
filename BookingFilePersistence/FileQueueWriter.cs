@@ -21,10 +21,11 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
 
         public Stream OpenStreamFor(T item)
         {
+            var fileName = item.Envelop().BodyType + item.Id;
             var path = Path.ChangeExtension(
                 Path.Combine(
                     this.directory.FullName,
-                    item.Id.ToString()),
+                    fileName),
                 extension);
             return File.Open(path, FileMode.Create);
         }
