@@ -17,7 +17,7 @@
 			});
 
 			function changeMonthYear(year, month, inst) {
-				$.getJSON("@(this.Url.Action("", "DisabledDates"))", { year: year, month: month }, disableDates);
+				$.getJSON("@(this.Url.Action("Get", "DisabledDates"))", { year: year, month: month }, disableDates);
 			}
 
 			function selectDate(dateText, inst) {
