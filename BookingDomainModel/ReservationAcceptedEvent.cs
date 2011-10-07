@@ -65,6 +65,9 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             public IEnumerable<IMessage> Quicken(dynamic envelope)
             {
+                if (envelope.BodyType != Envelope.CreateDefaultBodyTypeFor(typeof(ReservationAcceptedEvent)))
+                    yield break;
+
                 yield return new ReservationAcceptedEvent(envelope.Body);
             }
         }
