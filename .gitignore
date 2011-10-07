@@ -11,3 +11,4 @@ TestResults/
 */AutoTest.config.old
 BookingWebUI/Queue/*
 BookingWebUI/SSoT/*
+BookingWebUI/ViewStore/*
