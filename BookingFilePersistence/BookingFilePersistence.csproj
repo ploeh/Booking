@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileDateWriter.cs" />
+    <Compile Include="FileDateStore.cs" />
     <Compile Include="FileQueueWriter.cs" />
     <Compile Include="FileQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

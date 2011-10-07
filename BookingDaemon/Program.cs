@@ -28,6 +28,19 @@ namespace Ploeh.Samples.Booking.Daemon
 
             var extension = "txt";
 
+            var fileDateStore = new FileDateStore(
+                singleSourceOfTruthDirectory,
+                extension);
+
+            var quickenings = new IQuickening[]
+            {
+                new RequestReservationCommand.Quickening(),
+                new ReservationAcceptedEvent.Quickening(),
+                new ReservationRejectedEvent.Quickening(),
+                new CapacityReservedEvent.Quickening(),
+                new SoldOutEvent.Quickening()
+            };
+
             var disposable = new CompositeDisposable();
             var messageDispatcher = new Subject<object>();
             disposable.Add(
@@ -35,9 +48,9 @@ namespace Ploeh.Samples.Booking.Daemon
                     new Dispatcher<RequestReservationCommand>(
                         new CapacityGate(
                             new JsonCapacityRepository(
-                                new FileDateWriter(
-                                    singleSourceOfTruthDirectory,
-                                    extension)),
+                                fileDateStore,
+                                fileDateStore,
+                                quickenings),
                             new JsonChannel<ReservationAcceptedEvent>(
                                 new FileQueueWriter<ReservationAcceptedEvent>(
                                     queueDirectory,
@@ -56,14 +69,7 @@ namespace Ploeh.Samples.Booking.Daemon
                     queueDirectory,
                     extension),
                 new JsonStreamObserver(
-                    new IQuickening[]
-                    {
-                        new RequestReservationCommand.Quickening(),
-                        new ReservationAcceptedEvent.Quickening(),
-                        new ReservationRejectedEvent.Quickening(),
-                        new CapacityReservedEvent.Quickening(),
-                        new SoldOutEvent.Quickening()
-                    },
+                    quickenings,
                     messageDispatcher));
 
             var tokenSource = new CancellationTokenSource();

@@ -12,17 +12,24 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
     public class JsonCapacityRepository : ICapacityRepository
     {
         private readonly IStoreWriter<DateTime> writer;
+        private readonly IStoreReader<DateTime> reader;
+        private readonly IEnumerable<IQuickening> quickenings;
         private readonly JsonSerializer serializer;
 
-        public JsonCapacityRepository(IStoreWriter<DateTime> dateWriter)
+        public JsonCapacityRepository(IStoreWriter<DateTime> dateWriter, IStoreReader<DateTime> dateReader, IEnumerable<IQuickening> quickenings)
         {
             this.writer = dateWriter;
+            this.reader = dateReader;
+            this.quickenings = quickenings;
             this.serializer = new JsonSerializer();
         }
 
         public IEnumerable<Capacity> Read(DateTime date)
         {
-            yield break;
+            var capacity = this.GetEventsFor(date)
+                .Aggregate(new Capacity(10), (c, e) => c.Reserve(e));
+
+            return new[] { capacity };
         }
 
         public void Write(DateTime date, CapacityReservedEvent capacityReserved)
@@ -30,6 +37,33 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
             using (var stream = this.writer.OpenStreamFor(date))
             using (var writer = new StreamWriter(stream))
                 this.serializer.Serialize(writer, capacityReserved.Envelop());
+        }
+
+        private IEnumerable<CapacityReservedEvent> GetEventsFor(DateTime date)
+        {
+            var streams = this.reader.OpenStreamsFor(date);
+            foreach (var stream in streams)
+            {
+                try
+                {
+                    using (var reader = new StreamReader(stream))
+                    using (var jsonReader = new JsonTextReader(reader))
+                    {
+                        dynamic json = this.serializer.Deserialize(jsonReader);
+                        var messages = from q in this.quickenings
+                                       from m in (IEnumerable<IMessage>)q.Quicken(json)
+                                       select m;
+                        foreach (var m in messages)
+                        {
+                            yield return (CapacityReservedEvent)m;
+                        }
+                    }
+                }
+                finally
+                {
+                    stream.Dispose();
+                }
+            }
         }
     }
 }
