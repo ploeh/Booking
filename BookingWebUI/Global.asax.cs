@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ploeh.Samples.Booking.WebModel;
+using Castle.Windsor;
+using Ploeh.Samples.Booking.WebUI.Windsor;
 
 namespace Ploeh.Samples.Booking.WebUI
 {
@@ -13,6 +15,13 @@ namespace Ploeh.Samples.Booking.WebUI
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private readonly IWindsorContainer container;
+
+        public MvcApplication()
+        {
+            this.container = new WindsorContainer().Install(new WebWindsorInstaller());
+        }
+
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
@@ -44,7 +53,13 @@ namespace Ploeh.Samples.Booking.WebUI
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            ControllerBuilder.Current.SetControllerFactory(new PoorMansCompositionRoot());
+            ControllerBuilder.Current.SetControllerFactory(new WindsorCompositionRoot(this.container));
+        }
+
+        public override void Dispose()
+        {
+            this.container.Dispose();
+            base.Dispose();
         }
     }
 }
