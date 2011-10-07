@@ -82,6 +82,7 @@ namespace Ploeh.Samples.Booking.Daemon
             RunUntilStopped(q);
         }
 
+        #region Console stuff
         private static void RunUntilStopped(QueueConsumer q)
         {
             var tokenSource = new CancellationTokenSource();
@@ -111,5 +112,6 @@ namespace Ploeh.Samples.Booking.Daemon
             return line != "QUIT"
                 && line != "EXIT";
         }
+        #endregion
     }
 }
