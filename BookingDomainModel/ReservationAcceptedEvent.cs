@@ -51,5 +51,13 @@ namespace Ploeh.Samples.Booking.DomainModel
         {
             get { return this.quantity; }
         }
+
+        public class Quickening : IQuickening
+        {
+            public IEnumerable<IMessage> Quicken(dynamic envelope)
+            {
+                return null;
+            }
+        }
     }
 }
