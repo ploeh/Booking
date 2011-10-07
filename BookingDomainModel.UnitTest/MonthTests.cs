@@ -16,5 +16,11 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             Assert.Equal<int>(expected, sut.Year);
         }
+
+        [Theory, AutoDomainData]
+        public void MonthIsCorrect([Frozen]int expected, Month sut)
+        {
+            Assert.Equal<int>(expected, sut.MonthNumber);
+        }
     }
 }
