@@ -5,6 +5,9 @@ using System.Text;
 using Xunit.Extensions;
 using Ploeh.Samples.Booking.PersistenceModel;
 using Xunit;
+using Ploeh.AutoFixture.Xunit;
+using Ploeh.Samples.Booking.DomainModel;
+using Moq;
 
 namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
 {
@@ -15,10 +18,20 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         {
             Assert.IsAssignableFrom<IObserver<object>>(sut);
         }
+
+        [Theory, AutoPersistenceData]
+        public void OnNextMathingValueConsumesConsumer(
+            [Frozen]Mock<IConsumer<T>> consumerMock,
+            TypeMatchingConsumer<T> sut,
+            T value)
+        {
+            sut.OnNext(value);
+            consumerMock.Verify(c => c.Consume(value));
+        }
     }
 
-    public class TypeMatchingConsumerTestsOfString : TypeMatchingConsumer<string> { }
-    public class TypeMatchingConsumerTestsOfInt : TypeMatchingConsumer<int> { }
-    public class TypeMatchingConsumerTestsOfGuid : TypeMatchingConsumer<Guid> { }
-    public class TypeMatchingConsumerTestsOfVersion : TypeMatchingConsumer<Version> { }
+    public class TypeMatchingConsumerTestsOfString : TypeMatchingConsumerTests<string> { }
+    public class TypeMatchingConsumerTestsOfInt : TypeMatchingConsumerTests<int> { }
+    public class TypeMatchingConsumerTestsOfGuid : TypeMatchingConsumerTests<Guid> { }
+    public class TypeMatchingConsumerTestsOfVersion : TypeMatchingConsumerTests<Version> { }
 }
