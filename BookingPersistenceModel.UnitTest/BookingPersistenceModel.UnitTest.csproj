@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoPersistenceDataAttribute.cs" />
-    <Compile Include="MessageConsumerTests.cs" />
+    <Compile Include="TypeMatchingConsumerTests.cs" />
     <Compile Include="PersistenceCustomization.cs" />
     <Compile Include="QueueConsumerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

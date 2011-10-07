@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.PersistenceModel
 {
-    public class MessageConsumer : IObserver<object>
+    public class TypeMatchingConsumer<T> : IObserver<object>
     {
         public void OnCompleted()
         {
