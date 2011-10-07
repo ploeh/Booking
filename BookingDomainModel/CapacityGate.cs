@@ -25,7 +25,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 
         public void Consume(RequestReservationCommand item)
         {
-            var originalCapacity = this.repository.Read(item.Date.Date);
+            var originalCapacity = this.repository.Read(item.Date.Date).Single();
             if (originalCapacity.CanReserve(item))
             {
                 var reservedCapacity = item.ReserveCapacity();
