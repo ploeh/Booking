@@ -84,25 +84,20 @@ namespace Ploeh.Samples.Booking.Daemon
                 .ImplementedBy<MonthViewUpdater>());
 
             container.Register(Component
-                .For<Dispatcher<RequestReservationCommand>>());
+                .For<IObserver<object>>()
+                .ImplementedBy<CompositeObserver<object>>());
             container.Register(Component
-                .For<Dispatcher<SoldOutEvent>>());
-
+                .For<IObserver<object>>()
+                .ImplementedBy<Dispatcher<RequestReservationCommand>>());
+            container.Register(Component
+                .For<IObserver<object>>()
+                .ImplementedBy<Dispatcher<SoldOutEvent>>());
             container.Register(Component
                 .For<IObserver<Stream>>()
                 .ImplementedBy<JsonStreamObserver>());
             container.Register(Component
                 .For<IObserver<DateTime>>()
                 .ImplementedBy<FileMonthViewStore>());
-            container.Register(Component
-                .For<IObserver<object>>()
-                .UsingFactoryMethod(k =>
-                {
-                    var messageDispatcher = new Subject<object>();
-                    messageDispatcher.Subscribe(k.Resolve<Dispatcher<RequestReservationCommand>>());
-                    messageDispatcher.Subscribe(k.Resolve<Dispatcher<SoldOutEvent>>());
-                    return messageDispatcher;
-                }));
 
             container.Register(Component
                 .For<QueueConsumer>());
