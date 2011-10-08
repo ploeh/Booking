@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositeObserver.cs" />
     <Compile Include="DaemonWindsorInstaller.cs" />
     <Compile Include="DirectoryConvention.cs" />
     <Compile Include="ExtensionConvention.cs" />
