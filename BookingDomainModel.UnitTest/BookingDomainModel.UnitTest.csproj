@@ -65,6 +65,7 @@
     <Compile Include="CapacityGateTests.cs" />
     <Compile Include="CapacityReservedEventTests.cs" />
     <Compile Include="CapacityTests.cs" />
+    <Compile Include="DependencyConstraints.cs" />
     <Compile Include="DomainCustomization.cs" />
     <Compile Include="EnvelopeTests.cs" />
     <Compile Include="MonthTests.cs" />

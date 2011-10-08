@@ -80,6 +80,7 @@
     <Compile Include="DateViewModelBinderAttributeTests.cs" />
     <Compile Include="DateViewModelBinderTests.cs" />
     <Compile Include="DateViewModelTests.cs" />
+    <Compile Include="DependencyConstraints.cs" />
     <Compile Include="DisabledDatesControllerTests.cs" />
     <Compile Include="HomeControllerTests.cs" />
     <Compile Include="MonthViewUpdaterTests.cs" />
