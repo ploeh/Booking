@@ -28,8 +28,8 @@ namespace Ploeh.Samples.Booking.Daemon
 
             container.Register(Classes
                 .FromAssemblyInDirectory(new AssemblyFilter(".").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
-                .BasedOn<IQuickening>()
-                .WithService.FromInterface());
+                .Where(t => !(t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dispatcher<>)))
+                .WithServiceAllInterfaces());
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());
             container.Kernel.Resolver.AddSubResolver(new DirectoryConvention(container.Kernel));
@@ -49,55 +49,7 @@ namespace Ploeh.Samples.Booking.Daemon
                 .For<DirectoryInfo>()
                 .UsingFactoryMethod(() =>
                     new DirectoryInfo(@"..\..\..\BookingWebUI\ViewStore").CreateIfAbsent())
-                .Named("viewStoreDirectory"));            
-
-            container.Register(Component
-                .For<IQueue>()
-                .ImplementedBy<FileQueue>());
-
-            container.Register(Component
-                .For<IStoreWriter<DateTime>, IStoreReader<DateTime>>()
-                .ImplementedBy<FileDateStore>());
-            container.Register(Component
-                .For<IStoreWriter<ReservationAcceptedEvent>>()
-                .ImplementedBy<FileQueueWriter<ReservationAcceptedEvent>>());
-            container.Register(Component
-                .For<IStoreWriter<ReservationRejectedEvent>>()
-                .ImplementedBy<FileQueueWriter<ReservationRejectedEvent>>());
-            container.Register(Component
-                .For<IStoreWriter<SoldOutEvent>>()
-                .ImplementedBy<FileQueueWriter<SoldOutEvent>>());
-
-            container.Register(Component
-                .For<IChannel<ReservationAcceptedEvent>>()
-                .ImplementedBy<JsonChannel<ReservationAcceptedEvent>>());
-            container.Register(Component
-                .For<IChannel<ReservationRejectedEvent>>()
-                .ImplementedBy<JsonChannel<ReservationRejectedEvent>>());
-            container.Register(Component
-                .For<IChannel<SoldOutEvent>>()
-                .ImplementedBy<JsonChannel<SoldOutEvent>>());
-
-            container.Register(Component
-                .For<ICapacityRepository>()
-                .ImplementedBy<JsonCapacityRepository>());
-
-            container.Register(Component
-                .For<IConsumer<RequestReservationCommand>>()
-                .ImplementedBy<CapacityGate>());
-            container.Register(Component
-                .For<IConsumer<SoldOutEvent>>()
-                .ImplementedBy<MonthViewUpdater>());
-            
-            container.Register(Component
-                .For<IObserver<Stream>>()
-                .ImplementedBy<JsonStreamObserver>());
-            container.Register(Component
-                .For<IObserver<DateTime>>()
-                .ImplementedBy<FileMonthViewStore>());
-
-            container.Register(Component
-                .For<QueueConsumer>());
+                .Named("viewStoreDirectory"));
 
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             #endregion
