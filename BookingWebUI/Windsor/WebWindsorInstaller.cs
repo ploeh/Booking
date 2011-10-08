@@ -28,8 +28,8 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
 
             container.Register(Classes
                 .FromAssemblyInDirectory(new AssemblyFilter("bin").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
-                .BasedOn<IQuickening>()
-                .WithService.FromInterface());
+                .Pick()
+                .WithServiceAllInterfaces());
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());
             container.Kernel.Resolver.AddSubResolver(new DirectoryConvention(container.Kernel));
@@ -50,24 +50,6 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .UsingFactoryMethod(() =>
                     new DirectoryInfo(HostingEnvironment.MapPath("~/ViewStore")).CreateIfAbsent())
                 .Named("viewStoreDirectory"));
-
-            container.Register(Component
-                .For<IReader<Month, IEnumerable<string>>>()
-                .ImplementedBy<FileMonthViewStore>());
-            container.Register(Component
-                .For<IReader<DateTime, int>>()
-                .ImplementedBy<JsonCapacityRepository>());
-
-            container.Register(Component
-                .For<IStoreWriter<DateTime>, IStoreReader<DateTime>>()
-                .ImplementedBy<FileDateStore>());
-            container.Register(Component
-                .For<IStoreWriter<RequestReservationCommand>>()
-                .ImplementedBy<FileQueueWriter<RequestReservationCommand>>());
-
-            container.Register(Component
-                .For<IChannel<RequestReservationCommand>>()
-                .ImplementedBy<JsonChannel<RequestReservationCommand>>());
 
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             #endregion
