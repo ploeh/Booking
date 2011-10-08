@@ -48,28 +48,28 @@ namespace Ploeh.Samples.Booking.Daemon
                 .For<IQueue>()
                 .ImplementedBy<FileQueue>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "queueDirectory")));
+                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
 
             container.Register(Component
                 .For<IStoreWriter<DateTime>, IStoreReader<DateTime>>()
                 .ImplementedBy<FileDateStore>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "ssotDirectory")));
+                    Dependency.OnComponent("ssotDirectory", "ssotDirectory")));
             container.Register(Component
                 .For<IStoreWriter<ReservationAcceptedEvent>>()
                 .ImplementedBy<FileQueueWriter<ReservationAcceptedEvent>>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "queueDirectory")));
+                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
             container.Register(Component
                 .For<IStoreWriter<ReservationRejectedEvent>>()
                 .ImplementedBy<FileQueueWriter<ReservationRejectedEvent>>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "queueDirectory")));
+                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
             container.Register(Component
                 .For<IStoreWriter<SoldOutEvent>>()
                 .ImplementedBy<FileQueueWriter<SoldOutEvent>>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "queueDirectory")));
+                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
 
             container.Register(Component
                 .For<IChannel<ReservationAcceptedEvent>>()
@@ -104,7 +104,7 @@ namespace Ploeh.Samples.Booking.Daemon
                 .For<IObserver<DateTime>>()
                 .ImplementedBy<FileMonthViewStore>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "viewStoreDirectory")));
+                    Dependency.OnComponent("viewStoreDirectory", "viewStoreDirectory")));
             container.Register(Component
                 .For<IObserver<object>>()
                 .UsingFactoryMethod(k =>

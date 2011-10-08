@@ -13,9 +13,9 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
         private readonly DirectoryInfo directory;
         private readonly string extension;
 
-        public FileQueue(DirectoryInfo directory, string extension)
+        public FileQueue(DirectoryInfo queueDirectory, string extension)
         {
-            this.directory = directory;
+            this.directory = queueDirectory;
             this.extension = extension;
         }
 

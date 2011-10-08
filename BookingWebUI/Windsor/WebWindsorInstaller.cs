@@ -54,7 +54,7 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .For<IReader<Month, IEnumerable<string>>>()
                 .ImplementedBy<FileMonthViewStore>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "viewStoreDirectory")));
+                    Dependency.OnComponent("viewStoreDirectory", "viewStoreDirectory")));
             container.Register(Component
                 .For<IReader<DateTime, int>>()
                 .ImplementedBy<JsonCapacityRepository>());
@@ -63,12 +63,12 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .For<IStoreWriter<DateTime>, IStoreReader<DateTime>>()
                 .ImplementedBy<FileDateStore>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "ssotDirectory")));
+                    Dependency.OnComponent("ssotDirectory", "ssotDirectory")));
             container.Register(Component
                 .For<IStoreWriter<RequestReservationCommand>>()
                 .ImplementedBy<FileQueueWriter<RequestReservationCommand>>()
                 .DependsOn(
-                    Dependency.OnComponent("directory", "queueDirectory")));
+                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
 
             container.Register(Component
                 .For<IChannel<RequestReservationCommand>>()

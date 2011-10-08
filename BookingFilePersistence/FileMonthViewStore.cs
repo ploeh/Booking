@@ -13,9 +13,9 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
         private readonly DirectoryInfo directory;
         private readonly string extension;
 
-        public FileMonthViewStore(DirectoryInfo directory, string extension)
+        public FileMonthViewStore(DirectoryInfo viewStoreDirectory, string extension)
         {
-            this.directory = directory;
+            this.directory = viewStoreDirectory;
             this.extension = extension;
         }
 

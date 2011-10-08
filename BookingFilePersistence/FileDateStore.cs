@@ -12,9 +12,9 @@ namespace Ploeh.Samples.Booking.Persistence.FileSystem
         private readonly DirectoryInfo directory;
         private readonly string extension;
 
-        public FileDateStore(DirectoryInfo directory, string extension)
+        public FileDateStore(DirectoryInfo ssotDirectory, string extension)
         {
-            this.directory = directory;
+            this.directory = ssotDirectory;
             this.extension = extension;
         }
 
