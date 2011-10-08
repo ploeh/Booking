@@ -33,6 +33,7 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());
             container.Kernel.Resolver.AddSubResolver(new DirectoryConvention(container.Kernel));
+            container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
 
             #region Manual configuration that requires maintenance
             container.Register(Component
@@ -49,9 +50,7 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .For<DirectoryInfo>()
                 .UsingFactoryMethod(() =>
                     new DirectoryInfo(HostingEnvironment.MapPath("~/ViewStore")).CreateIfAbsent())
-                .Named("viewStoreDirectory"));
-
-            container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
+                .Named("viewStoreDirectory"));            
             #endregion
         }
     }
