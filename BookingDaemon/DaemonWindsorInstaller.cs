@@ -20,6 +20,8 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.AddFacility<ConsumerConvention>();
+
             container.Register(Component
                 .For<IObserver<object>>()
                 .ImplementedBy<CompositeObserver<object>>());
@@ -87,12 +89,6 @@ namespace Ploeh.Samples.Booking.Daemon
                 .For<IConsumer<SoldOutEvent>>()
                 .ImplementedBy<MonthViewUpdater>());
             
-            container.Register(Component
-                .For<IObserver<object>>()
-                .ImplementedBy<Dispatcher<RequestReservationCommand>>());
-            container.Register(Component
-                .For<IObserver<object>>()
-                .ImplementedBy<Dispatcher<SoldOutEvent>>());
             container.Register(Component
                 .For<IObserver<Stream>>()
                 .ImplementedBy<JsonStreamObserver>());
