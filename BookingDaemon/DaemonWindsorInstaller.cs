@@ -11,7 +11,6 @@ using System.IO;
 using Ploeh.Samples.Booking.JsonAntiCorruption;
 using Ploeh.Samples.Booking.DomainModel;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
-using System.Reactive.Subjects;
 using Ploeh.Samples.Booking.WebModel;
 
 namespace Ploeh.Samples.Booking.Daemon

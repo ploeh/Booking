@@ -8,8 +8,6 @@ using Ploeh.Samples.Booking.PersistenceModel;
 using System.Threading;
 using Ploeh.Samples.Booking.JsonAntiCorruption;
 using Ploeh.Samples.Booking.DomainModel;
-using System.Reactive.Subjects;
-using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using Ploeh.Samples.Booking.WebModel;
 using Castle.Windsor;
