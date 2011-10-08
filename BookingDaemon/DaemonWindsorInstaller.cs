@@ -20,6 +20,10 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Register(Component
+                .For<IObserver<object>>()
+                .ImplementedBy<CompositeObserver<object>>());
+
             container.Register(Classes
                 .FromAssemblyInDirectory(new AssemblyFilter(".").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
                 .BasedOn<IQuickening>()
@@ -82,10 +86,7 @@ namespace Ploeh.Samples.Booking.Daemon
             container.Register(Component
                 .For<IConsumer<SoldOutEvent>>()
                 .ImplementedBy<MonthViewUpdater>());
-
-            container.Register(Component
-                .For<IObserver<object>>()
-                .ImplementedBy<CompositeObserver<object>>());
+            
             container.Register(Component
                 .For<IObserver<object>>()
                 .ImplementedBy<Dispatcher<RequestReservationCommand>>());
