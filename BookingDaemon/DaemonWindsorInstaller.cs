@@ -26,6 +26,7 @@ namespace Ploeh.Samples.Booking.Daemon
                 .WithService.FromInterface());
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());
+            container.Kernel.Resolver.AddSubResolver(new DirectoryConvention(container.Kernel));
 
             #region Manual configuration that requires maintenance
             container.Register(Component
@@ -46,30 +47,20 @@ namespace Ploeh.Samples.Booking.Daemon
 
             container.Register(Component
                 .For<IQueue>()
-                .ImplementedBy<FileQueue>()
-                .DependsOn(
-                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
+                .ImplementedBy<FileQueue>());
 
             container.Register(Component
                 .For<IStoreWriter<DateTime>, IStoreReader<DateTime>>()
-                .ImplementedBy<FileDateStore>()
-                .DependsOn(
-                    Dependency.OnComponent("ssotDirectory", "ssotDirectory")));
+                .ImplementedBy<FileDateStore>());
             container.Register(Component
                 .For<IStoreWriter<ReservationAcceptedEvent>>()
-                .ImplementedBy<FileQueueWriter<ReservationAcceptedEvent>>()
-                .DependsOn(
-                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
+                .ImplementedBy<FileQueueWriter<ReservationAcceptedEvent>>());
             container.Register(Component
                 .For<IStoreWriter<ReservationRejectedEvent>>()
-                .ImplementedBy<FileQueueWriter<ReservationRejectedEvent>>()
-                .DependsOn(
-                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
+                .ImplementedBy<FileQueueWriter<ReservationRejectedEvent>>());
             container.Register(Component
                 .For<IStoreWriter<SoldOutEvent>>()
-                .ImplementedBy<FileQueueWriter<SoldOutEvent>>()
-                .DependsOn(
-                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
+                .ImplementedBy<FileQueueWriter<SoldOutEvent>>());
 
             container.Register(Component
                 .For<IChannel<ReservationAcceptedEvent>>()
@@ -102,9 +93,7 @@ namespace Ploeh.Samples.Booking.Daemon
                 .ImplementedBy<JsonStreamObserver>());
             container.Register(Component
                 .For<IObserver<DateTime>>()
-                .ImplementedBy<FileMonthViewStore>()
-                .DependsOn(
-                    Dependency.OnComponent("viewStoreDirectory", "viewStoreDirectory")));
+                .ImplementedBy<FileMonthViewStore>());
             container.Register(Component
                 .For<IObserver<object>>()
                 .UsingFactoryMethod(k =>

@@ -32,6 +32,7 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
                 .WithService.FromInterface());
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());
+            container.Kernel.Resolver.AddSubResolver(new DirectoryConvention(container.Kernel));
 
             #region Manual configuration that requires maintenance
             container.Register(Component
@@ -52,23 +53,17 @@ namespace Ploeh.Samples.Booking.WebUI.Windsor
 
             container.Register(Component
                 .For<IReader<Month, IEnumerable<string>>>()
-                .ImplementedBy<FileMonthViewStore>()
-                .DependsOn(
-                    Dependency.OnComponent("viewStoreDirectory", "viewStoreDirectory")));
+                .ImplementedBy<FileMonthViewStore>());
             container.Register(Component
                 .For<IReader<DateTime, int>>()
                 .ImplementedBy<JsonCapacityRepository>());
 
             container.Register(Component
                 .For<IStoreWriter<DateTime>, IStoreReader<DateTime>>()
-                .ImplementedBy<FileDateStore>()
-                .DependsOn(
-                    Dependency.OnComponent("ssotDirectory", "ssotDirectory")));
+                .ImplementedBy<FileDateStore>());
             container.Register(Component
                 .For<IStoreWriter<RequestReservationCommand>>()
-                .ImplementedBy<FileQueueWriter<RequestReservationCommand>>()
-                .DependsOn(
-                    Dependency.OnComponent("queueDirectory", "queueDirectory")));
+                .ImplementedBy<FileQueueWriter<RequestReservationCommand>>());
 
             container.Register(Component
                 .For<IChannel<RequestReservationCommand>>()
