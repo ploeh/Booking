@@ -77,7 +77,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="PoorMansCompositionRoot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windsor\DirectoryConvention.cs" />
     <Compile Include="Windsor\ExtensionConvention.cs" />
