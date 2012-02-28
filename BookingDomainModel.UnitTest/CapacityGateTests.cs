@@ -115,7 +115,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             Capacity originalCapacity)
         {
             var requestWithinCapacity = command.WithQuantity(originalCapacity.Remaining - 1);
-            var newCapacity = originalCapacity.Reserve(requestWithinCapacity.ReserveCapacity());
+            var newCapacity = originalCapacity.Apply(requestWithinCapacity.ReserveCapacity());
 
             repositoryMock
                 .Setup(r => r.Read(command.Date.Date))

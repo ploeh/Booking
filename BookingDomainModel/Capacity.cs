@@ -23,7 +23,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             get { return this.remaining; }
         }
 
-        public bool CanReserve(CapacityReservedEvent @event)
+        public bool CanApply(CapacityReservedEvent @event)
         {
             if (this.IsReplayOf(@event))
                 return true;
@@ -31,9 +31,9 @@ namespace Ploeh.Samples.Booking.DomainModel
             return this.remaining >= @event.Quantity;
         }
 
-        public Capacity Reserve(CapacityReservedEvent @event)
+        public Capacity Apply(CapacityReservedEvent @event)
         {
-            if (!this.CanReserve(@event))
+            if (!this.CanApply(@event))
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");
 
             if (this.IsReplayOf(@event))

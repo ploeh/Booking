@@ -28,7 +28,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
         public Maybe<Capacity> Read(DateTime date)
         {
             var capacity = this.GetEventsFor(date)
-                .Aggregate(Capacity.Default, (c, e) => c.Reserve(e));
+                .Aggregate(Capacity.Default, (c, e) => c.Apply(e));
 
             return capacity.ToMaybe();
         }

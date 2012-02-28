@@ -30,9 +30,9 @@ namespace Ploeh.Samples.Booking.DomainModel
                 .Single();
 
             var reservedCapacity = item.ReserveCapacity();
-            if (originalCapacity.CanReserve(reservedCapacity))
+            if (originalCapacity.CanApply(reservedCapacity))
             {                
-                var newCapacity = originalCapacity.Reserve(reservedCapacity);
+                var newCapacity = originalCapacity.Apply(reservedCapacity);
                 if (!newCapacity.Equals(originalCapacity))
                 {
                     this.repository.Append(item.Date.Date, reservedCapacity);

@@ -25,7 +25,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var request = command.WithQuantity(greaterQuantity);
             var @event = request.ReserveCapacity();
 
-            bool actual = sut.CanReserve(@event);
+            bool actual = sut.CanApply(@event);
 
             Assert.False(actual);
         }
@@ -37,7 +37,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             var request = command.WithQuantity(sut.Remaining);
             var @event = request.ReserveCapacity();
-            var actual = sut.CanReserve(@event);
+            var actual = sut.CanApply(@event);
             Assert.True(actual);
         }
 
@@ -50,7 +50,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var request = command.WithQuantity(lesserQuantity);
             var @event = request.ReserveCapacity();
 
-            var actual = sut.CanReserve(@event);
+            var actual = sut.CanApply(@event);
 
             Assert.True(actual);
         }
@@ -65,7 +65,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var @event = request.ReserveCapacity();
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                sut.Reserve(@event));
+                sut.Apply(@event));
         }
 
         [Theory, AutoDomainData]
@@ -76,7 +76,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var request = command.WithQuantity(sut.Remaining);
             var @event = request.ReserveCapacity();
             Assert.DoesNotThrow(() =>
-                sut.Reserve(@event));
+                sut.Apply(@event));
         }
 
         [Theory, AutoDomainData]
@@ -88,7 +88,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var request = command.WithQuantity(lesserQuantity);
             var @event = request.ReserveCapacity();
             Assert.DoesNotThrow(() =>
-                sut.Reserve(@event));
+                sut.Apply(@event));
         }
 
         [Theory, AutoDomainData]
@@ -100,7 +100,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var expected = sut.Remaining - quantity;
             var @event = command.WithQuantity(quantity).ReserveCapacity();
 
-            Capacity actual = sut.Reserve(@event);
+            Capacity actual = sut.Apply(@event);
 
             Assert.Equal(expected, actual.Remaining);
         }
@@ -167,8 +167,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             CapacityReservedEvent @event,
             Capacity sut)
         {
-            var expected = sut.Reserve(@event);
-            var actual = sut.Reserve(@event);
+            var expected = sut.Apply(@event);
+            var actual = sut.Apply(@event);
             Assert.Equal(expected, actual);
         }
 
@@ -178,7 +178,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             CapacityReservedEvent @event,
             Capacity sut)
         {
-            var actual = sut.Reserve(@event);
+            var actual = sut.Apply(@event);
             Assert.NotEqual(actual, sut);
         }
 
@@ -188,8 +188,8 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             CapacityReservedEvent @event,
             Capacity sut)
         {
-            var expected = sut.Reserve(@event);
-            var actual = expected.Reserve(@event);
+            var expected = sut.Apply(@event);
+            var actual = expected.Apply(@event);
             Assert.Equal(expected, actual);
         }
 
@@ -201,9 +201,9 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var remaining = initial.Remaining;
             var request = command.WithQuantity(remaining);
             var @event = request.ReserveCapacity();
-            var sut = initial.Reserve(@event);
+            var sut = initial.Apply(@event);
 
-            var result = sut.CanReserve(@event);
+            var result = sut.CanApply(@event);
 
             Assert.True(result);
         }
