@@ -48,6 +48,20 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             IEnumerable actual = sut;
             Assert.Equal(expected, actual.OfType<T>().Single());
         }
+
+        [Theory, AutoDomainData]
+        public void ToMaybeReturnsCorrectResult(T expected)
+        {
+            Maybe<T> acutal = expected.ToMaybe();
+            Assert.Equal(expected, acutal.SingleOrDefault());
+        }
+
+        [Fact]
+        public void EmptyReturnsCorrectResult()
+        {
+            Maybe<T> actual = Maybe.Empty<T>();
+            Assert.Empty(actual);
+        }
     }
 
     public class MaybeTestsOfObject : MaybeTests<object> { }

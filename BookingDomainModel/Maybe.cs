@@ -30,4 +30,17 @@ namespace Ploeh.Samples.Booking.DomainModel
             return this.GetEnumerator();
         }
     }
+
+    public static class Maybe
+    {
+        public static Maybe<T> ToMaybe<T>(this T value)
+        {
+            return new Maybe<T>(value);
+        }
+
+        public static Maybe<T> Empty<T>()
+        {
+            return new Maybe<T>();
+        }
+    }
 }
