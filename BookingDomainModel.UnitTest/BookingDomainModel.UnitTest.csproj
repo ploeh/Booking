@@ -68,6 +68,7 @@
     <Compile Include="DependencyConstraints.cs" />
     <Compile Include="DomainCustomization.cs" />
     <Compile Include="EnvelopeTests.cs" />
+    <Compile Include="MaybeTests.cs" />
     <Compile Include="MonthTests.cs" />
     <Compile Include="QuickeningTests.cs" />
     <Compile Include="RequestReservationCommandTests.cs" />
