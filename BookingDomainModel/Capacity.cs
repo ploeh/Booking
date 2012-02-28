@@ -23,7 +23,16 @@ namespace Ploeh.Samples.Booking.DomainModel
             get { return this.remaining; }
         }
 
-        public bool CanApply(CapacityReservedEvent @event)
+        public bool CanApply(IMessage @event)
+        {
+            var cr = @event as CapacityReservedEvent;
+            if (cr != null)
+                return this.CanApply(cr);
+
+            return false;
+        }
+
+        private bool CanApply(CapacityReservedEvent @event)
         {
             if (this.IsReplayOf(@event))
                 return true;
@@ -31,7 +40,16 @@ namespace Ploeh.Samples.Booking.DomainModel
             return this.remaining >= @event.Quantity;
         }
 
-        public Capacity Apply(CapacityReservedEvent @event)
+        public Capacity Apply(IMessage @event)
+        {
+            var cr = @event as CapacityReservedEvent;
+            if (cr != null)
+                return this.Apply(cr);
+
+            throw new ArgumentException(string.Format("The event type {0} is unknown.", @event.GetType()), "event");
+        }
+
+        private Capacity Apply(CapacityReservedEvent @event)
         {
             if (!this.CanApply(@event))
                 throw new ArgumentOutOfRangeException("request", "The quantity must be less than or equal to the remaining quantity.");

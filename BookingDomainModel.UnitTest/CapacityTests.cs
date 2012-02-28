@@ -17,6 +17,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         }
 
         [Theory, AutoDomainData]
+        public void CanApplyReturnsFalseWhenMessageIsUnknown(
+            Capacity sut,
+            IMessage unknownMessage)
+        {
+            var actual = sut.CanApply(unknownMessage);
+            Assert.False(actual);
+        }
+
+        [Theory, AutoDomainData]
         public void CanReserveReturnsFalseWhenQuantityIsGreaterThanRemaining(
             Capacity sut, 
             RequestReservationCommand command)
@@ -53,6 +62,15 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             var actual = sut.CanApply(@event);
 
             Assert.True(actual);
+        }
+
+        [Theory, AutoDomainData]
+        public void ApplyThrowsOnUnknownMessage(
+            Capacity sut,
+            IMessage unknownMessage)
+        {
+            Assert.Throws<ArgumentException>(() =>
+                sut.Apply(unknownMessage));
         }
 
         [Theory, AutoDomainData]
