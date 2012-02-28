@@ -45,7 +45,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
             return this.Read(arg).Single().Remaining;
         }
 
-        private IEnumerable<CapacityReservedEvent> GetEventsFor(DateTime date)
+        private IEnumerable<IMessage> GetEventsFor(DateTime date)
         {
             var streams = this.reader.OpenStreamsFor(date);
             foreach (var stream in streams)
@@ -61,7 +61,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
                                        select m;
                         foreach (var m in messages)
                         {
-                            yield return (CapacityReservedEvent)m;
+                            yield return m;
                         }
                     }
                 }
