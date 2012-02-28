@@ -28,7 +28,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(It.IsAny<DateTime>()))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             sut.Consume(command);
 
@@ -46,7 +46,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             sut.Consume(command.WithQuantity(capacity.Remaining + 1));
 
@@ -62,7 +62,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryMock
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             var requestWithinCapacity = command.WithQuantity(capacity.Remaining - 1);
             sut.Consume(requestWithinCapacity);
@@ -80,7 +80,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryMock
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             sut.Consume(command.WithQuantity(capacity.Remaining + 1));
 
@@ -97,7 +97,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             sut.Consume(command.WithQuantity(capacity.Remaining));
 
@@ -119,7 +119,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             repositoryMock
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { newCapacity });
+                .Returns(newCapacity.ToMaybe());
 
             sut.Consume(requestWithinCapacity);
 
@@ -138,7 +138,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             sut.Consume(command.WithQuantity(capacity.Remaining - 1));
 
@@ -155,7 +155,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             var requestExceedingCapacity = command.WithQuantity(capacity.Remaining + 1);
             sut.Consume(requestExceedingCapacity);
@@ -174,7 +174,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(new[] { capacity });
+                .Returns(capacity.ToMaybe());
 
             sut.Consume(command.WithQuantity(capacity.Remaining));
 
@@ -190,7 +190,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(Enumerable.Empty<Capacity>());
+                .Returns(Maybe.Empty<Capacity>());
 
             sut.Consume(command.WithQuantity(Capacity.Default.Remaining + 1));
 
@@ -206,7 +206,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
         {
             repositoryStub
                 .Setup(r => r.Read(command.Date.Date))
-                .Returns(Enumerable.Empty<Capacity>());
+                .Returns(Maybe.Empty<Capacity>());
 
             sut.Consume(command.WithQuantity(Capacity.Default.Remaining));
 

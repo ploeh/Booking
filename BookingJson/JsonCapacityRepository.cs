@@ -25,12 +25,12 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
             this.serializer = new JsonSerializer();
         }
 
-        public IEnumerable<Capacity> Read(DateTime date)
+        public Maybe<Capacity> Read(DateTime date)
         {
             var capacity = this.GetEventsFor(date)
                 .Aggregate(Capacity.Default, (c, e) => c.Reserve(e));
 
-            return new[] { capacity };
+            return capacity.ToMaybe();
         }
 
         public void Append(DateTime date, CapacityReservedEvent capacityReserved)

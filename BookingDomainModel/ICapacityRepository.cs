@@ -7,7 +7,7 @@ namespace Ploeh.Samples.Booking.DomainModel
 {
     public interface ICapacityRepository
     {
-        IEnumerable<Capacity> Read(DateTime date);
+        Maybe<Capacity> Read(DateTime date);
 
         void Append(DateTime date, CapacityReservedEvent capacityReserved);
     }
