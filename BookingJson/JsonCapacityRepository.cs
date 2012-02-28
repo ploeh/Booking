@@ -33,7 +33,7 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
             return new[] { capacity };
         }
 
-        public void Write(DateTime date, CapacityReservedEvent capacityReserved)
+        public void Append(DateTime date, CapacityReservedEvent capacityReserved)
         {
             using (var stream = this.writer.OpenStreamFor(date))
             using (var writer = new StreamWriter(stream))

@@ -68,7 +68,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
             sut.Consume(requestWithinCapacity);
 
             var expected = requestWithinCapacity.ReserveCapacity().Id;
-            repositoryMock.Verify(r => r.Write(requestWithinCapacity.Date.Date, It.Is<CapacityReservedEvent>(e => e.Id == expected)));
+            repositoryMock.Verify(r => r.Append(requestWithinCapacity.Date.Date, It.Is<CapacityReservedEvent>(e => e.Id == expected)));
         }
 
         [Theory, AutoDomainData]
@@ -84,7 +84,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             sut.Consume(command.WithQuantity(capacity.Remaining + 1));
 
-            repositoryMock.Verify(r => r.Write(command.Date.Date, It.IsAny<CapacityReservedEvent>()), Times.Never());
+            repositoryMock.Verify(r => r.Append(command.Date.Date, It.IsAny<CapacityReservedEvent>()), Times.Never());
         }
 
         [Theory, AutoDomainData]
@@ -123,7 +123,7 @@ namespace Ploeh.Samples.Booking.DomainModel.UnitTest
 
             sut.Consume(requestWithinCapacity);
 
-            repositoryMock.Verify(r => r.Write(requestWithinCapacity.Date.Date, It.IsAny<CapacityReservedEvent>()), Times.Never());
+            repositoryMock.Verify(r => r.Append(requestWithinCapacity.Date.Date, It.IsAny<CapacityReservedEvent>()), Times.Never());
             capacityChannelMock.Verify(r => r.Send(It.IsAny<CapacityReservedEvent>()), Times.Never());
             soldOutChannelMock.Verify(r => r.Send(It.IsAny<SoldOutEvent>()), Times.Never());
         }

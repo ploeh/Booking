@@ -9,6 +9,6 @@ namespace Ploeh.Samples.Booking.DomainModel
     {
         IEnumerable<Capacity> Read(DateTime date);
 
-        void Write(DateTime date, CapacityReservedEvent capacityReserved);
+        void Append(DateTime date, CapacityReservedEvent capacityReserved);
     }
 }

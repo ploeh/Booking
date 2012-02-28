@@ -35,7 +35,7 @@ namespace Ploeh.Samples.Booking.DomainModel
                 var newCapacity = originalCapacity.Reserve(reservedCapacity);
                 if (!newCapacity.Equals(originalCapacity))
                 {
-                    this.repository.Write(item.Date.Date, reservedCapacity);
+                    this.repository.Append(item.Date.Date, reservedCapacity);
 
                     this.acceptChannel.Send(item.Accept());
                     if (newCapacity.Remaining <= 0)
