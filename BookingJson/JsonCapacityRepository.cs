@@ -40,6 +40,11 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
                 this.serializer.Serialize(writer, capacityReserved.Envelop());
         }
 
+        public int Query(DateTime arg)
+        {
+            return this.Read(arg).Single().Remaining;
+        }
+
         private IEnumerable<CapacityReservedEvent> GetEventsFor(DateTime date)
         {
             var streams = this.reader.OpenStreamsFor(date);
@@ -65,11 +70,6 @@ namespace Ploeh.Samples.Booking.JsonAntiCorruption
                     stream.Dispose();
                 }
             }
-        }
-
-        public int Query(DateTime arg)
-        {
-            return this.Read(arg).Single().Remaining;
         }
     }
 }
