@@ -80,8 +80,37 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             BookingViewModel model)
         {
             sut.Post(model);
-            var expected = model.MakeReservation().AsSource().OfLikeness<RequestReservationCommand>().Without(d => d.Id);
+            //var expected = model.MakeReservation().AsSource().OfLikeness<RequestReservationCommand>().Without(d => d.Id);
+            var expected = new RequestReservationCommandResemblance(model.MakeReservation());
             channelMock.Verify(c => c.Send(It.Is<RequestReservationCommand>(x => expected.Equals(x))));
+        }
+
+        private class RequestReservationCommandResemblance : RequestReservationCommand
+        {
+            public RequestReservationCommandResemblance(RequestReservationCommand source)
+                : base(source)
+            {
+            }
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as RequestReservationCommand;
+                if (other != null)
+                    return object.Equals(this.Date, other.Date)
+                        && object.Equals(this.Email, other.Email)
+                        && object.Equals(this.Name, other.Name)
+                        && object.Equals(this.Quantity, other.Quantity);
+
+                return base.Equals(obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Date.GetHashCode()
+                    ^ this.Email.GetHashCode()
+                    ^ this.Name.GetHashCode()
+                    ^ this.Quantity.GetHashCode();
+            }
         }
     }
 }
