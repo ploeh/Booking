@@ -87,7 +87,7 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         private class RequestReservationCommandResemblance : RequestReservationCommand
         {
             public RequestReservationCommandResemblance(RequestReservationCommand source)
-                : base(source)
+                : base(source.Date, source.Email, source.Name, source.Quantity)
             {
             }
 
