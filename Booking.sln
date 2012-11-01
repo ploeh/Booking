@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingWebUI", "BookingWebUI\BookingWebUI.csproj", "{B83C3621-ED80-4DA6-A9D4-DACD23D701E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingWebModel.UnitTest", "BookingWebModel.UnitTest\BookingWebModel.UnitTest.csproj", "{D33B842D-25C1-4F1C-9600-53D87B996E86}"
