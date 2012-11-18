@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AutoFixture.Idioms</id>
+    <version>2.14.0</version>
+    <title>AutoFixture Idioms</title>
+    <authors>Mark Seemann</authors>
+    <owners>Mark Seemann</owners>
+    <licenseUrl>http://autofixture.codeplex.com/license</licenseUrl>
+    <projectUrl>https://github.com/AutoFixture/AutoFixture</projectUrl>
+    <iconUrl>http://i3.codeplex.com/Download?ProjectName=autofixture&amp;DownloadId=278049</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Ubiquitous use of AutoFixture for unit testing has given rise to a number of idiomatic unit tests - unit tests that tend to follow common templates. The AutoFixture Idioms library encapsulates these idioms into reusable classes and methods.</description>
+    <summary>Extension to AutoFixture that contains unit testing idioms.</summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="autofixture" version="2.14.0" />
+    </dependencies>
+  </metadata>
+</package>

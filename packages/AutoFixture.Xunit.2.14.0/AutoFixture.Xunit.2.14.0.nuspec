@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AutoFixture.Xunit</id>
+    <version>2.14.0</version>
+    <title>AutoFixture with xUnit.net data theories</title>
+    <authors>Mark Seemann</authors>
+    <owners>Mark Seemann</owners>
+    <licenseUrl>http://autofixture.codeplex.com/license</licenseUrl>
+    <projectUrl>https://github.com/AutoFixture/AutoFixture</projectUrl>
+    <iconUrl>http://i3.codeplex.com/Download?ProjectName=autofixture&amp;DownloadId=278049</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>By leveraging the data theory feature of xUnit.net, this extension turns AutoFixture into a declarative framework for writing unit tests. In many ways it becomes a unit testing DSL (Domain Specific Language).</description>
+    <summary>Extension to AutoFixture that integrates it with xUnit.net.</summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="autofixture" version="2.14.0" />
+      <dependency id="xunit.extensions" version="1.6.1" />
+    </dependencies>
+  </metadata>
+</package>

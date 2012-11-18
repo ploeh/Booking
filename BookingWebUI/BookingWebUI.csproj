@@ -21,6 +21,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,22 +44,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Windsor.3.0.0.4001\lib\net40\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=2.11.1.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+    <Reference Include="Ploeh.AutoFixture, Version=2.14.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.2.11.1\lib\Ploeh.AutoFixture.dll</HintPath>
+      <HintPath>..\packages\AutoFixture.2.14.0\lib\net35\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.SemanticComparison, Version=2.11.1.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+    <Reference Include="Ploeh.SemanticComparison, Version=2.14.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.2.11.1\lib\Ploeh.SemanticComparison.dll</HintPath>
+      <HintPath>..\packages\AutoFixture.2.14.0\lib\net35\Ploeh.SemanticComparison.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -114,12 +120,15 @@
     <Content Include="Content\themes\base\jquery.ui.core.css" />
     <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
     <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
     <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
     <Content Include="Content\themes\base\jquery.ui.resizable.css" />
     <Content Include="Content\themes\base\jquery.ui.selectable.css" />
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
     <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -142,27 +151,34 @@
     <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="README.jQuery.vsdoc.txt" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.19.js" />
     <Content Include="Scripts\jquery-ui-1.8.19.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui-1.9.0.js" />
+    <Content Include="Scripts\jquery-ui-1.9.0.min.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
     <Content Include="Scripts\jquery.ui.core.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -170,6 +186,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
