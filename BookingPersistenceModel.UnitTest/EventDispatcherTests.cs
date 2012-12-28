@@ -11,10 +11,10 @@ using Moq;
 
 namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
 {
-    public abstract class DispatcherTests<T>
+    public abstract class EventDispatcherTests<T>
     {
         [Theory, AutoPersistenceData]
-        public void SutIsObserverOfObject(Dispatcher<T> sut)
+        public void SutIsObserverOfObject(EventDispatcher<T> sut)
         {
             Assert.IsAssignableFrom<IObserver<object>>(sut);
         }
@@ -22,7 +22,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         [Theory, AutoPersistenceData]
         public void OnNextMathingValueConsumesConsumer(
             [Frozen]Mock<IEventHandler<T>> consumerMock,
-            Dispatcher<T> sut,
+            EventDispatcher<T> sut,
             T value)
         {
             sut.OnNext(value);
@@ -32,7 +32,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         [Theory, AutoPersistenceData]
         public void OnNextObjectDoesNotConsumeConsumer(
             [Frozen]Mock<IEventHandler<T>> consumerMock,
-            Dispatcher<T> sut,
+            EventDispatcher<T> sut,
             object value)
         {
             sut.OnNext(value);
@@ -40,8 +40,8 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         }
     }
 
-    public class TypeMatchingConsumerTestsOfString : DispatcherTests<string> { }
-    public class TypeMatchingConsumerTestsOfInt : DispatcherTests<int> { }
-    public class TypeMatchingConsumerTestsOfGuid : DispatcherTests<Guid> { }
-    public class TypeMatchingConsumerTestsOfVersion : DispatcherTests<Version> { }
+    public class TypeMatchingConsumerTestsOfString : EventDispatcherTests<string> { }
+    public class TypeMatchingConsumerTestsOfInt : EventDispatcherTests<int> { }
+    public class TypeMatchingConsumerTestsOfGuid : EventDispatcherTests<Guid> { }
+    public class TypeMatchingConsumerTestsOfVersion : EventDispatcherTests<Version> { }
 }

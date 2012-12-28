@@ -29,7 +29,7 @@ namespace Ploeh.Samples.Booking.Daemon
             {
                 this.Kernel.Register(Component
                     .For<IObserver<object>>()
-                    .ImplementedBy(typeof(Dispatcher<>).MakeGenericType(t)));
+                    .ImplementedBy(typeof(EventDispatcher<>).MakeGenericType(t)));
             }
         }
     }

@@ -27,7 +27,7 @@ namespace Ploeh.Samples.Booking.Daemon
 
             container.Register(Classes
                 .FromAssemblyInDirectory(new AssemblyFilter(".").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
-                .Where(t => !(t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dispatcher<>)))
+                .Where(t => !(t.IsGenericType && t.GetGenericTypeDefinition() == typeof(EventDispatcher<>)))
                 .WithServiceAllInterfaces());
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());

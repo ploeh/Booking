@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="ExceptionPolicy.cs" />
     <Compile Include="IQueue.cs" />
-    <Compile Include="Dispatcher.cs" />
+    <Compile Include="EventDispatcher.cs" />
     <Compile Include="IStoreReader.cs" />
     <Compile Include="QueueConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,11 +6,11 @@ using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.PersistenceModel
 {
-    public class Dispatcher<T> : IObserver<object>
+    public class EventDispatcher<T> : IObserver<object>
     {
         private readonly IEventHandler<T> eventHandler;
 
-        public Dispatcher(IEventHandler<T> eventHandler)
+        public EventDispatcher(IEventHandler<T> eventHandler)
         {
             this.eventHandler = eventHandler;
         }
