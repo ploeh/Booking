@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlerConvention.cs" />
     <Compile Include="CompositeObserver.cs" />
     <Compile Include="EventHandlerConvention.cs" />
     <Compile Include="DaemonWindsorInstaller.cs" />

@@ -19,6 +19,7 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.AddFacility<CommandHandlerConvention>();
             container.AddFacility<EventHandlerConvention>();
 
             container.Register(Component
@@ -27,7 +28,7 @@ namespace Ploeh.Samples.Booking.Daemon
 
             container.Register(Classes
                 .FromAssemblyInDirectory(new AssemblyFilter(".").FilterByName(an => an.Name.StartsWith("Ploeh.Samples.Booking")))
-                .Where(t => !(t.IsGenericType && t.GetGenericTypeDefinition() == typeof(EventDispatcher<>)))
+                .Where(Accepted)
                 .WithServiceAllInterfaces());
 
             container.Kernel.Resolver.AddSubResolver(new ExtensionConvention());
@@ -51,6 +52,17 @@ namespace Ploeh.Samples.Booking.Daemon
                     new DirectoryInfo(@"..\..\..\BookingWebUI\ViewStore").CreateIfAbsent())
                 .Named("viewStoreDirectory"));
             #endregion
+        }
+
+        private static bool Accepted(Type t)
+        {
+            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(EventDispatcher<>))
+                return false;
+
+            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(CommandDispatcher<>))
+                return false;
+
+            return true;
         }
     }
 }
