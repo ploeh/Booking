@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public class CapacityGate : IEventHandler<RequestReservationCommand>
+    public class CapacityGate : ICommandHandler<RequestReservationCommand>
     {
         private readonly ICapacityRepository repository;
         private readonly IChannel<ReservationAcceptedEvent> acceptChannel;
@@ -23,27 +23,27 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.soldOutChannel = soldOutChannel;
         }
 
-        public void Handle(RequestReservationCommand item)
+        public void Execute(RequestReservationCommand command)
         {
-            var originalCapacity = this.repository.Read(item.Date.Date)
+            var originalCapacity = this.repository.Read(command.Date.Date)
                 .DefaultIfEmpty(Capacity.Default)
                 .Single();
 
-            var reservedCapacity = item.ReserveCapacity();
+            var reservedCapacity = command.ReserveCapacity();
             if (originalCapacity.CanApply(reservedCapacity))
             {                
                 var newCapacity = originalCapacity.Apply(reservedCapacity);
                 if (!newCapacity.Equals(originalCapacity))
                 {
-                    this.repository.Append(item.Date.Date, reservedCapacity);
+                    this.repository.Append(command.Date.Date, reservedCapacity);
 
-                    this.acceptChannel.Send(item.Accept());
+                    this.acceptChannel.Send(command.Accept());
                     if (newCapacity.Remaining <= 0)
-                        this.soldOutChannel.Send(new SoldOutEvent(item.Date.Date));
+                        this.soldOutChannel.Send(new SoldOutEvent(command.Date.Date));
                 }
             }
             else
-                rejectChannel.Send(item.Reject());
+                rejectChannel.Send(command.Reject());
         }
     }
 }

@@ -52,6 +52,8 @@ namespace Ploeh.Samples.Booking.Daemon
                     new DirectoryInfo(@"..\..\..\BookingWebUI\ViewStore").CreateIfAbsent())
                 .Named("viewStoreDirectory"));
             #endregion
+
+            GuardAgainstMismatchedCommands(container);
         }
 
         private static bool Accepted(Type t)
@@ -63,6 +65,19 @@ namespace Ploeh.Samples.Booking.Daemon
                 return false;
 
             return true;
+        }
+
+        private void GuardAgainstMismatchedCommands(IWindsorContainer container)
+        {
+            var handlerTypes = from h in container.Kernel.GetHandlers(typeof(IMessage))
+                               where h.ComponentModel.Implementation.Name.EndsWith("Command")
+                               select typeof(ICommandHandler<>).MakeGenericType(h.ComponentModel.Implementation);
+            foreach (var h in handlerTypes)
+            {
+                var count = container.Kernel.GetHandlers(h).Count();
+                if(count != 1)
+                    throw new InvalidOperationException(string.Format("Exactly one implementation of {0} was expected, but {1} were found.", h, count));
+            }
         }
     }
 }
