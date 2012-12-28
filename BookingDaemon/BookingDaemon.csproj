@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositeObserver.cs" />
-    <Compile Include="ConsumerConvention.cs" />
+    <Compile Include="EventHandlerConvention.cs" />
     <Compile Include="DaemonWindsorInstaller.cs" />
     <Compile Include="DirectoryConvention.cs" />
     <Compile Include="ExtensionConvention.cs" />

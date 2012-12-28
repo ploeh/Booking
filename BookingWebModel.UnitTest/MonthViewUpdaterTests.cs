@@ -15,7 +15,7 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
         [Theory, AutoWebData]
         public void SutIsConsumer(MonthViewUpdater sut)
         {
-            Assert.IsAssignableFrom<IConsumer<SoldOutEvent>>(sut);
+            Assert.IsAssignableFrom<IEventHandler<SoldOutEvent>>(sut);
         }
 
         [Theory, AutoWebData]
@@ -24,7 +24,7 @@ namespace Ploeh.Samples.Booking.WebModel.UnitTest
             MonthViewUpdater sut,
             SoldOutEvent @event)
         {
-            sut.Consume(@event);
+            sut.Handle(@event);
             observerMock.Verify(s => s.OnNext(@event.Date));
         }
     }

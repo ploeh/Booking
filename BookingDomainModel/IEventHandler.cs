@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public interface IConsumer<T>
+    public interface IEventHandler<T>
     {
-        void Consume(T item);
+        void Handle(T @event);
     }
 }

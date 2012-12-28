@@ -6,7 +6,7 @@ using Ploeh.Samples.Booking.DomainModel;
 
 namespace Ploeh.Samples.Booking.WebModel
 {
-    public class MonthViewUpdater : IConsumer<SoldOutEvent>
+    public class MonthViewUpdater : IEventHandler<SoldOutEvent>
     {
         private readonly IObserver<DateTime> disabler;
 
@@ -15,9 +15,9 @@ namespace Ploeh.Samples.Booking.WebModel
             this.disabler = disabler;
         }
 
-        public void Consume(SoldOutEvent item)
+        public void Handle(SoldOutEvent @event)
         {
-            this.disabler.OnNext(item.Date);
+            this.disabler.OnNext(@event.Date);
         }
     }
 }

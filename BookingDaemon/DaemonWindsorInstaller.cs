@@ -19,7 +19,7 @@ namespace Ploeh.Samples.Booking.Daemon
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.AddFacility<ConsumerConvention>();
+            container.AddFacility<EventHandlerConvention>();
 
             container.Register(Component
                 .For<IObserver<object>>()

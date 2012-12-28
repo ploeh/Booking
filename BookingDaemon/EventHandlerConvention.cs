@@ -10,7 +10,7 @@ using Ploeh.Samples.Booking.PersistenceModel;
 
 namespace Ploeh.Samples.Booking.Daemon
 {
-    public class ConsumerConvention : AbstractFacility
+    public class EventHandlerConvention : AbstractFacility
     {
         protected override void Init()
         {
@@ -22,7 +22,7 @@ namespace Ploeh.Samples.Booking.Daemon
             var messageTypes = from t in handler.ComponentModel.Services
                                where t.IsInterface
                                && t.IsGenericType
-                               && t.GetGenericTypeDefinition() == typeof(IConsumer<>)
+                               && t.GetGenericTypeDefinition() == typeof(IEventHandler<>)
                                select t.GetGenericArguments().Single();
 
             foreach (var t in messageTypes)

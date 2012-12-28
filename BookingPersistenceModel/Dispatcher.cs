@@ -8,11 +8,11 @@ namespace Ploeh.Samples.Booking.PersistenceModel
 {
     public class Dispatcher<T> : IObserver<object>
     {
-        private readonly IConsumer<T> consumer;
+        private readonly IEventHandler<T> eventHandler;
 
-        public Dispatcher(IConsumer<T> consumer)
+        public Dispatcher(IEventHandler<T> eventHandler)
         {
-            this.consumer = consumer;
+            this.eventHandler = eventHandler;
         }
 
         public void OnCompleted()
@@ -26,7 +26,7 @@ namespace Ploeh.Samples.Booking.PersistenceModel
         public void OnNext(object value)
         {
             if (value is T)
-                this.consumer.Consume((T)value);
+                this.eventHandler.Handle((T)value);
         }
     }
 }

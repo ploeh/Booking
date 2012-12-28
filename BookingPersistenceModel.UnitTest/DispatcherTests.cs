@@ -21,22 +21,22 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
 
         [Theory, AutoPersistenceData]
         public void OnNextMathingValueConsumesConsumer(
-            [Frozen]Mock<IConsumer<T>> consumerMock,
+            [Frozen]Mock<IEventHandler<T>> consumerMock,
             Dispatcher<T> sut,
             T value)
         {
             sut.OnNext(value);
-            consumerMock.Verify(c => c.Consume(value));
+            consumerMock.Verify(c => c.Handle(value));
         }
 
         [Theory, AutoPersistenceData]
         public void OnNextObjectDoesNotConsumeConsumer(
-            [Frozen]Mock<IConsumer<T>> consumerMock,
+            [Frozen]Mock<IEventHandler<T>> consumerMock,
             Dispatcher<T> sut,
             object value)
         {
             sut.OnNext(value);
-            consumerMock.Verify(c => c.Consume(It.IsAny<T>()), Times.Never());
+            consumerMock.Verify(c => c.Handle(It.IsAny<T>()), Times.Never());
         }
     }
 

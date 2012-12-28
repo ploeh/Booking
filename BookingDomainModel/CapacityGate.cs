@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ploeh.Samples.Booking.DomainModel
 {
-    public class CapacityGate : IConsumer<RequestReservationCommand>
+    public class CapacityGate : IEventHandler<RequestReservationCommand>
     {
         private readonly ICapacityRepository repository;
         private readonly IChannel<ReservationAcceptedEvent> acceptChannel;
@@ -23,7 +23,7 @@ namespace Ploeh.Samples.Booking.DomainModel
             this.soldOutChannel = soldOutChannel;
         }
 
-        public void Consume(RequestReservationCommand item)
+        public void Handle(RequestReservationCommand item)
         {
             var originalCapacity = this.repository.Read(item.Date.Date)
                 .DefaultIfEmpty(Capacity.Default)
