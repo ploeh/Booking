@@ -40,8 +40,8 @@ namespace Ploeh.Samples.Booking.PersistenceModel.UnitTest
         }
     }
 
-    public class TypeMatchingConsumerTestsOfString : EventDispatcherTests<string> { }
-    public class TypeMatchingConsumerTestsOfInt : EventDispatcherTests<int> { }
-    public class TypeMatchingConsumerTestsOfGuid : EventDispatcherTests<Guid> { }
-    public class TypeMatchingConsumerTestsOfVersion : EventDispatcherTests<Version> { }
+    public class TypeMatchingEventDispatcherTestsOfString : EventDispatcherTests<string> { }
+    public class TypeMatchingEventDispatcherTestsOfInt : EventDispatcherTests<int> { }
+    public class TypeMatchingEventDispatcherTestsOfGuid : EventDispatcherTests<Guid> { }
+    public class TypeMatchingEventDispatcherTestsOfVersion : EventDispatcherTests<Version> { }
 }

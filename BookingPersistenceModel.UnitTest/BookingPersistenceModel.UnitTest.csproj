@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoPersistenceDataAttribute.cs" />
+    <Compile Include="CommandDispatcherTests.cs" />
     <Compile Include="DependencyConstraints.cs" />
     <Compile Include="EventDispatcherTests.cs" />
     <Compile Include="PersistenceCustomization.cs" />
